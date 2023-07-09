@@ -1,1 +1,2 @@
-# shift-crowdfunding
+# ШИФТ Краудфандинговая платформа
+Frontend
