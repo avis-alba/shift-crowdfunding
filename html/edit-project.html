@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+	<link rel="stylesheet" href="../css/styles.css">
+	<title>Редактирование проекта | Shut Up And Take My Money</title>
+</head>
+
+<body>
+	<header>
+		<img src="../img/logo.png" alt="logo">
+		<a href="./index.html">
+			<div class="name">SHUT UP AND TAKE MY MONEY</div>
+		</a>
+		<a class="projects-link" href="./projects.html">
+			<div>Проекты</div>
+		</a>
+		<button class="login">Войти</button>
+	</header>
+	<div class="content page">
+		<h1>Изменить информацию о проекте</h1>
+		<div class="form-template">
+			<form class="main-form">
+				<label for="name">Название проекта*</label>
+				<input type="text" placeholder="Мой проект" id="name" minlength="2" maxlength="35" required>
+				<label for="summ">Необходимая сумма*</label>
+				<input type="number" placeholder="10000" id="summ" min="1" max="1000000000" required>
+				<label for="date">Дата окончания сбора*</label>
+				<input type="date" placeholder="2034-12-12" id="date" required>
+				<label for="url">Ссылка на видео о проекте</label>
+				<input type="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" id="url">
+				<textarea name="" id="" cols="30" rows="10" placeholder="Описание проекта*"></textarea>
+				<p>* Поле обязательно для заполнения</p>
+				<div class="button-set">
+					<input type="submit" value="Сохранить изменения">
+					<input type="reset" value="Отменить изменения">
+					<input type="reset" value="Удалить проект">
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer>
+		<div id="copyright">© Shut Up And Take My Money Inc. 2023</div>
+		<a class="projects-link" href="./projects.html">
+			<div>Проекты</div>
+		</a>
+		<button class="login">Войти</button>
+	</footer>
+	<div class="form-template popup">
+		<h3>Вход</h3>
+		<form class="main-form">
+			<label for="login">Логин</label>
+			<input type="text" placeholder="ivanov_s" id="login" minlength="2" maxlength="35" required>
+			<label for="password">Пароль</label>
+			<input type="password" id="password" placeholder="**********" required>
+			<div class="button-set">
+				<input type="submit" value="Войти">
+				<input type="reset" value="Отмена">
+			</div>
+		</form>
+		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>
+	</div>
+	<script src="../ts/build/script.js" type="module"></script>
+</body>
+
+</html>

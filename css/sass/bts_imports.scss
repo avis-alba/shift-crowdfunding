@@ -1,0 +1,20 @@
+// sass .\css\sass\bts_imports.scss .\css\bts-components\components.css
+
+// Начальные функции
+@import "../../node_modules/bootstrap/scss/functions";
+
+// Переменные переопределяемые во вторую очередь
+$primary: #900;
+$enable-shadows: true;
+$prefix: "mo-";
+
+// Обязательный импорт Bootstrap
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/root";
+
+// Импорт отдельных компонентов
+@import "../../node_modules/bootstrap/scss/_close";
+@import "../../node_modules/bootstrap/scss/_tooltip";

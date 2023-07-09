@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/styles.css">
+	<title>Профиль пользователя | Shut Up And Take My Money</title>
+</head>
+
+<body>
+	<header>
+		<img src="../img/logo.png" alt="logo">
+		<a href="./index.html">
+			<div class="name">SHUT UP AND TAKE MY MONEY</div>
+		</a>
+		<a class="projects-link" href="./projects.html">
+			<div>Проекты</div>
+		</a>
+		<button class="login">Войти</button>
+	</header>
+	<div class="content page">
+		<h1>Ваш профиль</h1>
+		<div class="user-profile">
+			<div class="form-template">
+				<form class="main-form">
+					<label for="lastname">Фамилия*</label>
+					<input type="text" placeholder="Иванов" id="lastname" minlength="2" maxlength="35" required
+						value="Иванов">
+					<label for="name">Имя*</label>
+					<input type="text" placeholder="Сергей" id="name" minlength="2" maxlength="35" required
+						value="Петр">
+					<label for="patronymic">Отчество</label>
+					<input type="text" placeholder="Петрович" id="patronymic" minlength="2" maxlength="35"
+						value="Сергеевич">
+					<label for="date">Дата рождения*</label>
+					<input type="date" id="date" value="1991-09-11" required>
+					<textarea name="" id="" cols="30" rows="5"
+						placeholder="Расскажите о себе">Я основатель 50 стартапов в Новосибирском Технопарке, миллионер, плейбой, филантроп.</textarea>
+					<p>* Поле обязательно для заполнения</p>
+					<div class="button-set">
+						<input type="submit" value="Обновить данные">
+					</div>
+				</form>
+			</div>
+			<div class="user-tools">
+				<div class="user-money">
+					<p><strong>Мой баланс:</strong></p>
+					<div class="sidebar-summ">
+						<p id="money">1000000000</p>
+					</div>
+					<button>Пополнить счет</button>
+					<form action="">
+						<input type="text" placeholder="0000-0000-0000" id="promocode" minlength="15" required>
+						<input type="submit" value="OK">
+					</form>
+				</div>
+				<a href="./my-projects.html"><button>Мои проекты</button></a>
+				<a href="./create-project.html"><button>Создать проект</button></a>
+			</div>
+
+		</div>
+
+
+	</div>
+	<footer>
+		<div id="copyright">© Shut Up And Take My Money Inc. 2023</div>
+		<a class="projects-link" href="./projects.html">
+			<div>Проекты</div>
+		</a>
+		<button class="login">Войти</button>
+	</footer>
+	<div class="form-template popup" id="popup">
+		<h3>Вход</h3>
+		<form class="main-form">
+			<label for="login">Логин</label>
+			<input type="text" placeholder="ivanov_s" id="login" minlength="2" maxlength="35" required>
+			<label for="password">Пароль</label>
+			<input type="password" id="password" placeholder="**********" required>
+			<div class="button-set">
+				<input type="submit" value="Войти">
+				<input type="reset" value="Отмена">
+			</div>
+		</form>
+		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>
+	</div>
+	<script src="../ts/build/script.js" type="module"></script>
+</body>
+
+</html>

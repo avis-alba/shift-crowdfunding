@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/styles.css">
+	<title>Проект Lorem Ipsum | Shut Up And Take My Money</title>
+</head>
+
+<body>
+	<header>
+		<img src="../img/logo.png" alt="logo">
+		<a href="./index.html">
+			<div class="name">SHUT UP AND TAKE MY MONEY</div>
+		</a>
+		<a class="projects-link" href="./projects.html">
+			<div>Проекты</div>
+		</a>
+		<button class="login">Войти</button>
+	</header>
+	<div class="content page">
+		<h1 class="item-header">Проект Lorem Ipsum</h1>
+		<div class="item-full-info">
+			<div class="full-info-body">
+				<div class="full-info-text">
+					<p>
+						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, nulla doloremque? Inventore
+						dolorum explicabo aperiam dolores, exercitationem culpa nisi placeat at repellat ex delectus
+						deserunt iure facilis corporis consequatur laborum?
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque at eius maiores eum! Dolorum
+						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
+						quos sapiente! Sapiente, praesentium.
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque at eius maiores eum! Dolorum
+						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
+						quos sapiente! Sapiente, praesentium.
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque at eius maiores eum! Dolorum
+						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
+						quos sapiente! Sapiente, praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Neque at eius maiores eum! Dolorum
+						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
+						quos sapiente! Sapiente, praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Neque at eius maiores eum! Dolorum
+						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
+						quos sapiente! Sapiente, praesentium.
+					</p>
+				</div>
+				<div class="full-info-video">
+					<h2>Посмотреть видео о проекте</h2>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/siN7p6s9HWM"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen></iframe>
+				</div>
+			</div>
+			<div class="full-info-sidebar">
+				<p><strong>Собрано:</strong></p>
+				<div class="sidebar-summ">
+					<p id="money">100 / 1000</p>
+				</div>
+				<p><strong>Окончание сбора:</strong></p>
+				<p id="time">12.05.2024</p>
+				<p><strong>Автор:</strong></p>
+				<p id="author">Петров А.Р.</p>
+				<button>Спонсировать</button>
+
+				<form name="fund">
+					<input type="number" placeholder="1000" min="0" max="1000000000">
+					<input type="submit" value="OK">
+				</form>
+			</div>
+		</div>
+		<!--Админ панель-->
+		<div class="admin-menu">
+			<button>Редактировать проект</button>
+			<button>Удалить проект</button>
+			<button>Вывести деньги</button>
+		</div>
+
+	</div>
+	<footer>
+		<div id="copyright">© Shut Up And Take My Money Inc. 2023</div>
+		<a class="projects-link" href="./projects.html">
+			<div>Проекты</div>
+		</a>
+		<button class="login">Войти</button>
+	</footer>
+	<div class="form-template popup" id="popup">
+		<h3>Вход</h3>
+		<form class="main-form">
+			<label for="login">Логин</label>
+			<input type="text" placeholder="ivanov_s" id="login" minlength="2" maxlength="35" required>
+			<label for="password">Пароль</label>
+			<input type="password" id="password" placeholder="**********" required>
+			<div class="button-set">
+				<input type="submit" value="Войти">
+				<input type="reset" value="Отмена">
+			</div>
+		</form>
+		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>
+	</div>
+	<script src="../ts/build/script.js" type="module"></script>
+</body>
+
+</html>
