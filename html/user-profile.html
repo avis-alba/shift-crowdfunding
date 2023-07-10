@@ -5,6 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="../css/bts-components/components.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
 	<title>Профиль пользователя | Shut Up And Take My Money</title>
 </head>
 
@@ -35,8 +39,8 @@
 						value="Сергеевич">
 					<label for="date">Дата рождения*</label>
 					<input type="date" id="date" value="1991-09-11" required>
-					<textarea name="" id="" cols="30" rows="5"
-						placeholder="Расскажите о себе">Я основатель 50 стартапов в Новосибирском Технопарке, миллионер, плейбой, филантроп.</textarea>
+					<textarea name="" id="user-text" cols="30" rows="5" placeholder="Расскажите о себе"
+						maxlength="700">Я основатель 50 стартапов в Новосибирском Технопарке, миллионер, плейбой, филантроп.</textarea>
 					<p>* Поле обязательно для заполнения</p>
 					<div class="button-set">
 						<input type="submit" value="Обновить данные">
@@ -71,12 +75,13 @@
 		<button class="login">Войти</button>
 	</footer>
 	<div class="form-template popup" id="popup">
+		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
 		<form class="main-form">
 			<label for="login">Логин</label>
-			<input type="text" placeholder="ivanov_s" id="login" minlength="2" maxlength="35" required>
+			<input type="text" placeholder="ivanov_s" id="popup-login" minlength="2" maxlength="35" required>
 			<label for="password">Пароль</label>
-			<input type="password" id="password" placeholder="**********" required>
+			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
 				<input type="submit" value="Войти">
 				<input type="reset" value="Отмена">

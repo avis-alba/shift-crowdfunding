@@ -28,14 +28,11 @@
 		<div class="form-template">
 			<form class="main-form">
 				<label for="lastname">Фамилия*</label>
-				<input type="text" placeholder="Иванов" id="lastname" minlength="2" maxlength="35" required
-					pattern="^[A-Za-zА-Яа-яЁё\s][A-Za-zА-Яа-яЁё\-\s]*[A-Za-zА-Яа-яЁё\s]$">
+				<input type="text" placeholder="Иванов" id="lastname" minlength="2" maxlength="35" required>
 				<label for="name">Имя*</label>
-				<input type="text" placeholder="Сергей" id="name" minlength="2" maxlength="35" required
-					pattern="^[A-Za-zА-Яа-яЁё\s][A-Za-zА-Яа-яЁё\-\s]*[A-Za-zА-Яа-яЁё\s]$">
+				<input type="text" placeholder="Сергей" id="name" minlength="2" maxlength="35" required>
 				<label for="patronymic">Отчество</label>
-				<input type="text" placeholder="Петрович" id="patronymic" minlength="2" maxlength="35"
-					pattern="^[A-Za-zА-Яа-яЁё\s][A-Za-zА-Яа-яЁё\-\s]*[A-Za-zА-Яа-яЁё\s]$">
+				<input type="text" placeholder="Петрович" id="patronymic" minlength="2" maxlength="35">
 				<label for="date">Дата рождения*</label>
 				<input type="date" id="date" value="1991-09-11" required>
 				<label for="login" data-bs-toggle="tooltip" data-bs-placement="left"
@@ -45,7 +42,8 @@
 				<input type="password" id="password" placeholder="**********" required>
 				<label for="repeat-password">Повторите пароль*</label>
 				<input type="password" id="repeat-password" placeholder="**********" required>
-				<textarea name="" id="" cols="30" rows="5" placeholder="Расскажите о себе" maxlength="700"></textarea>
+				<textarea name="" id="user-text" cols="30" rows="5" placeholder="Расскажите о себе"
+					maxlength="700"></textarea>
 				<p>* Поле обязательно для заполнения</p>
 				<div class="button-set">
 					<input type="submit" value="Зарегистрироваться">
@@ -62,12 +60,13 @@
 		<button class="login">Войти</button>
 	</footer>
 	<div class="form-template popup" id="popup">
+		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
 		<form class="main-form">
 			<label for="login">Логин</label>
-			<input type="text" placeholder="ivanov_s" id="login" minlength="2" maxlength="35" required>
+			<input type="text" placeholder="ivanov_s" id="popup-login" minlength="2" maxlength="35" required>
 			<label for="password">Пароль</label>
-			<input type="password" id="password" placeholder="**********" required>
+			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
 				<input type="submit" value="Войти">
 				<input type="reset" value="Отмена">
