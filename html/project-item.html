@@ -65,16 +65,17 @@
 			</div>
 			<div class="full-info-sidebar">
 				<p><strong>Собрано:</strong></p>
-				<div class="sidebar-summ">
-					<p id="money">100 / 1000</p>
+				<div class="sidebar-num">
+					<p id="money">1000000000 / 1000000000</p>
 				</div>
 				<p><strong>Окончание сбора:</strong></p>
-				<p id="time">12.05.2024</p>
+				<div class="sidebar-num">
+					<p id="time">12.05.2024</p>
+				</div>
 				<p><strong>Автор:</strong></p>
 				<p id="author">Петров А.Р.</p>
-				<button>Спонсировать</button>
-
-				<form name="fund">
+				<button id="show-form">Спонсировать</button>
+				<form id="fund">
 					<input type="number" placeholder="1000" min="0" max="1000000000">
 					<input type="submit" value="OK">
 				</form>
@@ -82,9 +83,9 @@
 		</div>
 		<!--Админ панель-->
 		<div class="admin-menu">
-			<button>Редактировать проект</button>
+			<a href="./edit-project.html"><button>Редактировать проект</button></a>
 			<button>Удалить проект</button>
-			<button>Вывести деньги</button>
+			<button onclick="alert('Деньги успешно отправлены!')">Вывести деньги</button>
 		</div>
 
 	</div>

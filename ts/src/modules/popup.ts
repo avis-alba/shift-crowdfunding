@@ -11,14 +11,16 @@ export default function popupHandler(e: Event): void {
 	background.classList.add('popup-background');
 	document.body.append(background);
 
-	let popup = document.body.querySelector('#popup');
+	let popup: HTMLDivElement | null = document.body.querySelector('#popup');
 
 	if (popup) {
 		let popupStyles = getComputedStyle(popup);
 		let offsetTop = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl + 'px';
 		let offsetLeft = htmlW / 2 - parseInt(popupStyles.width) / 2 + 'px';
 
-		popup.setAttribute('style', `display: block; top: ${offsetTop}; left: ${offsetLeft}`);
+		popup.style.display = 'block';
+		popup.style.top = offsetTop;
+		popup.style.left = offsetLeft;
 
 		let closeButton = popup.querySelector('.btn-close');
 		if (closeButton) {

@@ -12,7 +12,9 @@ export default function popupHandler(e) {
         let popupStyles = getComputedStyle(popup);
         let offsetTop = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl + 'px';
         let offsetLeft = htmlW / 2 - parseInt(popupStyles.width) / 2 + 'px';
-        popup.setAttribute('style', `display: block; top: ${offsetTop}; left: ${offsetLeft}`);
+        popup.style.display = 'block';
+        popup.style.top = offsetTop;
+        popup.style.left = offsetLeft;
         let closeButton = popup.querySelector('.btn-close');
         if (closeButton) {
             closeButton.addEventListener('click', hidePopup);
