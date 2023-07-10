@@ -181,7 +181,6 @@ header .projects-link {
 	flex-direction: column;
 	justify-content: start;
 	align-items: flex-start;
-	/*!!!!!*/
 	position: relative;
 	top: 90px;
 }
@@ -214,7 +213,8 @@ header .projects-link {
 	padding: 20px;
 	background-color: var(--my-green-1);
 	box-shadow: var(--hard-shadow);
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 	position: relative;
 	z-index: 10;
 }
@@ -279,9 +279,7 @@ header .projects-link {
 }
 
 .about-us {
-	/* height: 230px; */
 	width: 100%;
-	padding-bottom: 20px;
 	margin: 0 0 50px 0px;
 	box-shadow: var(--main-block-shadow);
 	background-color: var(--my-green-2);
@@ -292,16 +290,16 @@ header .projects-link {
 .info {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 	margin: 0;
-	padding: 0px 20px 20px 20px;
+	padding-bottom: 20px;
 }
 
 .info-point {
 	height: 100px;
 	width: 300px;
-	margin-top: 20px;
+	margin: 20px;
 	padding: 10px;
 	display: flex;
 	justify-content: space-between;
@@ -313,6 +311,7 @@ header .projects-link {
 
 .info-point img {
 	height: 100px;
+	margin: 0px 5px;
 }
 
 .info-point p {
