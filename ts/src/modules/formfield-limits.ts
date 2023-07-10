@@ -10,6 +10,7 @@ export default function addFormFieldLimits(): void {
 	let projectName: HTMLInputElement | null = document.querySelector('#project-name');
 	let popupLogin: HTMLInputElement | null = document.querySelector('#popup-login');
 	let popupPassword: HTMLInputElement | null = document.querySelector('#popup-password');
+	let youtubeURL: HTMLInputElement | null = document.querySelector('#url');
 
 	lastname ? lastname.pattern = formFieldsRegExp.userName.toString().slice(1, -1) : null;
 	name ? name.pattern = formFieldsRegExp.userName.toString().slice(1, -1) : null;
@@ -19,4 +20,6 @@ export default function addFormFieldLimits(): void {
 	projectName ? projectName.pattern = formFieldsRegExp.projectName.toString().slice(1, -1) : null;
 	popupLogin ? popupLogin.pattern = formFieldsRegExp.login.toString().slice(1, -1) : null;
 	popupPassword ? popupPassword.pattern = formFieldsRegExp.password.toString().slice(1, -1) : null;
+	youtubeURL ? youtubeURL.pattern = formFieldsRegExp.youtubeURL.toString().slice(1, -1) : null;
+
 }

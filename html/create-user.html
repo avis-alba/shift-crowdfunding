@@ -27,18 +27,22 @@
 		<h1>Форма регистрации</h1>
 		<div class="form-template">
 			<form class="main-form">
-				<label for="lastname">Фамилия*</label>
+				<label for="lastname" data-bs-toggle="tooltip" data-bs-placement="left"
+					data-bs-title="От 2 до 50 знаков, буквы, пробелы и -">Фамилия*</label>
 				<input type="text" placeholder="Иванов" id="lastname" minlength="2" maxlength="35" required>
-				<label for="name">Имя*</label>
+				<label for="name" data-bs-toggle="tooltip" data-bs-placement="left"
+					data-bs-title="От 2 до 50 знаков, буквы, пробелы и -">Имя*</label>
 				<input type="text" placeholder="Сергей" id="name" minlength="2" maxlength="35" required>
-				<label for="patronymic">Отчество</label>
+				<label for="patronymic" data-bs-toggle="tooltip" data-bs-placement="left"
+					data-bs-title="От 2 до 50 знаков, буквы, пробелы и -">Отчество</label>
 				<input type="text" placeholder="Петрович" id="patronymic" minlength="2" maxlength="35">
 				<label for="date">Дата рождения*</label>
 				<input type="date" id="date" value="1991-09-11" required>
 				<label for="login" data-bs-toggle="tooltip" data-bs-placement="left"
-					data-bs-title="Используйте буквы латинского алфавита, цифры, - и _">Логин*</label>
+					data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин*</label>
 				<input type="text" placeholder="ivanov_s" id="login" minlength="2" maxlength="35" required>
-				<label for="password">Пароль*</label>
+				<label for="password" data-bs-toggle="tooltip" data-bs-placement="left"
+					data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль*</label>
 				<input type="password" id="password" placeholder="**********" required>
 				<label for="repeat-password">Повторите пароль*</label>
 				<input type="password" id="repeat-password" placeholder="**********" required>
@@ -63,9 +67,11 @@
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
 		<form class="main-form">
-			<label for="login">Логин</label>
+			<label for="popup-login" data-bs-toggle="tooltip" data-bs-placement="left"
+				data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин</label>
 			<input type="text" placeholder="ivanov_s" id="popup-login" minlength="2" maxlength="35" required>
-			<label for="password">Пароль</label>
+			<label for="popup-password" data-bs-toggle="tooltip" data-bs-placement="left"
+				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
 				<input type="submit" value="Войти">

@@ -28,13 +28,16 @@
 		<h1>Изменить информацию о проекте</h1>
 		<div class="form-template">
 			<form class="main-form">
-				<label for="name">Название проекта*</label>
+				<label for="project-name" data-bs-toggle="tooltip" data-bs-placement="left"
+					data-bs-title="От 2 до 30 знаков, буквы, цифры, пробелы и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Название
+					проекта*</label>
 				<input type="text" placeholder="Мой проект" id="project-name" minlength="2" maxlength="35" required>
 				<label for="summ">Необходимая сумма*</label>
 				<input type="number" placeholder="10000" id="summ" min="1" max="1000000000" required>
 				<label for="date">Дата окончания сбора*</label>
 				<input type="date" placeholder="2034-12-12" id="date" required>
-				<label for="url">Ссылка на видео о проекте</label>
+				<label for="url" data-bs-toggle="tooltip" data-bs-placement="left"
+					data-bs-title="Ссылка формата https://www.youtube.com/my-video">Ссылка на видео о проекте</label>
 				<input type="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" id="url">
 				<textarea name="" id="user-text" cols="30" rows="10" placeholder="Описание проекта*"
 					maxlength="3000"></textarea>
@@ -54,13 +57,15 @@
 		</a>
 		<button class="login">Войти</button>
 	</footer>
-	<div class="form-template popup">
+	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
 		<form class="main-form">
-			<label for="login">Логин</label>
+			<label for="popup-login" data-bs-toggle="tooltip" data-bs-placement="left"
+				data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин</label>
 			<input type="text" placeholder="ivanov_s" id="popup-login" minlength="2" maxlength="35" required>
-			<label for="password">Пароль</label>
+			<label for="popup-password" data-bs-toggle="tooltip" data-bs-placement="left"
+				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
 				<input type="submit" value="Войти">
@@ -70,6 +75,10 @@
 		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>
 	</div>
 	<script src="../ts/build/script.js" type="module"></script>
+	<script>
+		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+	</script>
 </body>
 
 </html>
