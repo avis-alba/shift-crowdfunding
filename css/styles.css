@@ -139,7 +139,7 @@ header button.login {
 }
 
 footer button.login {
-	width: 150px;
+	width: 200px;
 }
 
 button:hover {
@@ -770,4 +770,10 @@ label {
 .category::before {
 	content: 'Категория: ';
 	font-weight: bold;
+}
+
+.spinner-border {
+	position: absolute;
+	left: 234px;
+	top: 174px;
 }
