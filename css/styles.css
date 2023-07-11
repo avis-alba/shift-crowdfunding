@@ -12,6 +12,7 @@ body {
 	--my-white: #ECECE4;
 	--my-grey-light: #c6c6bf;
 	--my-grey-dark: #b7b7b1;
+	--my-red: #bb6585;
 	--my-green-1: #f5f9f2;
 	--my-green-2: #d6e8cc;
 	--my-green-3: #c2ddb2;
@@ -49,6 +50,10 @@ p:first-child {
 	margin-top: 0;
 }
 
+hr {
+	margin: 0px;
+}
+
 a {
 	text-decoration: none;
 	color: var(--my-black);
@@ -60,6 +65,14 @@ a:visited {
 
 input {
 	box-sizing: border-box;
+}
+
+input[type="submit"] {
+	border: 1.3px solid var(--my-green-6);
+}
+
+input[type="reset"] {
+	border: 1px solid var(--my-red);
 }
 
 select {
@@ -228,7 +241,7 @@ header .projects-link {
 .banner button {
 	width: 300px;
 	height: 120px;
-	margin: 180px 80px;
+	margin: 170px 80px;
 	background-color: var(--my-green-4);
 	box-shadow: var(--hard-shadow);
 	position: relative;
@@ -429,10 +442,9 @@ header .projects-link {
 .projects-menu,
 .admin-menu {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-around;
-	width: 1244px;
-	height: 60px;
 	margin: 20px auto 10px auto;
 	box-sizing: border-box;
 	background-color: var(--my-green-4);
@@ -543,17 +555,18 @@ input[type='number'] {
 	display: none;
 }
 
-#fund:before {
+#fund:before,
+#send-money:before {
 	content: '▼';
 	display: block;
-	margin: 0;
+	margin-bottom: 10px;
 }
 
 #fund input[type="number"] {
 	width: 70%;
 	display: inline-block;
 	box-sizing: border-box;
-	margin: 15px 0px 10px 0;
+	margin: 0px 0px 10px 0;
 	height: 50px;
 }
 
@@ -571,7 +584,7 @@ input[type='number'] {
 
 .admin-menu button {
 	width: 260px;
-	margin: 0px 15px;
+	margin: 15px 15px;
 	height: 40px;
 	background-color: var(--my-green-1);
 	box-shadow: 5px 5px 0px inset var(--my-green-6);
@@ -627,7 +640,8 @@ input[type='number'] {
 }
 
 .form-template input,
-.form-template textarea {
+.form-template textarea,
+.form-template select {
 	display: block;
 	font-size: 17px;
 }
@@ -638,6 +652,7 @@ input[type='number'] {
 }
 
 .main-form input,
+.main-form select,
 textarea {
 	width: 100%;
 	box-sizing: border-box;
@@ -648,7 +663,8 @@ textarea {
 	resize: vertical;
 }
 
-.main-form input {
+.main-form input,
+.main-form select {
 	height: 50px;
 }
 
@@ -716,14 +732,37 @@ label {
 	width: 180px;
 }
 
-.user-money form {
+.user-money button {
+	margin-bottom: 20px;
+}
+
+#send-money {
 	display: none;
+	margin-bottom: 20px;
+
 }
 
 .user-tools .sidebar-num {
 	width: 100%;
+	height: 50px;
+	line-height: 50px;
 	box-sizing: border-box;
 	padding: 0px 20px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.category {
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	margin: 0px 0px 20px 0px;
+	padding: 5px;
+	background-color: var(--my-green-3);
+	border: 1px solid var(--my-black);
+}
+
+.category::before {
+	content: 'Категория: ';
+	font-weight: bold;
 }
