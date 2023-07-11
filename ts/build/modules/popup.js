@@ -16,9 +16,11 @@ export default function popupHandler(e) {
         popup.style.top = offsetTop;
         popup.style.left = offsetLeft;
         let closeButton = popup.querySelector('.btn-close');
-        if (closeButton) {
+        if (closeButton)
             closeButton.addEventListener('click', hidePopup);
-        }
+        let resetButton = popup.querySelector('[type="reset"]');
+        if (resetButton)
+            resetButton.addEventListener('click', hidePopup);
         background.addEventListener('click', hidePopup);
     }
     function hidePopup() {

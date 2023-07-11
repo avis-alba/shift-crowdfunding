@@ -12,7 +12,8 @@ export default function addFormFieldLimits(): void {
 	let popupPassword: HTMLInputElement | null = document.querySelector('#popup-password');
 	let youtubeURL: HTMLInputElement | null = document.querySelector('#url');
 	let date: HTMLInputElement | null = document.querySelector('#date');
-
+	let minSumm: HTMLInputElement | null = document.querySelector('#min-summ');
+	let maxSumm: HTMLInputElement | null = document.querySelector('#max-summ');
 
 	if (lastname) lastname.pattern = formFieldsRegExp.userName;
 	if (name) name.pattern = formFieldsRegExp.userName;
@@ -48,4 +49,21 @@ export default function addFormFieldLimits(): void {
 			date.max = maxDateUser;
 		}
 	}
+
+	function setFilterlimits(event: Event) {
+		if (minSumm && maxSumm) {
+			if (event.target === minSumm) {
+				maxSumm.min = (+minSumm.value + 1).toString();
+			}
+			if (event.target === maxSumm) {
+				+minSumm.value > +maxSumm.value ?
+					maxSumm.min = (+minSumm.value + 1).toString() :
+					minSumm.max = (+maxSumm.value - 1).toString();
+			}
+		}
+	}
+
+	if (minSumm) minSumm.addEventListener('change', setFilterlimits);
+	if (maxSumm) maxSumm.addEventListener('change', setFilterlimits);
+
 }

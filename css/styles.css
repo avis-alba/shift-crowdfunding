@@ -71,6 +71,11 @@ input[type="submit"] {
 	border: 1.3px solid var(--my-green-6);
 }
 
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	background-color: var(--my-white);
+}
+
 input[type="reset"] {
 	border: 1px solid var(--my-red);
 }
