@@ -33,20 +33,24 @@ export default function addFormFieldLimits() {
         youtubeURL.pattern = formFieldsRegExp.youtubeURL;
     let currentDate = new Date();
     let year = currentDate.getFullYear().toString();
+    let allowedYear = (currentDate.getFullYear() - 18).toString();
     let month = (currentDate.getMonth() + 1).toString();
+    let day = currentDate.getDate().toString();
     let nextDay = (currentDate.getDate() + 1).toString();
-    let previousDay = (currentDate.getDate() - 1).toString();
+    // let previousDay: string = (currentDate.getDate() - 1).toString();
     if (month.length === 1)
         month = '0' + month;
     if (nextDay.length === 1)
         nextDay = '0' + nextDay;
-    if (previousDay.length === 1)
-        previousDay = '0' + previousDay;
+    if (day.length === 1)
+        day = '0' + day;
     let minDateProject = `${year}-${month}-${nextDay}`;
-    let maxDateUser = `${year}-${month}-${previousDay}`;
+    let maxDateProject = `2100-01-01`;
+    let maxDateUser = `${allowedYear}-${month}-${day}`;
     if (date) {
         if (((_a = date.parentElement) === null || _a === void 0 ? void 0 : _a.matches('#create-project')) || ((_b = date.parentElement) === null || _b === void 0 ? void 0 : _b.matches('#edit-project'))) {
             date.min = minDateProject;
+            date.max = maxDateProject;
         }
         if (((_c = date.parentElement) === null || _c === void 0 ? void 0 : _c.matches('#create-user')) || ((_d = date.parentElement) === null || _d === void 0 ? void 0 : _d.matches('#edit-user'))) {
             date.max = maxDateUser;

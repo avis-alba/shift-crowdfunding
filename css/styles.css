@@ -12,7 +12,7 @@ body {
 	--my-white: #ECECE4;
 	--my-grey-light: #c6c6bf;
 	--my-grey-dark: #b7b7b1;
-	--my-red: #bb6585;
+	--my-red: #da467d;
 	--my-green-1: #f5f9f2;
 	--my-green-2: #d6e8cc;
 	--my-green-3: #c2ddb2;
@@ -338,6 +338,7 @@ header .projects-link {
 }
 
 .projects {
+	width: 100%;
 	background-color: var(--my-green-3);
 	box-shadow: var(--main-block-shadow);
 	text-align: center;

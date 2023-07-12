@@ -36,10 +36,13 @@ export default function login(event) {
             location.href = `${requests.siteOrigin}` + `user-profile.html`;
         }
         else if (`${response.status}`[0] === '4') {
-            let error = yield response.json();
-            alert(error.message || 'Ошибка запроса');
-            // console.log('error');
-            // console.log('after fetch for body');
+            loginField.style.border = '2px solid #da467d';
+            passwordField.style.border = '2px solid #da467d';
+            response.json().then((response) => {
+                alert(response.message || 'Ошибка запроса');
+            }).catch((error) => {
+                alert(error.message);
+            });
         }
         else if (`${response.status}`[0] === '5') {
             alert('Ошибка сервера!');

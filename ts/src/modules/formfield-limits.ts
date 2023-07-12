@@ -28,21 +28,26 @@ export default function addFormFieldLimits(): void {
 	let currentDate: Date = new Date();
 
 	let year: string = currentDate.getFullYear().toString();
+	let allowedYear: string = (currentDate.getFullYear() - 18).toString();
 	let month: string = (currentDate.getMonth() + 1).toString();
+	let day: string = currentDate.getDate().toString();
 	let nextDay: string = (currentDate.getDate() + 1).toString();
-	let previousDay: string = (currentDate.getDate() - 1).toString();
+
+	// let previousDay: string = (currentDate.getDate() - 1).toString();
 
 	if (month.length === 1) month = '0' + month;
 	if (nextDay.length === 1) nextDay = '0' + nextDay;
-	if (previousDay.length === 1) previousDay = '0' + previousDay;
+	if (day.length === 1) day = '0' + day;
 
 	let minDateProject: string = `${year}-${month}-${nextDay}`;
-	let maxDateUser: string = `${year}-${month}-${previousDay}`;
+	let maxDateProject: string = `2100-01-01`;
+	let maxDateUser: string = `${allowedYear}-${month}-${day}`;
 
 
 	if (date) {
 		if (date.parentElement?.matches('#create-project') || date.parentElement?.matches('#edit-project')) {
 			date.min = minDateProject;
+			date.max = maxDateProject;
 		}
 
 		if (date.parentElement?.matches('#create-user') || date.parentElement?.matches('#edit-user')) {

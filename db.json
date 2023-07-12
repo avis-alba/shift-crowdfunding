@@ -1,6 +1,62 @@
 {
   "login": {
-    "login": "avis-alba",
-    "password": "123654789"
-  }
+    "login": "avis-alba1",
+    "password": "lkjhgfds"
+  },
+  "projects": [
+    {
+      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "project_name": "My project",
+      "author": {
+        "login": "string",
+        "about": "string",
+        "first_name": "иван",
+        "last_name": "петров",
+        "patronymic": "сергеевич",
+        "birth_date": "2000-07-11",
+        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "description": "Описание проекта",
+      "donation_deadline": "2023-07-30",
+      "required_amount": 1000,
+      "collected_amount": 0,
+      "category": "Игры"
+    },
+    {
+      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "project_name": "My project 2",
+      "author": {
+        "login": "string",
+        "about": "string",
+        "first_name": "Иван",
+        "last_name": "Иванов",
+        "patronymic": "Сергеевич",
+        "birth_date": "2000-07-15",
+        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "description": "Описание проекта. Описание проекта",
+      "donation_deadline": "2023-08-30",
+      "required_amount": 10000,
+      "collected_amount": 10,
+      "category": "Игры"
+    },
+    {
+      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "project_name": "My project 3",
+      "author": {
+        "login": "string",
+        "about": "string",
+        "first_name": "Иван",
+        "last_name": "Сидоров",
+        "patronymic": "Сергеевич",
+        "birth_date": "2000-08-11",
+        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "description": "Описание проекта. Описание проекта. Описание проекта",
+      "donation_deadline": "2023-07-30",
+      "required_amount": 1000,
+      "collected_amount": 0,
+      "category": "Благотворительность"
+    }
+  ]
 }

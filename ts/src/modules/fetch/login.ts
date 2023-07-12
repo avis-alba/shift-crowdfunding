@@ -34,10 +34,14 @@ export default async function login(event: Event) {
 
 	} else if (`${response.status}`[0] === '4') {
 
-		let error = await response.json();
-		alert(error.message || 'Ошибка запроса');
-		// console.log('error');
-		// console.log('after fetch for body');
+		loginField.style.border = '2px solid #da467d';
+		passwordField.style.border = '2px solid #da467d';
+
+		response.json().then((response) => {
+			alert(response.message || 'Ошибка запроса');
+		}).catch((error) => {
+			alert(error.message);
+		})
 
 	} else if (`${response.status}`[0] === '5') {
 
