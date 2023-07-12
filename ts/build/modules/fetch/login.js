@@ -17,11 +17,12 @@ export default function login(event) {
         let form = document.querySelector('#popup-form');
         let loginField = form.elements[0];
         let passwordField = form.elements[1];
+        let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.login}`;
         let requestData = {
             login: loginField.value,
             password: passwordField.value
         };
-        let response = yield fetch(`${requests.requestOrigin}${requests.requestURLs.POST.login}`, {
+        let response = yield fetch(requestURL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -39,7 +40,8 @@ export default function login(event) {
             loginField.style.border = '2px solid #da467d';
             passwordField.style.border = '2px solid #da467d';
             response.json().then((response) => {
-                alert(response.message || 'Ошибка запроса');
+                console.log(response.message);
+                alert('Неверный логин или пароль');
             }).catch((error) => {
                 alert(error.message);
             });

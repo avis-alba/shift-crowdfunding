@@ -1,21 +1,20 @@
+import getLoginFromCookie from './get-login.js';
+import * as requests from './requests.js';
 
 export default async function pageLoad(event: Event) {
-	console.log('load');
 
 	let buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.login');
-	let cookieLogin = document.cookie.match(/user=.+/);
-	let login;
 
-	if (cookieLogin) login = cookieLogin[0].slice(5);
+	let login = getLoginFromCookie();
 
 	if (login) {
 
-		console.log('hascookie');
-		console.log(login);
-
 		for (let button of buttons) {
-			button.innerHTML = '<a href="./user-profile.html">Мой профиль</a>';
-			button.onclick = null;
+
+			button.innerHTML = 'Мой профиль';
+			button.onclick = function () {
+				window.location.href = `${requests.siteOrigin}user-profile.html`;
+			};
 		}
 	}
 }

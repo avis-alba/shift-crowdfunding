@@ -1,3 +1,4 @@
 {
-	"/avis-alba1/*": "/$1"
+	"/avis-alba1/*": "/$1",
+	"/users/avis-alba1/": "/profile"
 }

@@ -11,12 +11,14 @@ export default async function login(event: Event) {
 	let loginField: HTMLInputElement = form.elements[0] as HTMLInputElement;
 	let passwordField: HTMLInputElement = form.elements[1] as HTMLInputElement;
 
+	let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.login}`;
+
 	let requestData = {
 		login: loginField.value,
 		password: passwordField.value
 	};
 
-	let response = await fetch(`${requests.requestOrigin}${requests.requestURLs.POST.login}`, {
+	let response = await fetch(requestURL, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8'
@@ -38,10 +40,15 @@ export default async function login(event: Event) {
 		passwordField.style.border = '2px solid #da467d';
 
 		response.json().then((response) => {
-			alert(response.message || 'Ошибка запроса');
+
+			console.log(response.message);
+			alert('Неверный логин или пароль');
+
 		}).catch((error) => {
+
 			alert(error.message);
-		})
+
+		});
 
 	} else if (`${response.status}`[0] === '5') {
 

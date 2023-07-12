@@ -1,9 +1,11 @@
 //json-server --watch db.json
 
+import getLoginFromCookie from './get-login.js';
+
 export let requestOrigin: string = `http://localhost:3000/`;
 export let siteOrigin: string = `http://127.0.0.1:5500/html/`;
 
-export let userLogin: string = ``;
+export let userLogin: string = getLoginFromCookie();
 export let projectId: string = ``;
 export let projectName: string = ``;
 export let isAscending: string = ``;

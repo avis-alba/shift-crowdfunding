@@ -17,12 +17,9 @@ export default async function getProjects() {
 
 	let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;
 
-	if (window.location.href === 'http://127.0.0.1:5500/html/my-projects.html') {
+	if (window.location.href === `${requests.siteOrigin}/html/my-projects.html`) {
 
-		let cookieLogin = document.cookie.match(/user=.+/);
-		let login;
-		if (cookieLogin) login = cookieLogin[0].slice(5);
-		requestURL = `${requests.requestOrigin}${login}/${requests.requestURLs.GET.projects}`;
+		requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userProjects}`;
 	}
 
 	let response = await fetch(`${requestURL}`);
@@ -78,10 +75,11 @@ export default async function getProjects() {
 
 		response.json().then((response) => {
 
-			errorMessage.innerHTML = response.message || 'Ошибка запроса';
+			errorMessage.innerHTML = 'Ошибка запроса';
 			projectContainer?.append(errorMessage);
 
 		}).catch((error) => {
+
 			alert(error.message);
 		})
 

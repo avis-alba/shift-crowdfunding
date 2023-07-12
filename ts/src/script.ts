@@ -5,6 +5,7 @@ import showAdditionalForm from './modules/show-form.js';
 import login from './modules/fetch/login.js';
 import pageLoad from './modules/fetch/page-load.js';
 import getProjects from './modules/fetch/projects.js';
+import getUserProfile from './modules/fetch/user-load.js';
 
 try {
 	let loginButtons: NodeListOf<HTMLButtonElement> = document.body.querySelectorAll('.login');
@@ -23,6 +24,7 @@ try {
 
 	window.addEventListener('load', pageLoad);
 	window.addEventListener('load', getProjects);
+	window.addEventListener('load', getUserProfile);
 
 } catch (e) {
 	if (e instanceof Error) {
