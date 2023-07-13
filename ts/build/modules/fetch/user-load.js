@@ -54,9 +54,9 @@ export default function getUserProfile() {
                 event.preventDefault();
                 let updatedData = {
                     about: descriptionField.value,
-                    first_name: nameField.value,
-                    last_name: lastNameField.value,
-                    patronymic: patronymicField.value,
+                    first_name: nameField.value.toLowerCase(),
+                    last_name: lastNameField.value.toLowerCase(),
+                    patronymic: patronymicField.value.toLowerCase(),
                     birth_date: birthDateField.value,
                     balance: balance.innerHTML // это костыль для моки
                 };

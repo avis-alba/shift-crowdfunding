@@ -73,6 +73,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover,
 input[type="reset"]:hover {
+	cursor: pointer;
 	background-color: var(--my-white);
 }
 

@@ -1,5 +1,6 @@
 {
 	"/avis-alba1/*": "/$1",
 	"/users/avis-alba1/": "/profile",
-	"/projects/*": "/my-project"
+	"/projects/*": "/my-project",
+	"/users/": "/profile"
 }
