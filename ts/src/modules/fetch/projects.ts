@@ -16,9 +16,10 @@ export default async function getProjects() {
 
 	let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;
 
-	if (window.location.href === `${requests.siteOrigin}/html/my-projects.html`) {
+	if (window.location.href == `${requests.siteOrigin}my-projects.html`) {
 
 		requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userProjects}`;
+
 	}
 
 	let response = await fetch(`${requestURL}`);

@@ -84,10 +84,16 @@ export default async function getProjectInfo() {
 		projectCategory.innerHTML = category;
 
 		if (video) {
+
 			projectVideo.style.display = 'block';
+			let spinner = createSpinner();
+			spinner.style.position = 'static';
+
 			let iframe = document.createElement('iframe');
 			projectVideo.append(iframe);
 			iframe.outerHTML = `<iframe width="560" height="315" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>`
+
+			spinner.remove();
 		}
 
 		let sidebarTemplate = `

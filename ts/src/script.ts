@@ -8,6 +8,7 @@ import getProjects from './modules/fetch/projects.js';
 import getUserProfile from './modules/fetch/user-load.js';
 import getProjectInfo from './modules/fetch/project-load.js';
 import createUser from './modules/fetch/create-user.js';
+import createProject from './modules/fetch/create-project.js';
 
 try {
 	let loginButtons: NodeListOf<HTMLButtonElement> = document.body.querySelectorAll('.login');
@@ -29,6 +30,7 @@ try {
 	window.addEventListener('load', getUserProfile);
 	window.addEventListener('load', getProjectInfo);
 	window.addEventListener('load', createUser);
+	window.addEventListener('load', createProject);
 
 } catch (e) {
 	if (e instanceof Error) {

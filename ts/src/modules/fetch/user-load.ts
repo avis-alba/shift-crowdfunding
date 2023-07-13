@@ -70,11 +70,13 @@ export default async function getUserProfile() {
 			last_name: lastNameField.value.toLowerCase(),
 			patronymic: patronymicField.value.toLowerCase(),
 			birth_date: birthDateField.value,
+
 			balance: balance.innerHTML // это костыль для моки
 		};
 
 		let response = await fetch(requestURL, {
-			method: 'PUT',
+
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			},

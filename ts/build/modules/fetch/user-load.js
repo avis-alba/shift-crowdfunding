@@ -61,7 +61,7 @@ export default function getUserProfile() {
                     balance: balance.innerHTML // это костыль для моки
                 };
                 let response = yield fetch(requestURL, {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                     },

@@ -65,9 +65,7 @@
     "last_name": "михайлова",
     "patronymic": "владимировна",
     "birth_date": "2000-09-11",
-    "login": "avis-alba1",
-    "password": "qwerty",
-    "balance": 100
+    "balance": "100"
   },
   "balance": {
     "promo_code": "1111-1111-1111"
@@ -98,5 +96,13 @@
   ],
   "donate": {
     "amount": "1000"
+  },
+  "post-project": {
+    "project_name": "Анализатор пчел",
+    "category": "Игры",
+    "required_amount": "1000000",
+    "donation_deadline": "2025-05-20",
+    "video_widget": "",
+    "description": "Анализирует пчел"
   }
 }
