@@ -20,7 +20,7 @@ export default function getProjects() {
         spinner.style.position = 'static';
         projectContainer.append(spinner);
         let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;
-        if (window.location.href == `${requests.siteOrigin}my-projects.html`) {
+        if (window.location.href === `${requests.siteOrigin}my-projects.html`) {
             requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userProjects}`;
         }
         let response = yield fetch(`${requestURL}`);
