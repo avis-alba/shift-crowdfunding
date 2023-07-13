@@ -9,6 +9,9 @@ export default async function pageLoad(event: Event) {
 
 	if (login) {
 
+		let registrationButton: HTMLAnchorElement | null = document.querySelector('#registration');
+		if (registrationButton) registrationButton.href = './user-profile.html';
+
 		for (let button of buttons) {
 
 			button.innerHTML = 'Мой профиль';

@@ -1,4 +1,5 @@
 import * as requests from './requests.js';
+import createSpinner from './create-spinner.js';
 
 export default async function getProjects() {
 	let projectContainer: HTMLDivElement | null = document.querySelector('.projects-body');
@@ -8,9 +9,7 @@ export default async function getProjects() {
 	let errorMessage = document.createElement('p');
 	errorMessage.style.color = '#da467d';
 
-	let spinner = document.createElement('div');
-	spinner.classList.add('spinner-border');
-	spinner.setAttribute('role', 'status');
+	let spinner = createSpinner();
 	spinner.style.position = 'static';
 
 	projectContainer.append(spinner);

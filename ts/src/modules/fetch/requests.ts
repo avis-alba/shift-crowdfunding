@@ -6,7 +6,9 @@ export let requestOrigin: string = `http://localhost:3000/`;
 export let siteOrigin: string = `http://127.0.0.1:5500/html/`;
 
 export let userLogin: string = getLoginFromCookie();
-export let projectId: string = ``;
+
+let idParameter = location.href.match(/id=.+/);
+export let projectId: string = idParameter ? idParameter[0].slice(3) : ``;
 export let projectName: string = ``;
 export let isAscending: string = ``;
 export let minAmount: string = ``;
@@ -18,7 +20,7 @@ export let requestURLs = {
 		login: `login`,
 		balance: `balance`,
 		createProgect: `projects`,
-		donateToProject: `/projects/${projectId}/donate`
+		donateToProject: `projects/${projectId}/donate`
 	},
 	GET: {
 		userInfo: `users/${userLogin}`,

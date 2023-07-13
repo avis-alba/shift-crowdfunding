@@ -42,8 +42,15 @@ export default function getUserProfile() {
         else if (`${response.status}`[0] === '5') {
             alert('Ошибка сервера!');
         }
+        let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
+        for (let field of inputs) {
+            field.onchange = function () {
+                window.onbeforeunload = function () { return false; };
+            };
+        }
         function updateUserProfile(event) {
             return __awaiter(this, void 0, void 0, function* () {
+                window.onbeforeunload = null;
                 event.preventDefault();
                 let updatedData = {
                     about: descriptionField.value,
@@ -71,12 +78,6 @@ export default function getUserProfile() {
                 }
             });
         }
-        let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
-        for (let field of inputs) {
-            field.onchange = function () {
-                window.onbeforeunload = function () { return false; };
-            };
-        }
         let sendMoneyForm = document.querySelector('#send-money');
         let promocodeField = sendMoneyForm.elements[0];
         sendMoneyForm.addEventListener('submit', sendPromocode);
@@ -87,8 +88,6 @@ export default function getUserProfile() {
                 let promocode = {
                     promo_code: promocodeField.value
                 };
-                console.log(requestURL);
-                console.log(promocode);
                 let response = yield fetch(requestURL, {
                     method: 'POST',
                     headers: {

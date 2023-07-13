@@ -24,69 +24,50 @@
 		<button class="login">Войти</button>
 	</header>
 	<div class="content page">
-		<h1 class="item-header">Проект Lorem Ipsum</h1>
+		<h1 class="item-header">Проект</h1>
 		<div class="item-full-info">
 			<div class="full-info-body">
-				<div class="category">Игры</div>
+				<div class="category">-</div>
 				<div class="full-info-text">
 					<p>
 						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, nulla doloremque? Inventore
 						dolorum explicabo aperiam dolores, exercitationem culpa nisi placeat at repellat ex delectus
 						deserunt iure facilis corporis consequatur laborum?
 					</p>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque at eius maiores eum! Dolorum
-						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
-						quos sapiente! Sapiente, praesentium.
-					</p>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque at eius maiores eum! Dolorum
-						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
-						quos sapiente! Sapiente, praesentium.
-					</p>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque at eius maiores eum! Dolorum
-						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
-						quos sapiente! Sapiente, praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Neque at eius maiores eum! Dolorum
-						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
-						quos sapiente! Sapiente, praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Neque at eius maiores eum! Dolorum
-						doloremque facere illo quisquam ipsa quidem, molestiae inventore architecto ad placeat suscipit,
-						quos sapiente! Sapiente, praesentium.
-					</p>
+
 				</div>
 				<div class="full-info-video">
 					<h2>Посмотреть видео о проекте</h2>
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/siN7p6s9HWM"
+					<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/siN7p6s9HWM"
 						title="YouTube video player" frameborder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-						allowfullscreen></iframe>
+						allowfullscreen></iframe> -->
 				</div>
 			</div>
 			<div class="full-info-sidebar">
-				<p><strong>Собрано:</strong></p>
+				<!-- <p><strong>Собрано:</strong></p>
 				<div class="sidebar-num">
-					<p id="money">1000000000 / 1000000000</p>
+					<p id="money">0 / 0</p>
 				</div>
 				<p><strong>Окончание сбора:</strong></p>
 				<div class="sidebar-num">
-					<p id="time">12.05.2024</p>
+					<p id="time">01.01.2050</p>
 				</div>
 				<p><strong>Автор:</strong></p>
-				<p id="author">Петров А.Р.</p>
+				<p id="author">-</p> -->
 				<button id="show-form">Спонсировать</button>
 				<form id="fund">
-					<input type="number" placeholder="1000" min="0" max="1000000000">
+					<input type="number" placeholder="1000" min="1" max="1000000000" value="1000">
 					<input type="submit" value="OK">
 				</form>
 			</div>
 		</div>
 		<!--Админ панель-->
 		<div class="admin-menu">
-			<a href="./edit-project.html"><button>Редактировать проект</button></a>
-			<button>Удалить проект</button>
-			<button onclick="alert('Деньги успешно отправлены!')">Вывести деньги</button>
+			<a href="./edit-project.html?id="><button id="edit">Редактировать проект</button></a>
+			<button id="delete">Удалить проект</button>
+			<button id="withdraw" style="display: none" onclick="alert('Деньги успешно отправлены!')">Вывести
+				деньги</button>
 		</div>
 
 	</div>

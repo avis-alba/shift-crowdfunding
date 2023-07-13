@@ -3,7 +3,8 @@ import getLoginFromCookie from './get-login.js';
 export let requestOrigin = `http://localhost:3000/`;
 export let siteOrigin = `http://127.0.0.1:5500/html/`;
 export let userLogin = getLoginFromCookie();
-export let projectId = ``;
+let idParameter = location.href.match(/id=.+/);
+export let projectId = idParameter ? idParameter[0].slice(3) : ``;
 export let projectName = ``;
 export let isAscending = ``;
 export let minAmount = ``;
@@ -14,7 +15,7 @@ export let requestURLs = {
         login: `login`,
         balance: `balance`,
         createProgect: `projects`,
-        donateToProject: `/projects/${projectId}/donate`
+        donateToProject: `projects/${projectId}/donate`
     },
     GET: {
         userInfo: `users/${userLogin}`,

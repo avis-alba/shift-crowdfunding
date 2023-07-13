@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
+import createSpinner from './create-spinner.js';
 export default function getProjects() {
     return __awaiter(this, void 0, void 0, function* () {
         let projectContainer = document.querySelector('.projects-body');
@@ -15,9 +16,7 @@ export default function getProjects() {
             return;
         let errorMessage = document.createElement('p');
         errorMessage.style.color = '#da467d';
-        let spinner = document.createElement('div');
-        spinner.classList.add('spinner-border');
-        spinner.setAttribute('role', 'status');
+        let spinner = createSpinner();
         spinner.style.position = 'static';
         projectContainer.append(spinner);
         let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;

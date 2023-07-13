@@ -50,7 +50,18 @@ export default async function getUserProfile() {
 		alert('Ошибка сервера!');
 	}
 
+	let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
+
+	for (let field of inputs) {
+		field.onchange = function () {
+
+			window.onbeforeunload = function () { return false };
+		}
+	}
+
 	async function updateUserProfile(event: Event) {
+
+		window.onbeforeunload = null;
 		event.preventDefault();
 
 		let updatedData = {
@@ -84,14 +95,6 @@ export default async function getUserProfile() {
 		}
 	}
 
-	let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
-
-	for (let field of inputs) {
-		field.onchange = function () {
-
-			window.onbeforeunload = function () { return false };
-		}
-	}
 
 	let sendMoneyForm: HTMLFormElement = document.querySelector('#send-money') as HTMLFormElement;
 	let promocodeField: HTMLInputElement = sendMoneyForm.elements[0] as HTMLInputElement;
