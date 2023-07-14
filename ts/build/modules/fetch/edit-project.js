@@ -46,7 +46,7 @@ export default function editProject() {
                 }
             });
         }
-        let sendProjectData = makeProjectDataRequest(requestURL);
+        let sendProjectData = makeProjectDataRequest(requestURL, 'PUT');
         form.addEventListener('submit', sendProjectData);
         if (response.ok) {
             let project = yield response.json();

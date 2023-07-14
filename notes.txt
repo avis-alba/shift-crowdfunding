@@ -10,3 +10,8 @@ let projectNameTooltip = 'От 2 до 30 знаков, буквы, цифры, �
 let youtubeURLTooltip = 'Ссылка формата https://www.youtube.com/my-video';
 
 data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title=""
+
+"/projects/": "/post-project"
+
+let paramsIndex = window.location.href.indexOf('?');
+window.location.href += window.location.href.slice(paramsIndex);

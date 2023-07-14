@@ -28,38 +28,35 @@
 			<h1>Проекты для спонсорства</h1>
 			<div class="projects-menu">
 				<div class="menu-form">
-					<p><strong>Сортировка:</strong></p>
-					<form name="sort">
+					<p data-bs-toggle="tooltip" data-bs-placement="top"
+						data-bs-title="Для сортировки обязателен выбор категории"><strong>Сортировка:</strong></p>
+					<form name="sort" id="sort">
 						<select>
-							<option value="price-down">По сумме ⇊</option>
-							<option value="price-up">По сумме ⇈</option>
-							<option value="date-down">По дате завершения ⇊</option>
-							<option value="date-up">По дате завершения ⇈</option>
+							<option value="Игры">Игры</option>
+							<option value="Наука">Наука</option>
+							<option value="Бизнес">Бизнес</option>
+							<option value="Кино">Кино</option>
+							<option value="Благотворительность">Благотворительность</option>
 						</select>
+						<select>
+							<option value="by_required_amount,false">По сумме ⇊</option>
+							<option value="by_required_amount,true">По сумме ⇈</option>
+							<option value="by_deadline_date,false">По дате завершения ⇊</option>
+							<option value="by_deadline_date,true">По дате завершения ⇈</option>
+						</select>
+						<input type="submit" value="Показать">
 					</form>
 				</div>
 				<div class="menu-form">
 					<p><strong>Сумма сбора:</strong></p>
-					<form name="range">
+					<form name="filter" id="filter">
 						<span>от </span><input type="number" min="0" max="1000000000" value="0" id="min-summ">
 						<span>до </span><input type="number" min="2" max="1000000000" value="10000" id="max-summ">
 						<input type="submit" value="Показать">
 					</form>
 				</div>
 				<div class="menu-form">
-					<p><strong>Категории:</strong></p>
-					<form name="sort">
-						<select>
-							<option value="games">Игры</option>
-							<option value="science">Наука</option>
-							<option value="business">Бизнес</option>
-							<option value="cinema">Кино</option>
-							<option value="charity">Благотворительность</option>
-						</select>
-					</form>
-				</div>
-				<div class="menu-form">
-					<form name="search">
+					<form name="search" id="search">
 						<input type="search" placeholder="Поиск по проектам">
 						<input type="submit" value="Поиск">
 					</form>

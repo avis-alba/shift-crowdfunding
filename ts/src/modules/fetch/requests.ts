@@ -10,10 +10,6 @@ export let userLogin: string = getLoginFromCookie();
 
 let idParameter = location.href.match(/id=.+/);
 export let projectId: string = idParameter ? idParameter[0].slice(3) : ``;
-export let projectName: string = ``;
-export let isAscending: string = ``;
-export let minAmount: string = ``;
-export let maxAmount: string = ``;
 
 export let requestURLs = {
 	POST: {
@@ -27,11 +23,7 @@ export let requestURLs = {
 		userInfo: `users/${userLogin}`,
 		userProjects: `users/${userLogin}/projects`,
 		projects: `projects`,
-		projectByName: `projects?project_name=${projectName}`,
 		projectById: `projects/${projectId}`,
-		sortByMoney: `projects?sorting_enabled=true&is_ascending=${isAscending}&mode=by_required_amount`,
-		sortByDeadline: `projects?sorting_enabled=true&is_ascending=${isAscending}&mode=by_deadline_date`,
-		filterByMoney: `projects?filter_required_amount=true&min_amount=${minAmount}&max_amount=${maxAmount}`
 	},
 	PUT: {
 		editUser: `users/${userLogin}`,

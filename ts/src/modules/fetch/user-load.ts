@@ -76,7 +76,7 @@ export default async function getUserProfile() {
 
 		let response = await fetch(requestURL, {
 
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			},
@@ -126,9 +126,7 @@ export default async function getUserProfile() {
 			balance.innerHTML = currentBalance.current_balance || 10000;
 
 			// ответа нет в моках
-			/*{
-					"current_balance": 0
-			} */
+			// {"current_balance": 0}
 
 		} else if (`${response.status}`[0] === '4') {
 

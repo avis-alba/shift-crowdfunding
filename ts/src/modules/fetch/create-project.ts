@@ -14,12 +14,12 @@ export default async function createProject() {
 		window.location.href = document.referrer;
 	};
 
-	let sendProjectData = makeProjectDataRequest(requestURL);
+	let sendProjectData = makeProjectDataRequest(requestURL, 'POST');
 
 	form.addEventListener('submit', sendProjectData);
 }
 
-export function makeProjectDataRequest(requestURL: string) {
+export function makeProjectDataRequest(requestURL: string, method: string) {
 
 	return async function (event: Event) {
 
@@ -47,7 +47,7 @@ export function makeProjectDataRequest(requestURL: string) {
 		};
 
 		let response = await fetch(requestURL, {
-			method: 'POST',
+			method,
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			},

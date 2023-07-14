@@ -47,7 +47,7 @@ export default async function editProject() {
 		}
 	}
 
-	let sendProjectData = makeProjectDataRequest(requestURL);
+	let sendProjectData = makeProjectDataRequest(requestURL, 'PUT');
 
 	form.addEventListener('submit', sendProjectData);
 

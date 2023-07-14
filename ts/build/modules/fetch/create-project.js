@@ -19,21 +19,16 @@ export default function createProject() {
         cancelButton.onclick = function () {
             window.location.href = document.referrer;
         };
-        let sendProjectData = makeProjectDataRequest(requestURL);
+        let sendProjectData = makeProjectDataRequest(requestURL, 'POST');
         form.addEventListener('submit', sendProjectData);
     });
 }
-export function makeProjectDataRequest(requestURL) {
+export function makeProjectDataRequest(requestURL, method) {
     return function (event) {
         return __awaiter(this, void 0, void 0, function* () {
             window.onbeforeunload = null;
             event.preventDefault();
             let form = document.querySelector('.main-form');
-            // if (window.location.href.includes('edit-project.html?id=')) {
-            // 	form = document.querySelector('#edit-project') as HTMLFormElement;
-            // } else if (window.location.href === `${requests.siteOrigin}create-project.html`) {
-            // 	form = document.querySelector('#create-project') as HTMLFormElement;
-            // }
             let nameField = form.elements[0];
             let categoryField = form.elements[1];
             let moneyField = form.elements[2];
@@ -49,7 +44,7 @@ export function makeProjectDataRequest(requestURL) {
                 description: descriptionField.value
             };
             let response = yield fetch(requestURL, {
-                method: 'POST',
+                method,
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },

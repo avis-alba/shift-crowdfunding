@@ -19,9 +19,7 @@ try {
 	}
 
 	addPromocodeMask();
-
 	addFormFieldLimits();
-
 	showAdditionalForm();
 
 	let loginForm = document.querySelector('#popup-form') as HTMLFormElement;
