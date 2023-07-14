@@ -57,13 +57,16 @@ export default function getProjectInfo() {
                 deleteButton.addEventListener('click', deleteProject);
                 function deleteProject() {
                     return __awaiter(this, void 0, void 0, function* () {
+                        if (!confirm('Вы действительно хотите удалить проект?'))
+                            return;
                         let response = yield fetch(requestURL, { method: 'DELETE' });
+                        window.location.href = `${requests.siteOrigin}projects.html`; // костыль для моки
                         if (response.ok) {
                             alert('Проект удален');
-                            window.location.href = `${requests.siteOrigin}projects.html`;
+                            window.location.href = `${requests.siteOrigin}my-projects.html`;
                         }
                         else if (`${response.status}`[0] === '4') {
-                            alert('Ошибка запроса!');
+                            // alert('Ошибка запроса!'); удалено для работы моки
                         }
                         else if (`${response.status}`[0] === '5') {
                             alert('Ошибка сервера!');

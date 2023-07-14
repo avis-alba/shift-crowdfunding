@@ -1,4 +1,5 @@
 //json-server --watch db.json
+//json-server db.json --routes routes.json
 
 import getLoginFromCookie from './get-login.js';
 
@@ -41,5 +42,15 @@ export let requestURLs = {
 		deleteProject: `projects/${projectId}`,
 		finishFundrising: `projects/${projectId}/finish`
 	}
+}
+
+export type ProjectData = {
+
+	project_name: string;
+	category: string;
+	required_amount: string;
+	donation_deadline: string;
+	video_widget: string;
+	description: string;
 }
 

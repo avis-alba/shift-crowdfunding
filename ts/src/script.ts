@@ -2,6 +2,7 @@ import popupHandler from './modules/popup.js';
 import addPromocodeMask from './modules/mask.js';
 import addFormFieldLimits from './modules/formfield-limits.js';
 import showAdditionalForm from './modules/show-form.js';
+
 import login from './modules/fetch/login.js';
 import pageLoad from './modules/fetch/page-load.js';
 import getProjects from './modules/fetch/projects.js';
@@ -9,6 +10,7 @@ import getUserProfile from './modules/fetch/user-load.js';
 import getProjectInfo from './modules/fetch/project-load.js';
 import createUser from './modules/fetch/create-user.js';
 import createProject from './modules/fetch/create-project.js';
+import editProject from './modules/fetch/edit-project.js';
 
 try {
 	let loginButtons: NodeListOf<HTMLButtonElement> = document.body.querySelectorAll('.login');
@@ -31,8 +33,10 @@ try {
 	window.addEventListener('load', getProjectInfo);
 	window.addEventListener('load', createUser);
 	window.addEventListener('load', createProject);
+	window.addEventListener('load', editProject);
 
 } catch (e) {
+
 	if (e instanceof Error) {
 		alert(e.message);
 	}

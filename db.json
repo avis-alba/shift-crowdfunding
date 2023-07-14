@@ -5,11 +5,11 @@
   },
   "projects": [
     {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "My project",
+      "project_id": "1234567",
+      "project_name": "Копирование пчел",
       "author": {
-        "login": "string",
-        "about": "string",
+        "login": "avis-alba1",
+        "about": "Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы ",
         "first_name": "иван",
         "last_name": "петров",
         "patronymic": "сергеевич",
@@ -18,12 +18,12 @@
       },
       "description": "Описание проекта",
       "donation_deadline": "2023-07-30",
-      "required_amount": 1000,
+      "required_amount": 10000,
       "collected_amount": 0,
-      "category": "Игры"
+      "category": "Бизнес"
     },
     {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "project_id": "3fa85f64-5717-4562-fc-2c963f66afa6",
       "project_name": "My project 2",
       "author": {
         "login": "string",
@@ -41,7 +41,7 @@
       "category": "Игры"
     },
     {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "project_id": "3fa85f64-5717-4562-b3fc-2c963afa6",
       "project_name": "My project 3",
       "author": {
         "login": "string",
@@ -50,7 +50,7 @@
         "last_name": "Сидоров",
         "patronymic": "Сергеевич",
         "birth_date": "2000-08-11",
-        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        "user_id": "3fa85f64-5717-4562-b3fc-63f66afa6"
       },
       "description": "Описание проекта. Описание проекта. Описание проекта",
       "donation_deadline": "2023-07-30",
@@ -60,7 +60,7 @@
     }
   ],
   "profile": {
-    "about": "Frontend-developer",
+    "about": "Frontend-developer!",
     "first_name": "валентина",
     "last_name": "михайлова",
     "patronymic": "владимировна",
@@ -98,11 +98,11 @@
     "amount": "1000"
   },
   "post-project": {
-    "project_name": "Анализатор пчел",
-    "category": "Игры",
-    "required_amount": "1000000",
-    "donation_deadline": "2025-05-20",
+    "project_name": "Пчелиный проект",
+    "category": "Бизнес",
+    "required_amount": "40000",
+    "donation_deadline": "2050-10-10",
     "video_widget": "",
-    "description": "Анализирует пчел"
+    "description": "Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы "
   }
 }
