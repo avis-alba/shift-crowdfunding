@@ -3,15 +3,15 @@
 
 import getLoginFromCookie from './get-login.js';
 
-export let requestOrigin: string = `http://localhost:3000/`;
-export let siteOrigin: string = `http://127.0.0.1:5500/html/`;
+export const requestOrigin: string = `http://localhost:3000/`;
+export const siteOrigin: string = `http://127.0.0.1:5500/html/`;
 
 export let userLogin: string = getLoginFromCookie();
 
-let idParameter = location.href.match(/id=.+/);
-export let projectId: string = idParameter ? idParameter[0].slice(3) : ``;
+let idParameter: RegExpMatchArray | null = location.href.match(/id=.+/);
+export let projectId: string | undefined = idParameter ? idParameter[0].slice(3) : undefined;
 
-export let requestURLs = {
+export let requestURLs = {  // типизировать
 	POST: {
 		registration: `users`,
 		login: `login`,
@@ -35,14 +35,3 @@ export let requestURLs = {
 		finishFundrising: `projects/${projectId}/finish`
 	}
 }
-
-export type ProjectData = {
-
-	project_name: string;
-	category: string;
-	required_amount: string;
-	donation_deadline: string;
-	video_widget: string;
-	description: string;
-}
-

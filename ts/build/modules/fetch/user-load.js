@@ -8,10 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
+import showAdditionalForm from '../show-form.js';
+import addPromocodeMask from '../mask.js';
 export default function getUserProfile() {
     return __awaiter(this, void 0, void 0, function* () {
         if (window.location.href !== `${requests.siteOrigin}user-profile.html`)
             return;
+        showAdditionalForm();
+        addPromocodeMask();
         let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
         let response = yield fetch(requestURL);
         let form = document.querySelector('#edit-user');
@@ -23,7 +27,7 @@ export default function getUserProfile() {
         let balance = document.querySelector('#money');
         form.addEventListener('submit', updateUserProfile);
         if (response.ok) {
-            let user = yield response.json();
+            let user = yield response.json(); // типизировать ответ с бэка
             lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
             nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);
             patronymicField.value = user.patronymic[0].toUpperCase() + user.patronymic.slice(1);
@@ -99,9 +103,7 @@ export default function getUserProfile() {
                     let currentBalance = yield response.json();
                     balance.innerHTML = currentBalance.current_balance || 10000;
                     // ответа нет в моках
-                    /*{
-                            "current_balance": 0
-                    } */
+                    // {"current_balance": 0}
                 }
                 else if (`${response.status}`[0] === '4') {
                     alert('Неверный промокод');

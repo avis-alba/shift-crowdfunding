@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import getLoginFromCookie from './get-login.js';
 import * as requests from './requests.js';
-export default function pageLoad(event) {
+export default function pageLoad() {
     return __awaiter(this, void 0, void 0, function* () {
         let buttons = document.querySelectorAll('.login');
         let login = getLoginFromCookie();

@@ -2,6 +2,5 @@
 	"/avis-alba1/*": "/$1",
 	"/users/avis-alba1/": "/profile",
 	"/projects/*": "/my-project",
-	"/users/": "/profile",
-	"/projects/": "/post-project"
+	"/users/": "/profile"
 }

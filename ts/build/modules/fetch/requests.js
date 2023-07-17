@@ -1,11 +1,11 @@
 //json-server --watch db.json
 //json-server db.json --routes routes.json
 import getLoginFromCookie from './get-login.js';
-export let requestOrigin = `http://localhost:3000/`;
-export let siteOrigin = `http://127.0.0.1:5500/html/`;
+export const requestOrigin = `http://localhost:3000/`;
+export const siteOrigin = `http://127.0.0.1:5500/html/`;
 export let userLogin = getLoginFromCookie();
 let idParameter = location.href.match(/id=.+/);
-export let projectId = idParameter ? idParameter[0].slice(3) : ``;
+export let projectId = idParameter ? idParameter[0].slice(3) : undefined;
 export let requestURLs = {
     POST: {
         registration: `users`,

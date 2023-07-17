@@ -1,4 +1,4 @@
-export const formFieldsRegExp = {
+export const formFieldsRegExp: RegExpList = {
 	userName: /^[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁё\-\s]*[A-Za-zА-Яа-яЁё]$/.toString().slice(1, -1),
 	projectName: /^[a-zA-ZА-Яа-яЁё0-9\-!#$%&()\*,./:;\?@[\]^_{|}~+=\s]{2,30}$/.toString().slice(1, -1),
 	login: /^[a-zA-Z0-9_\-]{3,30}$/.toString().slice(1, -1),

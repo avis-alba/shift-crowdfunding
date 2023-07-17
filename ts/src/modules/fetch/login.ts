@@ -1,6 +1,6 @@
 import * as requests from './requests.js';
 
-export default async function login(event: Event) {
+export default async function login(event: Event): Promise<void> {
 	event.preventDefault();
 
 	let spinner: HTMLDivElement | null = document.querySelector('.spinner-border');
@@ -11,14 +11,15 @@ export default async function login(event: Event) {
 	let loginField: HTMLInputElement = form.elements[0] as HTMLInputElement;
 	let passwordField: HTMLInputElement = form.elements[1] as HTMLInputElement;
 
-	let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.login}`;
+	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.login}`;
 
-	let requestData = {
+	let requestData: LoginData = {
+
 		login: loginField.value,
 		password: passwordField.value
 	};
 
-	let response = await fetch(requestURL, {
+	let response: Response = await fetch(requestURL, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8'
@@ -30,7 +31,6 @@ export default async function login(event: Event) {
 
 	if (response.ok) {
 
-		let json = await response.json();
 		document.cookie = `user=${requestData.login}`;
 		location.href = `${requests.siteOrigin}` + `user-profile.html`;
 
@@ -55,4 +55,3 @@ export default async function login(event: Event) {
 		alert('Ошибка сервера!');
 	}
 }
-

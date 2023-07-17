@@ -32,7 +32,6 @@ export default function login(event) {
         if (spinner)
             spinner.setAttribute('style', 'display: none');
         if (response.ok) {
-            let json = yield response.json();
             document.cookie = `user=${requestData.login}`;
             location.href = `${requests.siteOrigin}` + `user-profile.html`;
         }

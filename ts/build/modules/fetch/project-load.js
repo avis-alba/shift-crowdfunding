@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
+import showAdditionalForm from '../show-form.js';
 import getLoginFromCookie from './get-login.js';
 import createSpinner from './create-spinner.js';
 import { createBackground } from './create-spinner.js';
@@ -15,6 +16,7 @@ export default function getProjectInfo() {
     return __awaiter(this, void 0, void 0, function* () {
         if (!window.location.href.includes('project-item.html?id='))
             return;
+        showAdditionalForm();
         let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
         let requestURLDonation = `${requests.requestOrigin}${requests.requestURLs.POST.donateToProject}`;
         let adminMenu = document.querySelector('.admin-menu');
@@ -32,7 +34,7 @@ export default function getProjectInfo() {
         document.body.append(spinner);
         let response = yield fetch(requestURL);
         if (response.ok) {
-            let project = yield response.json();
+            let project = yield response.json(); // типизировать ответ с бэка
             spinner.remove();
             spinnerBackground.remove();
             let name = project.project_name;
@@ -76,7 +78,7 @@ export default function getProjectInfo() {
             }
             projectName.innerHTML = name;
             projectDescription.innerHTML = `<p>${description}</p>`;
-            projectCategory.innerHTML = category;
+            projectCategory.innerHTML = `<p>${category}</p>`;
             if (video) {
                 projectVideo.style.display = 'block';
                 let iframe = document.createElement('iframe');

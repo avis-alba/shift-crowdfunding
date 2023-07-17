@@ -1,7 +1,6 @@
-
 export default function createSpinner(): HTMLDivElement {
 
-	let spinner = document.createElement('div');
+	let spinner: HTMLDivElement = document.createElement('div');
 	spinner.classList.add('spinner-border');
 	spinner.setAttribute('role', 'status');
 	return spinner;
@@ -9,7 +8,7 @@ export default function createSpinner(): HTMLDivElement {
 
 export function createBackground(): HTMLDivElement {
 
-	let background = document.createElement('div');
+	let background: HTMLDivElement = document.createElement('div');
 	background.classList.add('spinner-background');
 	return background;
 }

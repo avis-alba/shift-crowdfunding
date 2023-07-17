@@ -1,20 +1,20 @@
 import * as requests from './requests.js';
 import createSpinner from './create-spinner.js';
 
-export default async function getProjects() {
+export default async function getProjects(): Promise<void> {
 	let projectContainer: HTMLDivElement | null = document.querySelector('.projects-body');
 
 	if (!projectContainer) return;
 
-	let errorMessage = document.createElement('p');
+	let errorMessage: HTMLParagraphElement = document.createElement('p');
 	errorMessage.style.color = '#da467d';
 
-	let spinner = createSpinner();
+	let spinner: HTMLDivElement = createSpinner();
 	spinner.style.position = 'static';
 
 	projectContainer.append(spinner);
 
-	let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;
+	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;
 
 	if (window.location.href === `${requests.siteOrigin}my-projects.html`) {
 
@@ -34,12 +34,12 @@ export default async function getProjects() {
 
 		function sortedProjectsRequest(): string {
 
-			let sortTypeValues = sortType.value.split(',');
-			let queryParams = `?sorting_enabled=true&is_ascending=${sortTypeValues[1]}&category=${category.value}&mode=${sortTypeValues[0]}`;
+			let sortTypeValues: string[] = sortType.value.split(',');
+			let queryParams: string = `?sorting_enabled=true&is_ascending=${sortTypeValues[1]}&category=${category.value}&mode=${sortTypeValues[0]}`;
 			return queryParams;
 		}
 
-		function showSortedProjects(event: Event) {
+		function showSortedProjects(event: Event): void {
 
 			event.preventDefault();
 			location.search = sortedProjectsRequest();
@@ -54,11 +54,11 @@ export default async function getProjects() {
 
 		function filteredProjectsRequest(): string {
 
-			let queryParams = `?filter_required_amount=true&min_amount=${minSumm.value}&max_amount=${maxSumm.value}`;
+			let queryParams: string = `?filter_required_amount=true&min_amount=${minSumm.value}&max_amount=${maxSumm.value}`;
 			return queryParams;
 		}
 
-		function showFilteredProjects(event: Event) {
+		function showFilteredProjects(event: Event): void {
 
 			event.preventDefault();
 			location.search = filteredProjectsRequest();
@@ -72,11 +72,11 @@ export default async function getProjects() {
 
 		function searchProjectsRequest(): string {
 
-			let queryParams = `?project_name=${searchField.value}`;
+			let queryParams: string = `?project_name=${searchField.value}`;
 			return queryParams;
 		}
 
-		function showSearchedProjects(event: Event) {
+		function showSearchedProjects(event: Event): void {
 
 			event.preventDefault();
 			location.search = searchProjectsRequest();
@@ -85,21 +85,21 @@ export default async function getProjects() {
 
 	}
 
-	async function showProjects() {
+	async function showProjects(): Promise<void> {
 
 		if (window.location.href.includes('?')) {
 
-			let params = location.search;
+			let params: string = location.search;
 			requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}${params}`;
 		}
 
-		let response = await fetch(requestURL);
+		let response: Response = await fetch(requestURL);
 
 		spinner.style.display = 'none';
 
 		if (response.ok) {
 
-			let projects = await response.json();
+			let projects = await response.json(); // типизировать ответ с бэка
 
 			for (let project of projects) {
 
@@ -111,11 +111,11 @@ export default async function getProjects() {
 				let collectedAmount = project.collected_amount;
 				let requiredAmount = project.required_amount;
 
-				let formatter = new Intl.DateTimeFormat();
-				let deadline = formatter.format(new Date(project.donation_deadline));
+				let formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
+				let deadline: string = formatter.format(new Date(project.donation_deadline));
 
 
-				let projectTemplate = `
+				let projectTemplate: string = `
 								<div class="projects-item">
 									<div class="item-name">
 										<h3>${projectName}</h3>
@@ -135,7 +135,7 @@ export default async function getProjects() {
 									</div>
 								</div>
 									`;
-				let projectCard = document.createElement('a');
+				let projectCard: HTMLAnchorElement = document.createElement('a');
 				projectCard.href = `${requests.siteOrigin}project-item.html?id=${project.project_id}`;
 				projectCard.innerHTML = projectTemplate;
 				projectContainer?.append(projectCard);
@@ -153,7 +153,5 @@ export default async function getProjects() {
 			alert('Ошибка сервера!');
 		}
 	}
-
-
 }
 

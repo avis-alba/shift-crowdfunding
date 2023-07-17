@@ -1,4 +1,4 @@
-export default function popupHandler(e) {
+export default function popupHandler() {
     let html = document.documentElement;
     let htmlH = html.clientHeight;
     let htmlW = html.clientWidth;
@@ -8,6 +8,11 @@ export default function popupHandler(e) {
     background.classList.add('popup-background');
     document.body.append(background);
     let popup = document.body.querySelector('#popup');
+    function hidePopup() {
+        background.remove();
+        popup === null || popup === void 0 ? void 0 : popup.setAttribute('style', 'display: none');
+        document.body.style.overflow = 'auto';
+    }
     if (popup) {
         let popupStyles = getComputedStyle(popup);
         let offsetTop = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl + 'px';
@@ -22,10 +27,5 @@ export default function popupHandler(e) {
         if (resetButton)
             resetButton.addEventListener('click', hidePopup);
         background.addEventListener('click', hidePopup);
-    }
-    function hidePopup() {
-        background.remove();
-        popup === null || popup === void 0 ? void 0 : popup.setAttribute('style', 'display: none');
-        document.body.style.overflow = 'auto';
     }
 }

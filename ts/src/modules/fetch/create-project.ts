@@ -1,6 +1,6 @@
 import * as requests from './requests.js';
 
-export default async function createProject() {
+export default async function createProject(): Promise<void> {
 	if (window.location.href !== `${requests.siteOrigin}create-project.html`) return;
 
 	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.createProgect}`;
@@ -8,20 +8,20 @@ export default async function createProject() {
 	let form: HTMLFormElement = document.querySelector('#create-project') as HTMLFormElement;
 	let cancelButton: HTMLInputElement = form.elements[7] as HTMLInputElement;
 
-	window.onbeforeunload = function () { return false };
+	window.onbeforeunload = function (): boolean { return false };
 
-	cancelButton.onclick = function () {
+	cancelButton.onclick = function (): void {
 		window.location.href = document.referrer;
 	};
 
-	let sendProjectData = makeProjectDataRequest(requestURL, 'POST');
+	let sendProjectData: SendProjectDataFunc = makeProjectDataRequest(requestURL, 'POST');
 
 	form.addEventListener('submit', sendProjectData);
 }
 
-export function makeProjectDataRequest(requestURL: string, method: string) {
+export function makeProjectDataRequest(requestURL: string, method: string): SendProjectDataFunc {
 
-	return async function (event: Event) {
+	return async function (event: Event): Promise<void> {
 
 		window.onbeforeunload = null;
 		event.preventDefault();
@@ -35,7 +35,7 @@ export function makeProjectDataRequest(requestURL: string, method: string) {
 		let videoField: HTMLInputElement = form.elements[4] as HTMLInputElement;
 		let descriptionField: HTMLInputElement = form.elements[5] as HTMLInputElement;
 
-		let projectData: requests.ProjectData = {
+		let projectData: ProjectData = {
 
 			project_name: nameField.value,
 			category: categoryField.value,
@@ -46,7 +46,7 @@ export function makeProjectDataRequest(requestURL: string, method: string) {
 
 		};
 
-		let response = await fetch(requestURL, {
+		let response: Response = await fetch(requestURL, {
 			method,
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'

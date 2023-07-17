@@ -74,7 +74,7 @@ export default function getProjects() {
                 let response = yield fetch(requestURL);
                 spinner.style.display = 'none';
                 if (response.ok) {
-                    let projects = yield response.json();
+                    let projects = yield response.json(); // типизировать ответ с бэка
                     for (let project of projects) {
                         let projectName = project.project_name;
                         let authorLastName = project.author.last_name[0].toUpperCase() + project.author.last_name.slice(1);

@@ -1,11 +1,11 @@
 import getLoginFromCookie from './get-login.js';
 import * as requests from './requests.js';
 
-export default async function pageLoad(event: Event) {
+export default async function pageLoad(): Promise<void> {
 
 	let buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.login');
 
-	let login = getLoginFromCookie();
+	let login: string = getLoginFromCookie();
 
 	if (login) {
 
@@ -15,7 +15,7 @@ export default async function pageLoad(event: Event) {
 		for (let button of buttons) {
 
 			button.innerHTML = 'Мой профиль';
-			button.onclick = function () {
+			button.onclick = function (): void {
 				window.location.href = `${requests.siteOrigin}user-profile.html`;
 			};
 		}

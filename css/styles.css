@@ -410,9 +410,11 @@ header .projects-link {
 	background-color: var(--my-green-1);
 }
 
-.item-description p:last-child {
+.item-description p:last-child,
+.description p:last-child {
 	margin-bottom: 0;
 }
+
 
 .item-info {
 	flex: 1;
@@ -774,7 +776,7 @@ label {
 	border: 1px solid var(--my-black);
 }
 
-.category::before {
+.category p::before {
 	content: 'Категория: ';
 	font-weight: bold;
 }

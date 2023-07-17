@@ -1,9 +1,9 @@
 import * as requests from './requests.js';
 
-export default async function createUser() {
+export default async function createUser(): Promise<void> {
 	if (window.location.href !== `${requests.siteOrigin}create-user.html`) return;
 
-	let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.registration}`;
+	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.registration}`;
 
 	let form: HTMLFormElement = document.querySelector('#create-user') as HTMLFormElement;
 
@@ -18,15 +18,15 @@ export default async function createUser() {
 
 	let cancelButton: HTMLInputElement = form.elements[9] as HTMLInputElement;
 
-	window.onbeforeunload = function () { return false };
+	window.onbeforeunload = function (): boolean { return false };
 
-	cancelButton.onclick = function () {
+	cancelButton.onclick = function (): void {
 		window.location.href = document.referrer;
 	};
 
 	form.addEventListener('submit', registration);
 
-	async function registration(event: Event) {
+	async function registration(event: Event): Promise<void> {
 
 		window.onbeforeunload = null;
 		event.preventDefault();
@@ -37,7 +37,7 @@ export default async function createUser() {
 			return;
 		}
 
-		let userData = {
+		let userData: UserRegistrationData = {
 
 			about: descriptionField.value,
 			first_name: nameField.value.toLowerCase(),
@@ -50,7 +50,7 @@ export default async function createUser() {
 			balance: 100 // это костыль для моки
 		};
 
-		let response = await fetch(requestURL, {
+		let response: Response = await fetch(requestURL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -75,5 +75,4 @@ export default async function createUser() {
 			alert('Ошибка сервера!');
 		}
 	}
-
 }

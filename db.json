@@ -9,163 +9,106 @@
       "project_name": "Копирование пчел",
       "author": {
         "login": "avis-alba1",
-        "about": "Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы ",
+        "about": "Пчелы Пчелы Пчелы Пчелы Пчелы",
         "first_name": "иван",
         "last_name": "петров",
         "patronymic": "сергеевич",
         "birth_date": "2000-07-11",
         "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
       },
-      "description": "Описание проекта",
-      "donation_deadline": "2023-07-30",
+      "description": "Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы Пчелы",
+      "donation_deadline": "2024-07-30",
       "required_amount": 10000,
       "collected_amount": 0,
       "category": "Бизнес"
     },
     {
       "project_id": "3fa85f64-5717-4562-fc-2c963f66afa6",
-      "project_name": "My project 2",
+      "project_name": "Летающий робот пылесос",
       "author": {
-        "login": "string",
+        "login": "fgdhjs",
         "about": "string",
-        "first_name": "Иван",
-        "last_name": "Иванов",
+        "first_name": "Брюс",
+        "last_name": "Уиллис",
         "patronymic": "Сергеевич",
         "birth_date": "2000-07-15",
         "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
       },
-      "description": "Описание проекта. Описание проекта",
-      "donation_deadline": "2023-08-30",
+      "description": "Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету. Пылесос собирает пыль на лету.",
+      "donation_deadline": "2025-08-30",
       "required_amount": 20000,
-      "collected_amount": 10,
-      "category": "Игры"
+      "collected_amount": 1000,
+      "category": "Бизнес"
     },
     {
       "project_id": "3fa85f64-5717-4562-b3fc-2c963afa6",
-      "project_name": "My project 3",
+      "project_name": "Анализатор птичьего пения",
       "author": {
         "login": "string",
         "about": "string",
-        "first_name": "Иван",
-        "last_name": "Сидоров",
-        "patronymic": "Сергеевич",
+        "first_name": "Бред",
+        "last_name": "Питт",
+        "patronymic": "Владимирович",
         "birth_date": "2000-08-11",
         "user_id": "3fa85f64-5717-4562-b3fc-63f66afa6"
       },
-      "description": "Описание проекта. Описание проекта. Описание проекта",
+      "description": "Чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик-чирик",
       "donation_deadline": "2023-07-30",
       "required_amount": 30000,
-      "collected_amount": 0,
+      "collected_amount": 25000,
+      "category": "Наука"
+    },
+    {
+      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "project_name": "Приют для бабочек",
+      "author": {
+        "login": "avis-alba1",
+        "about": "loremLorem ipsum dolor sit",
+        "first_name": "антон",
+        "last_name": "городецкий",
+        "patronymic": "анатольевич",
+        "birth_date": "1993-07-11",
+        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "description": "Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить. Бабочкам негде жить.",
+      "donation_deadline": "2030-10-11",
+      "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "required_amount": 400,
+      "collected_amount": 10,
       "category": "Благотворительность"
     },
     {
       "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "F",
+      "project_name": "Симулятор коровы",
       "author": {
         "login": "avis-alba1",
         "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
+        "first_name": "Анджелина",
+        "last_name": "Джоли",
+        "patronymic": "анатольевна",
         "birth_date": "1993-07-11",
         "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
       },
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "donation_deadline": "2023-10-11",
-      "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "required_amount": 400,
-      "collected_amount": 10,
-      "category": "Кино"
-    },
-    {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "FF",
-      "author": {
-        "login": "avis-alba1",
-        "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
-        "birth_date": "1993-07-11",
-        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-      },
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "description": "Мууууууууууууууууууууууууууууууууууууууууууууу ууууууууууууууууууууууууууууууууу уууууууууууууууууууууууууу уууууууууууууууууууууууууууу",
       "donation_deadline": "2023-10-11",
       "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "required_amount": 1000090,
       "collected_amount": 10000,
-      "category": "Благотворительность"
+      "category": "Игры"
     },
     {
       "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "FFF",
+      "project_name": "Фильм про креветок",
       "author": {
         "login": "avis-alba1",
         "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
+        "first_name": "иван",
+        "last_name": "Ургант",
+        "patronymic": "сергеевич",
         "birth_date": "1993-07-11",
         "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
       },
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "donation_deadline": "2023-10-11",
-      "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "required_amount": 10000,
-      "collected_amount": 10000,
-      "category": "Наука"
-    },
-    {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "FFFFF",
-      "author": {
-        "login": "avis-alba1",
-        "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
-        "birth_date": "1993-07-11",
-        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-      },
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "donation_deadline": "2023-10-11",
-      "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "required_amount": 10000,
-      "collected_amount": 10000,
-      "category": "Наука"
-    },
-    {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "FFFFFFFFFFF",
-      "author": {
-        "login": "avis-alba1",
-        "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
-        "birth_date": "1993-07-11",
-        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-      },
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "donation_deadline": "2023-10-11",
-      "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "required_amount": 10000,
-      "collected_amount": 10000,
-      "category": "Бизнес"
-    },
-    {
-      "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "FFFFFFFFFFF",
-      "author": {
-        "login": "avis-alba1",
-        "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
-        "birth_date": "1993-07-11",
-        "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-      },
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "description": "Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка.Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка. Креветка.",
       "donation_deadline": "2023-10-11",
       "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "required_amount": 10000,
@@ -174,42 +117,53 @@
     },
     {
       "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "project_name": "FFFFFFFFFFF",
+      "project_name": "Тестирование смысла",
       "author": {
         "login": "avis-alba1",
         "about": "loremLorem ipsum dolor sit",
-        "first_name": "антон",
-        "last_name": "городецкий",
-        "patronymic": "анатольевич",
+        "first_name": "валентина",
+        "last_name": "михайлова",
+        "patronymic": "владимировна",
         "birth_date": "1993-07-11",
         "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
       },
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "donation_deadline": "2023-10-11",
       "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "required_amount": 10000,
-      "collected_amount": 10000,
-      "category": "Игры"
+      "required_amount": 670000,
+      "collected_amount": 10,
+      "category": "Наука"
     }
   ],
   "profile": {
-    "about": "Frontend-developer!",
-    "first_name": "валентина",
-    "last_name": "михайлова",
-    "patronymic": "владимировна",
-    "birth_date": "2000-09-11",
-    "balance": "100"
+    "about": "Актриса и посол доброй воли ООН!",
+    "first_name": "анджелина",
+    "last_name": "джоли",
+    "patronymic": "сергеевна",
+    "birth_date": "1990-07-10",
+    "balance": "1000000"
   },
   "balance": {
     "promo_code": "1111-1111-1111"
   },
   "my-project": {
-    "project_name": "My best project111",
-    "category": "Бизнес",
-    "required_amount": "10000",
+    "project_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "project_name": "Тестирование смысла",
+    "author": {
+      "login": "avis-alba1",
+      "about": "loremLorem ipsum dolor sit",
+      "first_name": "валентина",
+      "last_name": "михайлова",
+      "patronymic": "владимировна",
+      "birth_date": "1993-07-11",
+      "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "donation_deadline": "2023-10-11",
     "video_widget": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "description": "1111Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "required_amount": 670000,
+    "collected_amount": 10,
+    "category": "Наука"
   },
   "posts": [
     {

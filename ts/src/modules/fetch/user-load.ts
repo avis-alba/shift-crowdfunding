@@ -1,12 +1,17 @@
 import * as requests from './requests.js';
+import showAdditionalForm from '../show-form.js';
+import addPromocodeMask from '../mask.js';
 
-export default async function getUserProfile() {
+export default async function getUserProfile(): Promise<void> {
 
 	if (window.location.href !== `${requests.siteOrigin}user-profile.html`) return;
 
-	let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
+	showAdditionalForm();
+	addPromocodeMask();
 
-	let response = await fetch(requestURL);
+	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
+
+	let response: Response = await fetch(requestURL);
 
 	let form: HTMLFormElement = document.querySelector('#edit-user') as HTMLFormElement;
 
@@ -22,7 +27,7 @@ export default async function getUserProfile() {
 
 	if (response.ok) {
 
-		let user = await response.json();
+		let user = await response.json(); // типизировать ответ с бэка
 
 		lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
 		nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);
@@ -50,16 +55,16 @@ export default async function getUserProfile() {
 		alert('Ошибка сервера!');
 	}
 
-	let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
+	let inputs: HTMLElement[] = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
 
 	for (let field of inputs) {
-		field.onchange = function () {
+		field.onchange = function (): void {
 
 			window.onbeforeunload = function () { return false };
 		}
 	}
 
-	async function updateUserProfile(event: Event) {
+	async function updateUserProfile(event: Event): Promise<void> {
 
 		window.onbeforeunload = null;
 		event.preventDefault();
@@ -74,7 +79,7 @@ export default async function getUserProfile() {
 			balance: balance.innerHTML // это костыль для моки
 		};
 
-		let response = await fetch(requestURL, {
+		let response: Response = await fetch(requestURL, {
 
 			method: 'PUT',
 			headers: {
@@ -103,16 +108,16 @@ export default async function getUserProfile() {
 
 	sendMoneyForm.addEventListener('submit', sendPromocode);
 
-	async function sendPromocode(event: Event) {
+	async function sendPromocode(event: Event): Promise<void> {
 		event.preventDefault();
 
-		let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.balance}`;
+		let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.balance}`;
 
-		let promocode = {
+		let promocode: { promo_code: string } = {
 			promo_code: promocodeField.value
 		}
 
-		let response = await fetch(requestURL, {
+		let response: Response = await fetch(requestURL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'

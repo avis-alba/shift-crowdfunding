@@ -3,7 +3,7 @@ export default function showAdditionalForm(): void {
 
 	if (button) {
 		button.onclick = function (event): void {
-			let additionalForm = button?.nextElementSibling as HTMLFormElement;
+			let additionalForm: HTMLFormElement = button?.nextElementSibling as HTMLFormElement;
 			additionalForm.style.display = 'block';
 		}
 	}

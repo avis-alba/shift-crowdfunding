@@ -1,13 +1,13 @@
 import * as requests from './requests.js';
 import { makeProjectDataRequest } from './create-project.js';
 
-export default async function editProject() {
+export default async function editProject(): Promise<void> {
 
 	if (!window.location.href.includes('edit-project.html?id=')) return;
 
-	let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
+	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
 
-	let response = await fetch(requestURL);
+	let response: Response = await fetch(requestURL);
 
 	let form: HTMLFormElement = document.querySelector('#edit-project') as HTMLFormElement;
 
@@ -19,17 +19,18 @@ export default async function editProject() {
 	let descriptionField: HTMLInputElement = form.elements[5] as HTMLInputElement;
 
 	let cancelButton: HTMLInputElement = form.elements[7] as HTMLInputElement;
-	cancelButton.onclick = function () {
+
+	cancelButton.onclick = function (): void {
 		window.location.href = document.referrer;
 	};
 
 	let deleteButton: HTMLInputElement = form.elements[8] as HTMLInputElement;
 	deleteButton.addEventListener('click', deleteProject);
 
-	async function deleteProject() {
+	async function deleteProject(): Promise<void> {
 		if (!confirm('Вы действительно хотите удалить проект?')) return;
 
-		let response = await fetch(requestURL, { method: 'DELETE' });
+		let response: Response = await fetch(requestURL, { method: 'DELETE' });
 		window.location.href = `${requests.siteOrigin}my-projects.html` // костыль для моки
 
 		if (response.ok) {
@@ -47,13 +48,13 @@ export default async function editProject() {
 		}
 	}
 
-	let sendProjectData = makeProjectDataRequest(requestURL, 'PUT');
+	let sendProjectData: SendProjectDataFunc = makeProjectDataRequest(requestURL, 'PUT');
 
 	form.addEventListener('submit', sendProjectData);
 
 	if (response.ok) {
 
-		let project = await response.json();
+		let project = await response.json();   //типизировать ответ с бэка
 
 		nameField.value = project.project_name;
 		categoryField.value = project.category;
@@ -72,12 +73,12 @@ export default async function editProject() {
 		alert('Ошибка сервера!');
 	}
 
-	let inputs = [nameField, categoryField, moneyField, dateField, videoField, descriptionField];
+	let inputs: HTMLElement[] = [nameField, categoryField, moneyField, dateField, videoField, descriptionField];
 
 	for (let field of inputs) {
-		field.onchange = function () {
+		field.onchange = function (): void {
 
-			window.onbeforeunload = function () { return false };
+			window.onbeforeunload = function (): boolean { return false };
 		}
 	}
 

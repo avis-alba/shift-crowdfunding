@@ -1,12 +1,12 @@
 export default function getLoginFromCookie(): string {
 
-	let cookie = document.cookie.split('; ');
+	let cookie: string[] = document.cookie.split('; ');
 
-	let cookieLogin = cookie.find((item) => {
+	let cookieLogin: string | undefined = cookie.find((item) => {
 		if (item.match(/user=.+/)) return true;
 	});
 
-	let login = '';
+	let login: string = '';
 
 	if (cookieLogin) login = cookieLogin.slice(5);
 

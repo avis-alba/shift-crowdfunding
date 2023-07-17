@@ -49,7 +49,7 @@ export default function editProject() {
         let sendProjectData = makeProjectDataRequest(requestURL, 'PUT');
         form.addEventListener('submit', sendProjectData);
         if (response.ok) {
-            let project = yield response.json();
+            let project = yield response.json(); //типизировать ответ с бэка
             nameField.value = project.project_name;
             categoryField.value = project.category;
             moneyField.value = project.required_amount;

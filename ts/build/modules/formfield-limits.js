@@ -37,12 +37,11 @@ export default function addFormFieldLimits() {
     let month = (currentDate.getMonth() + 1).toString();
     let day = currentDate.getDate().toString();
     let nextDay = (currentDate.getDate() + 1).toString();
-    // let previousDay: string = (currentDate.getDate() - 1).toString();
-    if (month.length === 1)
+    if (+month < 10)
         month = '0' + month;
-    if (nextDay.length === 1)
+    if (+nextDay < 10)
         nextDay = '0' + nextDay;
-    if (day.length === 1)
+    if (+day < 10)
         day = '0' + day;
     let minDateProject = `${year}-${month}-${nextDay}`;
     let maxDateProject = `2100-01-01`;

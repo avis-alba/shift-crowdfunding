@@ -1,14 +1,17 @@
 import * as requests from './requests.js';
+import showAdditionalForm from '../show-form.js';
 import getLoginFromCookie from './get-login.js';
 import createSpinner from './create-spinner.js';
 import { createBackground } from './create-spinner.js';
 
-export default async function getProjectInfo() {
+export default async function getProjectInfo(): Promise<void> {
 
 	if (!window.location.href.includes('project-item.html?id=')) return;
 
-	let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
-	let requestURLDonation = `${requests.requestOrigin}${requests.requestURLs.POST.donateToProject}`;
+	showAdditionalForm();
+
+	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
+	let requestURLDonation: string = `${requests.requestOrigin}${requests.requestURLs.POST.donateToProject}`;
 
 	let adminMenu: HTMLDivElement = document.querySelector('.admin-menu') as HTMLDivElement;
 
@@ -20,17 +23,17 @@ export default async function getProjectInfo() {
 	let sidebar: HTMLElement = document.querySelector('.full-info-sidebar') as HTMLElement;
 	let fullInfoBlock: HTMLElement = document.querySelector('.item-full-info') as HTMLElement;
 
-	let spinner = createSpinner();
-	let spinnerBackground = createBackground();
+	let spinner: HTMLDivElement = createSpinner();
+	let spinnerBackground: HTMLDivElement = createBackground();
 	spinner.style.top = '250px';
 	spinner.style.left = `${document.documentElement.clientWidth / 2 - 18}px`;
 
 	document.body.append(spinnerBackground);
 	document.body.append(spinner);
 
-	let response = await fetch(requestURL);
+	let response: Response = await fetch(requestURL);
 	if (response.ok) {
-		let project = await response.json();
+		let project = await response.json(); // типизировать ответ с бэка
 
 		spinner.remove();
 		spinnerBackground.remove();
@@ -45,8 +48,8 @@ export default async function getProjectInfo() {
 		let authorName = project.author.first_name[0].toUpperCase();
 		let authorPatronymic = project.author.patronymic[0].toUpperCase();
 
-		let formatter = new Intl.DateTimeFormat();
-		let deadline = formatter.format(new Date(project.donation_deadline));
+		let formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
+		let deadline: string = formatter.format(new Date(project.donation_deadline));
 
 		if (getLoginFromCookie() === project.author.login) {
 			adminMenu.style.display = 'block';
@@ -60,10 +63,10 @@ export default async function getProjectInfo() {
 
 			deleteButton.addEventListener('click', deleteProject);
 
-			async function deleteProject() {
+			async function deleteProject(): Promise<void> {
 				if (!confirm('Вы действительно хотите удалить проект?')) return;
 
-				let response = await fetch(requestURL, { method: 'DELETE' });
+				let response: Response = await fetch(requestURL, { method: 'DELETE' });
 				window.location.href = `${requests.siteOrigin}projects.html` // костыль для моки
 
 				if (response.ok) {
@@ -84,19 +87,19 @@ export default async function getProjectInfo() {
 
 		projectName.innerHTML = name;
 		projectDescription.innerHTML = `<p>${description}</p>`;
-		projectCategory.innerHTML = category;
+		projectCategory.innerHTML = `<p>${category}</p>`;
 
 		if (video) {
 
 			projectVideo.style.display = 'block';
 
-			let iframe = document.createElement('iframe');
+			let iframe: HTMLIFrameElement = document.createElement('iframe');
 			projectVideo.append(iframe);
 			iframe.outerHTML = `<iframe width="560" height="315" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>`
 
 		}
 
-		let sidebarTemplate = `
+		let sidebarTemplate: string = `
 					<p><strong>Собрано:</strong></p>
 					<div class="sidebar-num">
 						<p id="money">${collectedAmount} / ${requiredAmount}</p>
@@ -113,17 +116,17 @@ export default async function getProjectInfo() {
 
 		let donationForm: HTMLFormElement = sidebar.querySelector('#fund') as HTMLFormElement;
 		let moneyField: HTMLInputElement = donationForm.elements[0] as HTMLInputElement;
-		let money = {
+		let money: { amount: string } = {
 			amount: moneyField.value
 		};
 
 		donationForm.addEventListener('submit', donateToProject);
 
-		async function donateToProject(event: Event) {
+		async function donateToProject(event: Event): Promise<void> {
 
 			event.preventDefault();
 
-			let response = await fetch(`${requests.requestOrigin}donate`, { // стоит url для моки, рабочий requestURLDonation
+			let response: Response = await fetch(`${requests.requestOrigin}donate`, { // стоит url для моки, рабочий requestURLDonation
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json;charset=utf-8'
