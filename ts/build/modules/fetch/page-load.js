@@ -7,14 +7,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import getLoginFromCookie from './get-login.js';
+import getCookies from './get-cookies.js';
 import * as requests from './requests.js';
 export default function pageLoad() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        let buttons = document.querySelectorAll('.login');
-        let login = getLoginFromCookie();
+        const buttons = document.querySelectorAll('.login');
+        const login = (_a = getCookies()) === null || _a === void 0 ? void 0 : _a.login;
         if (login) {
-            let registrationButton = document.querySelector('#registration');
+            const registrationButton = document.querySelector('#registration');
             if (registrationButton)
                 registrationButton.href = './user-profile.html';
             for (let button of buttons) {

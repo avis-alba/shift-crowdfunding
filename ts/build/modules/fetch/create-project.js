@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
+import handleFetchError from './error-handler.js';
 export default function createProject() {
     return __awaiter(this, void 0, void 0, function* () {
         if (window.location.href !== `${requests.siteOrigin}create-project.html`)
@@ -58,12 +59,8 @@ export function makeProjectDataRequest(requestURL, method) {
                     window.location.href = `${requests.siteOrigin}my-projects.html`;
                 }
             }
-            else if (`${response.status}`[0] === '4') {
-                response.status === 409 ? alert('Имя проекта совпадает с уже существующим!') : null;
-                alert('Ошибка отправки формы!');
-            }
-            else if (`${response.status}`[0] === '5') {
-                alert('Ошибка сервера!');
+            else {
+                handleFetchError(response.status, 'project');
             }
         });
     };

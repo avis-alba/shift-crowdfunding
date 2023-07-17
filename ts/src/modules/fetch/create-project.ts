@@ -1,4 +1,5 @@
 import * as requests from './requests.js';
+import handleFetchError from './error-handler.js';
 
 export default async function createProject(): Promise<void> {
 	if (window.location.href !== `${requests.siteOrigin}create-project.html`) return;
@@ -57,25 +58,16 @@ export function makeProjectDataRequest(requestURL: string, method: string): Send
 		if (response.ok) {
 
 			if (window.location.href.includes('edit-project.html?id=')) {
-
 				window.location.href = `${requests.siteOrigin}project-item.html?id=${requests.projectId}`;
 
 			} else if (window.location.href === `${requests.siteOrigin}create-project.html`) {
-
 				window.location.href = `${requests.siteOrigin}my-projects.html`;
-
 			}
 
-		} else if (`${response.status}`[0] === '4') {
+		} else {
 
-			response.status === 409 ? alert('Имя проекта совпадает с уже существующим!') : null;
+			handleFetchError(response.status, 'project');
 
-			alert('Ошибка отправки формы!');
-
-		} else if (`${response.status}`[0] === '5') {
-
-			alert('Ошибка сервера!');
 		}
-
 	}
 }

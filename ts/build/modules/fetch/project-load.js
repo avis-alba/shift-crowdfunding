@@ -9,10 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import * as requests from './requests.js';
 import showAdditionalForm from '../show-form.js';
-import getLoginFromCookie from './get-login.js';
-import createSpinner from './create-spinner.js';
-import { createBackground } from './create-spinner.js';
+import getCookies from './get-cookies.js';
+import createSpinner from '../create-spinner.js';
+import { createBackground } from '../create-spinner.js';
+import { deleteProject } from './edit-project.js';
+import { ERROR_CODES } from '../error-codes.js';
+import handleFetchError from './error-handler.js';
 export default function getProjectInfo() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         if (!window.location.href.includes('project-item.html?id='))
             return;
@@ -25,7 +29,6 @@ export default function getProjectInfo() {
         let projectVideo = document.querySelector('.full-info-video');
         let projectCategory = document.querySelector('.category');
         let sidebar = document.querySelector('.full-info-sidebar');
-        let fullInfoBlock = document.querySelector('.item-full-info');
         let spinner = createSpinner();
         let spinnerBackground = createBackground();
         spinner.style.top = '250px';
@@ -48,7 +51,7 @@ export default function getProjectInfo() {
             let authorPatronymic = project.author.patronymic[0].toUpperCase();
             let formatter = new Intl.DateTimeFormat();
             let deadline = formatter.format(new Date(project.donation_deadline));
-            if (getLoginFromCookie() === project.author.login) {
+            if (((_a = getCookies()) === null || _a === void 0 ? void 0 : _a.login) === project.author.login) {
                 adminMenu.style.display = 'block';
                 let editButton = adminMenu.querySelector('a');
                 let sendMoneyButton = adminMenu.querySelector('#withdraw');
@@ -57,24 +60,6 @@ export default function getProjectInfo() {
                 if (+collectedAmount >= +requiredAmount)
                     sendMoneyButton.setAttribute('style', '');
                 deleteButton.addEventListener('click', deleteProject);
-                function deleteProject() {
-                    return __awaiter(this, void 0, void 0, function* () {
-                        if (!confirm('Вы действительно хотите удалить проект?'))
-                            return;
-                        let response = yield fetch(requestURL, { method: 'DELETE' });
-                        window.location.href = `${requests.siteOrigin}projects.html`; // костыль для моки
-                        if (response.ok) {
-                            alert('Проект удален');
-                            window.location.href = `${requests.siteOrigin}my-projects.html`;
-                        }
-                        else if (`${response.status}`[0] === '4') {
-                            // alert('Ошибка запроса!'); удалено для работы моки
-                        }
-                        else if (`${response.status}`[0] === '5') {
-                            alert('Ошибка сервера!');
-                        }
-                    });
-                }
             }
             projectName.innerHTML = name;
             projectDescription.innerHTML = `<p>${description}</p>`;
@@ -117,20 +102,17 @@ export default function getProjectInfo() {
                     if (response.ok) {
                         location.reload();
                     }
-                    else if (`${response.status}`[0] === '4') {
-                        alert('Ошибка запроса!');
+                    else if (response.status === ERROR_CODES.CLIENT_ERROR.CONFLICT) {
+                        alert('Недостаточно средств!');
                     }
-                    else if (`${response.status}`[0] === '5') {
-                        alert('Ошибка сервера!');
+                    else {
+                        handleFetchError(response.status, 'project');
                     }
                 });
             }
         }
-        else if (`${response.status}`[0] === '4') {
-            alert('Ошибка запроса!');
-        }
-        else if (`${response.status}`[0] === '5') {
-            alert('Ошибка сервера!');
+        else {
+            handleFetchError(response.status, 'project');
         }
     });
 }

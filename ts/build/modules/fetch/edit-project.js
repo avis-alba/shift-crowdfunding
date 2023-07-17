@@ -9,12 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import * as requests from './requests.js';
 import { makeProjectDataRequest } from './create-project.js';
+import handleFetchError from './error-handler.js';
 export default function editProject() {
     return __awaiter(this, void 0, void 0, function* () {
         if (!window.location.href.includes('edit-project.html?id='))
             return;
         let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
-        let response = yield fetch(requestURL);
+        let requestURLEdit = `${requests.requestOrigin}${requests.requestURLs.PUT.editProject}`;
         let form = document.querySelector('#edit-project');
         let nameField = form.elements[0];
         let categoryField = form.elements[1];
@@ -23,31 +24,7 @@ export default function editProject() {
         let videoField = form.elements[4];
         let descriptionField = form.elements[5];
         let cancelButton = form.elements[7];
-        cancelButton.onclick = function () {
-            window.location.href = document.referrer;
-        };
-        let deleteButton = form.elements[8];
-        deleteButton.addEventListener('click', deleteProject);
-        function deleteProject() {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (!confirm('Вы действительно хотите удалить проект?'))
-                    return;
-                let response = yield fetch(requestURL, { method: 'DELETE' });
-                window.location.href = `${requests.siteOrigin}my-projects.html`; // костыль для моки
-                if (response.ok) {
-                    alert('Проект удален');
-                    window.location.href = `${requests.siteOrigin}my-projects.html`;
-                }
-                else if (`${response.status}`[0] === '4') {
-                    // alert('Ошибка запроса!'); удалено для работы моки
-                }
-                else if (`${response.status}`[0] === '5') {
-                    alert('Ошибка сервера!');
-                }
-            });
-        }
-        let sendProjectData = makeProjectDataRequest(requestURL, 'PUT');
-        form.addEventListener('submit', sendProjectData);
+        let response = yield fetch(requestURL);
         if (response.ok) {
             let project = yield response.json(); //типизировать ответ с бэка
             nameField.value = project.project_name;
@@ -57,17 +34,37 @@ export default function editProject() {
             videoField.value = project.video_widget;
             descriptionField.value = project.description;
         }
-        else if (`${response.status}`[0] === '4') {
-            alert('Ошибка загрузки');
-        }
-        else if (`${response.status}`[0] === '5') {
-            alert('Ошибка сервера!');
+        else {
+            handleFetchError(response.status, 'project');
         }
         let inputs = [nameField, categoryField, moneyField, dateField, videoField, descriptionField];
         for (let field of inputs) {
             field.onchange = function () {
                 window.onbeforeunload = function () { return false; };
             };
+        }
+        cancelButton.onclick = function () {
+            window.location.href = document.referrer;
+        };
+        let deleteButton = form.elements[8];
+        deleteButton.addEventListener('click', deleteProject);
+        let sendProjectData = makeProjectDataRequest(requestURLEdit, 'PUT');
+        form.addEventListener('submit', sendProjectData);
+    });
+}
+export function deleteProject() {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!confirm('Вы действительно хотите удалить проект?'))
+            return;
+        let requestURL = `${requests.siteOrigin}${requests.requestURLs.DELETE.deleteProjectById}`;
+        let response = yield fetch(requestURL, { method: 'DELETE' });
+        window.location.href = `${requests.siteOrigin}my-projects.html`; // костыль для моки
+        if (response.ok) {
+            alert('Проект удален');
+            window.location.href = `${requests.siteOrigin}my-projects.html`;
+        }
+        else {
+            handleFetchError(response.status, 'project');
         }
     });
 }

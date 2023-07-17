@@ -1,13 +1,14 @@
 import * as requests from './requests.js';
 import { makeProjectDataRequest } from './create-project.js';
+import handleFetchError from './error-handler.js';
 
 export default async function editProject(): Promise<void> {
 
 	if (!window.location.href.includes('edit-project.html?id=')) return;
 
 	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
+	let requestURLEdit: string = `${requests.requestOrigin}${requests.requestURLs.PUT.editProject}`;
 
-	let response: Response = await fetch(requestURL);
 
 	let form: HTMLFormElement = document.querySelector('#edit-project') as HTMLFormElement;
 
@@ -20,37 +21,7 @@ export default async function editProject(): Promise<void> {
 
 	let cancelButton: HTMLInputElement = form.elements[7] as HTMLInputElement;
 
-	cancelButton.onclick = function (): void {
-		window.location.href = document.referrer;
-	};
-
-	let deleteButton: HTMLInputElement = form.elements[8] as HTMLInputElement;
-	deleteButton.addEventListener('click', deleteProject);
-
-	async function deleteProject(): Promise<void> {
-		if (!confirm('Вы действительно хотите удалить проект?')) return;
-
-		let response: Response = await fetch(requestURL, { method: 'DELETE' });
-		window.location.href = `${requests.siteOrigin}my-projects.html` // костыль для моки
-
-		if (response.ok) {
-
-			alert('Проект удален');
-			window.location.href = `${requests.siteOrigin}my-projects.html`
-
-		} else if (`${response.status}`[0] === '4') {
-
-			// alert('Ошибка запроса!'); удалено для работы моки
-
-		} else if (`${response.status}`[0] === '5') {
-
-			alert('Ошибка сервера!');
-		}
-	}
-
-	let sendProjectData: SendProjectDataFunc = makeProjectDataRequest(requestURL, 'PUT');
-
-	form.addEventListener('submit', sendProjectData);
+	let response: Response = await fetch(requestURL);
 
 	if (response.ok) {
 
@@ -63,23 +34,49 @@ export default async function editProject(): Promise<void> {
 		videoField.value = project.video_widget;
 		descriptionField.value = project.description;
 
-	} else if (`${response.status}`[0] === '4') {
+	} else {
 
-		alert('Ошибка загрузки');
+		handleFetchError(response.status, 'project');
 
-
-	} else if (`${response.status}`[0] === '5') {
-
-		alert('Ошибка сервера!');
 	}
 
 	let inputs: HTMLElement[] = [nameField, categoryField, moneyField, dateField, videoField, descriptionField];
 
 	for (let field of inputs) {
-		field.onchange = function (): void {
 
+		field.onchange = function (): void {
 			window.onbeforeunload = function (): boolean { return false };
 		}
 	}
 
+	cancelButton.onclick = function (): void {
+		window.location.href = document.referrer;
+	};
+
+	let deleteButton: HTMLInputElement = form.elements[8] as HTMLInputElement;
+	deleteButton.addEventListener('click', deleteProject);
+
+	let sendProjectData: SendProjectDataFunc = makeProjectDataRequest(requestURLEdit, 'PUT');
+
+	form.addEventListener('submit', sendProjectData);
+}
+
+export async function deleteProject(): Promise<void> {
+	if (!confirm('Вы действительно хотите удалить проект?')) return;
+
+	let requestURL = `${requests.siteOrigin}${requests.requestURLs.DELETE.deleteProjectById}`;
+
+	let response: Response = await fetch(requestURL, { method: 'DELETE' });
+	window.location.href = `${requests.siteOrigin}my-projects.html` // костыль для моки
+
+	if (response.ok) {
+
+		alert('Проект удален');
+		window.location.href = `${requests.siteOrigin}my-projects.html`;
+
+	} else {
+
+		handleFetchError(response.status, 'project');
+
+	}
 }

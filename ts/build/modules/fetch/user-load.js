@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import * as requests from './requests.js';
 import showAdditionalForm from '../show-form.js';
 import addPromocodeMask from '../mask.js';
+import handleFetchError from './error-handler.js';
 export default function getUserProfile() {
     return __awaiter(this, void 0, void 0, function* () {
         if (window.location.href !== `${requests.siteOrigin}user-profile.html`)
@@ -17,7 +18,7 @@ export default function getUserProfile() {
         showAdditionalForm();
         addPromocodeMask();
         let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
-        let response = yield fetch(requestURL);
+        let requestURLUpdate = `${requests.requestOrigin}${requests.requestURLs.PUT.editUser}`;
         let form = document.querySelector('#edit-user');
         let lastNameField = form.elements[0];
         let nameField = form.elements[1];
@@ -26,6 +27,7 @@ export default function getUserProfile() {
         let descriptionField = form.elements[4];
         let balance = document.querySelector('#money');
         form.addEventListener('submit', updateUserProfile);
+        let response = yield fetch(requestURL);
         if (response.ok) {
             let user = yield response.json(); // типизировать ответ с бэка
             lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
@@ -35,16 +37,8 @@ export default function getUserProfile() {
             descriptionField.value = user.about;
             balance.innerHTML = user.balance;
         }
-        else if (`${response.status}`[0] === '4') {
-            response.json().then((response) => {
-                console.log(response.message);
-                alert('Ошибка загрузки');
-            }).catch((error) => {
-                alert(error.message);
-            });
-        }
-        else if (`${response.status}`[0] === '5') {
-            alert('Ошибка сервера!');
+        else {
+            handleFetchError(response.status, 'user');
         }
         let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
         for (let field of inputs) {
@@ -64,7 +58,7 @@ export default function getUserProfile() {
                     birth_date: birthDateField.value,
                     balance: balance.innerHTML // это костыль для моки
                 };
-                let response = yield fetch(requestURL, {
+                let response = yield fetch(requestURLUpdate, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -74,11 +68,8 @@ export default function getUserProfile() {
                 if (response.ok) {
                     location.reload();
                 }
-                else if (`${response.status}`[0] === '4') {
-                    alert('Ошибка отправки формы');
-                }
-                else if (`${response.status}`[0] === '5') {
-                    alert('Ошибка сервера!');
+                else {
+                    handleFetchError(response.status, 'user');
                 }
             });
         }
@@ -101,15 +92,10 @@ export default function getUserProfile() {
                 });
                 if (response.ok) {
                     let currentBalance = yield response.json();
-                    balance.innerHTML = currentBalance.current_balance || 10000;
-                    // ответа нет в моках
-                    // {"current_balance": 0}
+                    balance.innerHTML = currentBalance.current_balance || 10000; // ответа нет в моках
                 }
-                else if (`${response.status}`[0] === '4') {
-                    alert('Неверный промокод');
-                }
-                else if (`${response.status}`[0] === '5') {
-                    alert('Ошибка сервера!');
+                else {
+                    handleFetchError(response.status, 'user');
                 }
             });
         }

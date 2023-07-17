@@ -1,13 +1,12 @@
 import * as requests from './requests.js';
-import createSpinner from './create-spinner.js';
+import createSpinner from '../create-spinner.js';
+import handleFetchError from './error-handler.js';
 
 export default async function getProjects(): Promise<void> {
+
 	let projectContainer: HTMLDivElement | null = document.querySelector('.projects-body');
 
 	if (!projectContainer) return;
-
-	let errorMessage: HTMLParagraphElement = document.createElement('p');
-	errorMessage.style.color = '#da467d';
 
 	let spinner: HTMLDivElement = createSpinner();
 	spinner.style.position = 'static';
@@ -141,16 +140,10 @@ export default async function getProjects(): Promise<void> {
 				projectContainer?.append(projectCard);
 			}
 
-			// if (window.location.href.includes('?sorting_enabled')) alert('Проекты отсортированы по вашим параметрам');
+		} else {
 
-		} else if (`${response.status}`[0] === '4') {
+			handleFetchError(response.status, 'project');
 
-			errorMessage.innerHTML = 'Ошибка запроса';
-			projectContainer?.append(errorMessage);
-
-		} else if (`${response.status}`[0] === '5') {
-
-			alert('Ошибка сервера!');
 		}
 	}
 }

@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
+import handleFetchError from './error-handler.js';
 export default function createUser() {
     return __awaiter(this, void 0, void 0, function* () {
         if (window.location.href !== `${requests.siteOrigin}create-user.html`)
@@ -54,16 +55,11 @@ export default function createUser() {
                     body: JSON.stringify(userData)
                 });
                 if (response.ok) {
-                    document.cookie = `user=${userData.login}`;
-                    document.cookie = "SameSite=None";
+                    document.cookie = `login=${userData.login}`;
                     window.location.href = `${requests.siteOrigin}user-profile.html`;
                 }
-                else if (`${response.status}`[0] === '4') {
-                    response.status == 409 ? alert('Данный логин занят') : null;
-                    alert('Ошибка отправки формы!');
-                }
-                else if (`${response.status}`[0] === '5') {
-                    alert('Ошибка сервера!');
+                else {
+                    handleFetchError(response.status, 'user');
                 }
             });
         }

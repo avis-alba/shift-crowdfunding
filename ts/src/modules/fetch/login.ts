@@ -1,4 +1,6 @@
 import * as requests from './requests.js';
+import handleFetchError from './error-handler.js';
+import { ERROR_CODES } from '../error-codes.js';
 
 export default async function login(event: Event): Promise<void> {
 	event.preventDefault();
@@ -31,27 +33,19 @@ export default async function login(event: Event): Promise<void> {
 
 	if (response.ok) {
 
-		document.cookie = `user=${requestData.login}`;
+		document.cookie = `login=${requestData.login}`;
 		location.href = `${requests.siteOrigin}` + `user-profile.html`;
 
-	} else if (`${response.status}`[0] === '4') {
+	} else if (response.status === ERROR_CODES.CLIENT_ERROR.BAD_REQUEST) {
 
 		loginField.style.border = '2px solid #da467d';
 		passwordField.style.border = '2px solid #da467d';
 
-		response.json().then((response) => {
+		alert('Неверный логин или пароль!');
 
-			console.log(response.message);
-			alert('Неверный логин или пароль');
+	} else {
 
-		}).catch((error) => {
+		handleFetchError(response.status, 'user');
 
-			alert(error.message);
-
-		});
-
-	} else if (`${response.status}`[0] === '5') {
-
-		alert('Ошибка сервера!');
 	}
 }

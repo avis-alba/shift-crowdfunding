@@ -8,6 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
+import handleFetchError from './error-handler.js';
+import { ERROR_CODES } from '../error-codes.js';
 export default function login(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
@@ -32,21 +34,16 @@ export default function login(event) {
         if (spinner)
             spinner.setAttribute('style', 'display: none');
         if (response.ok) {
-            document.cookie = `user=${requestData.login}`;
+            document.cookie = `login=${requestData.login}`;
             location.href = `${requests.siteOrigin}` + `user-profile.html`;
         }
-        else if (`${response.status}`[0] === '4') {
+        else if (response.status === ERROR_CODES.CLIENT_ERROR.BAD_REQUEST) {
             loginField.style.border = '2px solid #da467d';
             passwordField.style.border = '2px solid #da467d';
-            response.json().then((response) => {
-                console.log(response.message);
-                alert('Неверный логин или пароль');
-            }).catch((error) => {
-                alert(error.message);
-            });
+            alert('Неверный логин или пароль!');
         }
-        else if (`${response.status}`[0] === '5') {
-            alert('Ошибка сервера!');
+        else {
+            handleFetchError(response.status, 'user');
         }
     });
 }

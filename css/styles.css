@@ -188,7 +188,7 @@ header .projects-link {
 	text-align: center;
 }
 
-#copyright {
+.copyright {
 	margin-left: 30px;
 	margin-right: 10px;
 }
@@ -564,18 +564,18 @@ input[type='number'] {
 	text-align: center;
 }
 
-#fund {
+.fund {
 	display: none;
 }
 
-#fund:before,
-#send-money:before {
+.fund:before,
+.send-money:before {
 	content: '▼';
 	display: block;
 	margin-bottom: 10px;
 }
 
-#fund input[type="number"] {
+.fund input[type="number"] {
 	width: 70%;
 	display: inline-block;
 	box-sizing: border-box;
@@ -583,7 +583,7 @@ input[type='number'] {
 	height: 50px;
 }
 
-#fund input[type="submit"] {
+.fund input[type="submit"] {
 	display: inline-block;
 	width: 25%;
 	height: 50px;
@@ -750,7 +750,7 @@ label {
 	margin-bottom: 20px;
 }
 
-#send-money {
+.send-money {
 	display: none;
 	margin-bottom: 20px;
 
@@ -796,4 +796,8 @@ label {
 	background-color: var(--my-white);
 	opacity: 0.5;
 	z-index: 200;
+}
+
+.form-visible {
+	display: block;
 }

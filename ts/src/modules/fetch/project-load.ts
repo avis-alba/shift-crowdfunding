@@ -1,8 +1,11 @@
 import * as requests from './requests.js';
 import showAdditionalForm from '../show-form.js';
-import getLoginFromCookie from './get-login.js';
-import createSpinner from './create-spinner.js';
-import { createBackground } from './create-spinner.js';
+import getCookies from './get-cookies.js';
+import createSpinner from '../create-spinner.js';
+import { createBackground } from '../create-spinner.js';
+import { deleteProject } from './edit-project.js';
+import { ERROR_CODES } from '../error-codes.js';
+import handleFetchError from './error-handler.js';
 
 export default async function getProjectInfo(): Promise<void> {
 
@@ -21,7 +24,6 @@ export default async function getProjectInfo(): Promise<void> {
 	let projectCategory: HTMLElement = document.querySelector('.category') as HTMLElement;
 
 	let sidebar: HTMLElement = document.querySelector('.full-info-sidebar') as HTMLElement;
-	let fullInfoBlock: HTMLElement = document.querySelector('.item-full-info') as HTMLElement;
 
 	let spinner: HTMLDivElement = createSpinner();
 	let spinnerBackground: HTMLDivElement = createBackground();
@@ -32,6 +34,7 @@ export default async function getProjectInfo(): Promise<void> {
 	document.body.append(spinner);
 
 	let response: Response = await fetch(requestURL);
+
 	if (response.ok) {
 		let project = await response.json(); // типизировать ответ с бэка
 
@@ -51,8 +54,10 @@ export default async function getProjectInfo(): Promise<void> {
 		let formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
 		let deadline: string = formatter.format(new Date(project.donation_deadline));
 
-		if (getLoginFromCookie() === project.author.login) {
+		if (getCookies()?.login === project.author.login) {
+
 			adminMenu.style.display = 'block';
+
 			let editButton: HTMLAnchorElement = adminMenu.querySelector('a') as HTMLAnchorElement;
 			let sendMoneyButton: HTMLButtonElement = adminMenu.querySelector('#withdraw') as HTMLButtonElement;
 			let deleteButton: HTMLButtonElement = adminMenu.querySelector('#delete') as HTMLButtonElement;
@@ -63,26 +68,6 @@ export default async function getProjectInfo(): Promise<void> {
 
 			deleteButton.addEventListener('click', deleteProject);
 
-			async function deleteProject(): Promise<void> {
-				if (!confirm('Вы действительно хотите удалить проект?')) return;
-
-				let response: Response = await fetch(requestURL, { method: 'DELETE' });
-				window.location.href = `${requests.siteOrigin}projects.html` // костыль для моки
-
-				if (response.ok) {
-
-					alert('Проект удален');
-					window.location.href = `${requests.siteOrigin}my-projects.html`
-
-				} else if (`${response.status}`[0] === '4') {
-
-					// alert('Ошибка запроса!'); удалено для работы моки
-
-				} else if (`${response.status}`[0] === '5') {
-
-					alert('Ошибка сервера!');
-				}
-			}
 		}
 
 		projectName.innerHTML = name;
@@ -138,26 +123,20 @@ export default async function getProjectInfo(): Promise<void> {
 
 				location.reload();
 
-			} else if (`${response.status}`[0] === '4') {
+			} else if (response.status === ERROR_CODES.CLIENT_ERROR.CONFLICT) {
 
-				alert('Ошибка запроса!');
+				alert('Недостаточно средств!');
 
-			} else if (`${response.status}`[0] === '5') {
+			} else {
 
-				alert('Ошибка сервера!');
+				handleFetchError(response.status, 'project');
+
 			}
 		}
 
+	} else {
 
+		handleFetchError(response.status, 'project');
 
-	} else if (`${response.status}`[0] === '4') {
-
-		alert('Ошибка запроса!');
-
-	} else if (`${response.status}`[0] === '5') {
-
-		alert('Ошибка сервера!');
 	}
-
-
 }

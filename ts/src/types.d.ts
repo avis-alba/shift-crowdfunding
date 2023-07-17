@@ -1,3 +1,8 @@
+type Cookies = {
+
+	[property: string]: string
+}
+
 type RegExpList = {
 
 	userName: string;

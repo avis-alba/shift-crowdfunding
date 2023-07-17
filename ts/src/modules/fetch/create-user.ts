@@ -1,4 +1,5 @@
 import * as requests from './requests.js';
+import handleFetchError from './error-handler.js';
 
 export default async function createUser(): Promise<void> {
 	if (window.location.href !== `${requests.siteOrigin}create-user.html`) return;
@@ -60,19 +61,13 @@ export default async function createUser(): Promise<void> {
 
 		if (response.ok) {
 
-			document.cookie = `user=${userData.login}`;
-			document.cookie = "SameSite=None";
+			document.cookie = `login=${userData.login}`;
 			window.location.href = `${requests.siteOrigin}user-profile.html`;
 
-		} else if (`${response.status}`[0] === '4') {
+		} else {
 
-			response.status == 409 ? alert('Данный логин занят') : null;
+			handleFetchError(response.status, 'user');
 
-			alert('Ошибка отправки формы!');
-
-		} else if (`${response.status}`[0] === '5') {
-
-			alert('Ошибка сервера!');
 		}
 	}
 }

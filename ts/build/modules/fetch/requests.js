@@ -1,9 +1,10 @@
 //json-server --watch db.json
 //json-server db.json --routes routes.json
-import getLoginFromCookie from './get-login.js';
+var _a;
+import getCookies from './get-cookies.js';
 export const requestOrigin = `http://localhost:3000/`;
 export const siteOrigin = `http://127.0.0.1:5500/html/`;
-export let userLogin = getLoginFromCookie();
+export let userLogin = (_a = getCookies()) === null || _a === void 0 ? void 0 : _a.login;
 let idParameter = location.href.match(/id=.+/);
 export let projectId = idParameter ? idParameter[0].slice(3) : undefined;
 export let requestURLs = {
@@ -26,7 +27,7 @@ export let requestURLs = {
         changePassword: `users/security`,
     },
     DELETE: {
-        deleteProject: `projects/${projectId}`,
+        deleteProjectById: `projects/${projectId}`,
         finishFundrising: `projects/${projectId}/finish`
     }
 };

@@ -2,18 +2,18 @@ import { formFieldsRegExp } from './regexp.js';
 
 export default function addFormFieldLimits(): void {
 
-	let lastname: HTMLInputElement | null = document.querySelector('#lastname');
-	let name: HTMLInputElement | null = document.querySelector('#name');
-	let patronymic: HTMLInputElement | null = document.querySelector('#patronymic');
-	let login: HTMLInputElement | null = document.querySelector('#login');
-	let password: HTMLInputElement | null = document.querySelector('#password');
-	let projectName: HTMLInputElement | null = document.querySelector('#project-name');
-	let popupLogin: HTMLInputElement | null = document.querySelector('#popup-login');
-	let popupPassword: HTMLInputElement | null = document.querySelector('#popup-password');
-	let youtubeURL: HTMLInputElement | null = document.querySelector('#url');
-	let date: HTMLInputElement | null = document.querySelector('#date');
-	let minSumm: HTMLInputElement | null = document.querySelector('#min-summ');
-	let maxSumm: HTMLInputElement | null = document.querySelector('#max-summ');
+	const lastname: HTMLInputElement | null = document.querySelector('#lastname');
+	const name: HTMLInputElement | null = document.querySelector('#name');
+	const patronymic: HTMLInputElement | null = document.querySelector('#patronymic');
+	const login: HTMLInputElement | null = document.querySelector('#login');
+	const password: HTMLInputElement | null = document.querySelector('#password');
+	const projectName: HTMLInputElement | null = document.querySelector('#project-name');
+	const popupLogin: HTMLInputElement | null = document.querySelector('#popup-login');
+	const popupPassword: HTMLInputElement | null = document.querySelector('#popup-password');
+	const youtubeURL: HTMLInputElement | null = document.querySelector('#url');
+	const date: HTMLInputElement | null = document.querySelector('#date');
+	const minSumm: HTMLInputElement | null = document.querySelector('#min-summ');
+	const maxSumm: HTMLInputElement | null = document.querySelector('#max-summ');
 
 	if (lastname) lastname.pattern = formFieldsRegExp.userName;
 	if (name) name.pattern = formFieldsRegExp.userName;
@@ -25,10 +25,10 @@ export default function addFormFieldLimits(): void {
 	if (popupPassword) popupPassword.pattern = formFieldsRegExp.password;
 	if (youtubeURL) youtubeURL.pattern = formFieldsRegExp.youtubeURL;
 
-	let currentDate: Date = new Date();
+	const currentDate: Date = new Date();
 
-	let year: string = currentDate.getFullYear().toString();
-	let allowedYear: string = (currentDate.getFullYear() - 18).toString();
+	const year: string = currentDate.getFullYear().toString();
+	const allowedYear: string = (currentDate.getFullYear() - 18).toString();
 	let month: string = (currentDate.getMonth() + 1).toString();
 	let day: string = currentDate.getDate().toString();
 	let nextDay: string = (currentDate.getDate() + 1).toString();
@@ -37,9 +37,9 @@ export default function addFormFieldLimits(): void {
 	if (+nextDay < 10) nextDay = '0' + nextDay;
 	if (+day < 10) day = '0' + day;
 
-	let minDateProject: string = `${year}-${month}-${nextDay}`;
-	let maxDateProject: string = `2100-01-01`;
-	let maxDateUser: string = `${allowedYear}-${month}-${day}`;
+	const minDateProject: string = `${year}-${month}-${nextDay}`;
+	const maxDateProject: string = `2100-01-01`;
+	const maxDateUser: string = `${allowedYear}-${month}-${day}`;
 
 
 	if (date) {

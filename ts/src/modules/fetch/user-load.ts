@@ -1,6 +1,7 @@
 import * as requests from './requests.js';
 import showAdditionalForm from '../show-form.js';
 import addPromocodeMask from '../mask.js';
+import handleFetchError from './error-handler.js';
 
 export default async function getUserProfile(): Promise<void> {
 
@@ -10,8 +11,7 @@ export default async function getUserProfile(): Promise<void> {
 	addPromocodeMask();
 
 	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
-
-	let response: Response = await fetch(requestURL);
+	let requestURLUpdate: string = `${requests.requestOrigin}${requests.requestURLs.PUT.editUser}`;
 
 	let form: HTMLFormElement = document.querySelector('#edit-user') as HTMLFormElement;
 
@@ -25,6 +25,8 @@ export default async function getUserProfile(): Promise<void> {
 
 	form.addEventListener('submit', updateUserProfile);
 
+	let response: Response = await fetch(requestURL);
+
 	if (response.ok) {
 
 		let user = await response.json(); // типизировать ответ с бэка
@@ -37,22 +39,10 @@ export default async function getUserProfile(): Promise<void> {
 
 		balance.innerHTML = user.balance;
 
-	} else if (`${response.status}`[0] === '4') {
+	} else {
 
-		response.json().then((response) => {
+		handleFetchError(response.status, 'user');
 
-			console.log(response.message);
-			alert('Ошибка загрузки');
-
-		}).catch((error) => {
-
-			alert(error.message);
-
-		});
-
-	} else if (`${response.status}`[0] === '5') {
-
-		alert('Ошибка сервера!');
 	}
 
 	let inputs: HTMLElement[] = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
@@ -70,6 +60,7 @@ export default async function getUserProfile(): Promise<void> {
 		event.preventDefault();
 
 		let updatedData = {
+
 			about: descriptionField.value,
 			first_name: nameField.value.toLowerCase(),
 			last_name: lastNameField.value.toLowerCase(),
@@ -79,7 +70,7 @@ export default async function getUserProfile(): Promise<void> {
 			balance: balance.innerHTML // это костыль для моки
 		};
 
-		let response: Response = await fetch(requestURL, {
+		let response: Response = await fetch(requestURLUpdate, {
 
 			method: 'PUT',
 			headers: {
@@ -92,16 +83,12 @@ export default async function getUserProfile(): Promise<void> {
 
 			location.reload();
 
-		} else if (`${response.status}`[0] === '4') {
+		} else {
 
-			alert('Ошибка отправки формы');
+			handleFetchError(response.status, 'user');
 
-		} else if (`${response.status}`[0] === '5') {
-
-			alert('Ошибка сервера!');
 		}
 	}
-
 
 	let sendMoneyForm: HTMLFormElement = document.querySelector('#send-money') as HTMLFormElement;
 	let promocodeField: HTMLInputElement = sendMoneyForm.elements[0] as HTMLInputElement;
@@ -128,18 +115,13 @@ export default async function getUserProfile(): Promise<void> {
 		if (response.ok) {
 
 			let currentBalance = await response.json();
-			balance.innerHTML = currentBalance.current_balance || 10000;
+			balance.innerHTML = currentBalance.current_balance || 10000; // ответа нет в моках
 
-			// ответа нет в моках
-			// {"current_balance": 0}
 
-		} else if (`${response.status}`[0] === '4') {
+		} else {
 
-			alert('Неверный промокод');
+			handleFetchError(response.status, 'user');
 
-		} else if (`${response.status}`[0] === '5') {
-
-			alert('Ошибка сервера!');
 		}
 	}
 }

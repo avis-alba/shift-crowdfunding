@@ -1,29 +1,29 @@
 export default function popupHandler() {
-    let html = document.documentElement;
-    let htmlH = html.clientHeight;
-    let htmlW = html.clientWidth;
-    let htmlScrl = html.scrollTop;
+    const html = document.documentElement;
+    const htmlH = html.clientHeight;
+    const htmlW = html.clientWidth;
+    const htmlScrl = html.scrollTop;
     document.body.style.overflow = 'hidden';
-    let background = document.createElement('div');
+    const background = document.createElement('div');
     background.classList.add('popup-background');
     document.body.append(background);
-    let popup = document.body.querySelector('#popup');
+    const popup = document.body.querySelector('#popup');
     function hidePopup() {
         background.remove();
         popup === null || popup === void 0 ? void 0 : popup.setAttribute('style', 'display: none');
         document.body.style.overflow = 'auto';
     }
     if (popup) {
-        let popupStyles = getComputedStyle(popup);
-        let offsetTop = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl + 'px';
-        let offsetLeft = htmlW / 2 - parseInt(popupStyles.width) / 2 + 'px';
+        const popupStyles = getComputedStyle(popup);
+        const offsetTop = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl + 'px';
+        const offsetLeft = htmlW / 2 - parseInt(popupStyles.width) / 2 + 'px';
         popup.style.display = 'block';
         popup.style.top = offsetTop;
         popup.style.left = offsetLeft;
-        let closeButton = popup.querySelector('.btn-close');
+        const closeButton = popup.querySelector('.btn-close');
         if (closeButton)
             closeButton.addEventListener('click', hidePopup);
-        let resetButton = popup.querySelector('[type="reset"]');
+        const resetButton = popup.querySelector('[type="reset"]');
         if (resetButton)
             resetButton.addEventListener('click', hidePopup);
         background.addEventListener('click', hidePopup);

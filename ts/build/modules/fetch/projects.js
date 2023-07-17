@@ -8,14 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as requests from './requests.js';
-import createSpinner from './create-spinner.js';
+import createSpinner from '../create-spinner.js';
+import handleFetchError from './error-handler.js';
 export default function getProjects() {
     return __awaiter(this, void 0, void 0, function* () {
         let projectContainer = document.querySelector('.projects-body');
         if (!projectContainer)
             return;
-        let errorMessage = document.createElement('p');
-        errorMessage.style.color = '#da467d';
         let spinner = createSpinner();
         spinner.style.position = 'static';
         projectContainer.append(spinner);
@@ -110,14 +109,9 @@ export default function getProjects() {
                         projectCard.innerHTML = projectTemplate;
                         projectContainer === null || projectContainer === void 0 ? void 0 : projectContainer.append(projectCard);
                     }
-                    // if (window.location.href.includes('?sorting_enabled')) alert('Проекты отсортированы по вашим параметрам');
                 }
-                else if (`${response.status}`[0] === '4') {
-                    errorMessage.innerHTML = 'Ошибка запроса';
-                    projectContainer === null || projectContainer === void 0 ? void 0 : projectContainer.append(errorMessage);
-                }
-                else if (`${response.status}`[0] === '5') {
-                    alert('Ошибка сервера!');
+                else {
+                    handleFetchError(response.status, 'project');
                 }
             });
         }
