@@ -1,40 +1,38 @@
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
 import createSpinner from '../create-spinner.js';
 import handleFetchError from './error-handler.js';
+import getFormFields from '../get-formfields.js';
 
 export default async function getProjects(): Promise<void> {
 
-	let projectContainer: HTMLDivElement | null = document.querySelector('.projects-body');
+	const projectContainer: HTMLDivElement | null = document.querySelector('.projects-body');
 
 	if (!projectContainer) return;
 
-	let spinner: HTMLDivElement = createSpinner();
+	const spinner: HTMLDivElement = createSpinner();
 	spinner.style.position = 'static';
 
 	projectContainer.append(spinner);
 
-	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.projects}`;
+	let requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.PROJECTS}`;
 
-	if (window.location.href === `${requests.siteOrigin}my-projects.html`) {
+	if (location.href === `${REQUESTS.SITE_ORIGIN}my-projects.html`) {
 
-		requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userProjects}`;
+		requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.USER_PROJECTS}`;
 
 	}
 
 	showProjects();
 
-	if (window.location.href.includes('/projects.html')) {
+	if (location.href.includes('/projects.html')) {
 
-		let sortForm: HTMLFormElement = document.querySelector('#sort') as HTMLFormElement;
-		let category: HTMLSelectElement = sortForm.elements[0] as HTMLSelectElement;
-		let sortType: HTMLSelectElement = sortForm.elements[1] as HTMLSelectElement;
-
-		sortForm.addEventListener('submit', showSortedProjects);
+		const sortForm: HTMLFormElement = document.querySelector('#sort') as HTMLFormElement;
+		const [category, sortType] = getFormFields(sortForm);
 
 		function sortedProjectsRequest(): string {
 
-			let sortTypeValues: string[] = sortType.value.split(',');
-			let queryParams: string = `?sorting_enabled=true&is_ascending=${sortTypeValues[1]}&category=${category.value}&mode=${sortTypeValues[0]}`;
+			const sortTypeValues: string[] = sortType.value.split(',');
+			const queryParams: string = `?sorting_enabled=true&is_ascending=${sortTypeValues[1]}&category=${category.value}&mode=${sortTypeValues[0]}`;
 			return queryParams;
 		}
 
@@ -45,15 +43,14 @@ export default async function getProjects(): Promise<void> {
 			showProjects();
 		}
 
-		let filterForm: HTMLFormElement = document.querySelector('#filter') as HTMLFormElement;
-		let minSumm: HTMLInputElement = filterForm.elements[0] as HTMLInputElement;
-		let maxSumm: HTMLInputElement = filterForm.elements[1] as HTMLInputElement;
+		sortForm.addEventListener('submit', showSortedProjects);
 
-		filterForm.addEventListener('submit', showFilteredProjects);
+		const filterForm: HTMLFormElement = document.querySelector('#filter') as HTMLFormElement;
+		const [minSumm, maxSumm] = getFormFields(filterForm);
 
 		function filteredProjectsRequest(): string {
 
-			let queryParams: string = `?filter_required_amount=true&min_amount=${minSumm.value}&max_amount=${maxSumm.value}`;
+			const queryParams: string = `?filter_required_amount=true&min_amount=${minSumm.value}&max_amount=${maxSumm.value}`;
 			return queryParams;
 		}
 
@@ -64,14 +61,15 @@ export default async function getProjects(): Promise<void> {
 			showProjects();
 		}
 
-		let searchForm: HTMLFormElement = document.querySelector('#search') as HTMLFormElement;
-		let searchField: HTMLInputElement = searchForm.elements[0] as HTMLInputElement;
+		filterForm.addEventListener('submit', showFilteredProjects);
 
-		searchForm.addEventListener('submit', showSearchedProjects);
+		const searchForm: HTMLFormElement = document.querySelector('#search') as HTMLFormElement;
+		const searchField: HTMLInputElement = searchForm.elements.namedItem('search-by-name') as HTMLInputElement;
+
 
 		function searchProjectsRequest(): string {
 
-			let queryParams: string = `?project_name=${searchField.value}`;
+			const queryParams: string = `?project_name=${searchField.value}`;
 			return queryParams;
 		}
 
@@ -82,39 +80,40 @@ export default async function getProjects(): Promise<void> {
 			showProjects();
 		}
 
+		searchForm.addEventListener('submit', showSearchedProjects);
 	}
 
 	async function showProjects(): Promise<void> {
 
-		if (window.location.href.includes('?')) {
+		if (location.search) {
 
-			let params: string = location.search;
-			requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.projects}${params}`;
+			const params: string = location.search;
+			requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.PROJECTS}${params}`;
 		}
 
-		let response: Response = await fetch(requestURL);
+		const response: Response = await fetch(requestURL);
 
 		spinner.style.display = 'none';
 
 		if (response.ok) {
 
-			let projects = await response.json(); // типизировать ответ с бэка
+			const projects = await response.json();
 
 			for (let project of projects) {
 
-				let projectName = project.project_name;
-				let authorLastName = project.author.last_name[0].toUpperCase() + project.author.last_name.slice(1);
-				let authorName = project.author.first_name[0].toUpperCase();
-				let authorPatronymic = project.author.patronymic[0].toUpperCase();
-				let description = project.description;
-				let collectedAmount = project.collected_amount;
-				let requiredAmount = project.required_amount;
+				const projectName = project.project_name;
+				const authorLastName = project.author.last_name[0].toUpperCase() + project.author.last_name.slice(1);
+				const authorName = project.author.first_name[0].toUpperCase();
+				const authorPatronymic = project.author.patronymic[0].toUpperCase();
+				const description = project.description;
+				const collectedAmount = project.collected_amount;
+				const requiredAmount = project.required_amount;
 
-				let formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
-				let deadline: string = formatter.format(new Date(project.donation_deadline));
+				const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
+				const deadline: string = formatter.format(new Date(project.donation_deadline));
 
 
-				let projectTemplate: string = `
+				const projectTemplate: string = `
 								<div class="projects-item">
 									<div class="item-name">
 										<h3>${projectName}</h3>
@@ -134,8 +133,8 @@ export default async function getProjects(): Promise<void> {
 									</div>
 								</div>
 									`;
-				let projectCard: HTMLAnchorElement = document.createElement('a');
-				projectCard.href = `${requests.siteOrigin}project-item.html?id=${project.project_id}`;
+				const projectCard: HTMLAnchorElement = document.createElement('a');
+				projectCard.href = `${REQUESTS.SITE_ORIGIN}project-item.html?id=${project.project_id}`;
 				projectCard.innerHTML = projectTemplate;
 				projectContainer?.append(projectCard);
 			}

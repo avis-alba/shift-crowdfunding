@@ -1,4 +1,5 @@
 export default function showAdditionalForm(): void {
+
 	const button: HTMLButtonElement | null = document.querySelector('#show-form');
 
 	if (button) {

@@ -1,27 +1,25 @@
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
-import { ERROR_CODES } from '../error-codes.js';
 
 export default async function login(event: Event): Promise<void> {
 	event.preventDefault();
 
-	let spinner: HTMLDivElement | null = document.querySelector('.spinner-border');
+	const spinner: HTMLDivElement | null = document.querySelector('#spinner-login');
 	if (spinner) spinner.setAttribute('style', 'display: block');
 
-	let form: HTMLFormElement = document.querySelector('#popup-form') as HTMLFormElement;
+	const form: HTMLFormElement = document.querySelector('#popup-form') as HTMLFormElement;
+	const [loginField, passwordField] = getFormFields(form);
 
-	let loginField: HTMLInputElement = form.elements[0] as HTMLInputElement;
-	let passwordField: HTMLInputElement = form.elements[1] as HTMLInputElement;
+	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.LOGIN}`;
 
-	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.login}`;
-
-	let requestData: LoginData = {
+	const requestData: LoginData = {
 
 		login: loginField.value,
 		password: passwordField.value
 	};
 
-	let response: Response = await fetch(requestURL, {
+	const response: Response = await fetch(requestURL, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8'
@@ -34,14 +32,15 @@ export default async function login(event: Event): Promise<void> {
 	if (response.ok) {
 
 		document.cookie = `login=${requestData.login}`;
-		location.href = `${requests.siteOrigin}` + `user-profile.html`;
+		location.href = `${REQUESTS.SITE_ORIGIN}` + `user-profile.html`;
 
-	} else if (response.status === ERROR_CODES.CLIENT_ERROR.BAD_REQUEST) {
+	} else if (response.status === ERROR_CODES.BAD_REQUEST) {
 
 		loginField.style.border = '2px solid #da467d';
 		passwordField.style.border = '2px solid #da467d';
 
 		alert('Неверный логин или пароль!');
+		return;
 
 	} else {
 

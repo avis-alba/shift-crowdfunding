@@ -1,28 +1,20 @@
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 
 export default async function createUser(): Promise<void> {
-	if (window.location.href !== `${requests.siteOrigin}create-user.html`) return;
 
-	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.registration}`;
+	if (location.href !== `${REQUESTS.SITE_ORIGIN}create-user.html`) return;
 
-	let form: HTMLFormElement = document.querySelector('#create-user') as HTMLFormElement;
+	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.REGISTRATION}`;
 
-	let lastNameField: HTMLInputElement = form.elements[0] as HTMLInputElement;
-	let nameField: HTMLInputElement = form.elements[1] as HTMLInputElement;
-	let patronymicField: HTMLInputElement = form.elements[2] as HTMLInputElement;
-	let birthDateField: HTMLInputElement = form.elements[3] as HTMLInputElement;
-	let loginField: HTMLInputElement = form.elements[4] as HTMLInputElement;
-	let passwordField: HTMLInputElement = form.elements[5] as HTMLInputElement;
-	let repeatPasswordField: HTMLInputElement = form.elements[6] as HTMLInputElement;
-	let descriptionField: HTMLInputElement = form.elements[7] as HTMLInputElement;
-
-	let cancelButton: HTMLInputElement = form.elements[9] as HTMLInputElement;
+	const form: HTMLFormElement = document.querySelector('#create-user') as HTMLFormElement;
+	const [lastNameField, nameField, patronymicField, birthDateField, loginField, passwordField, repeatPasswordField, descriptionField, submitButton, cancelButton] = getFormFields(form);
 
 	window.onbeforeunload = function (): boolean { return false };
 
 	cancelButton.onclick = function (): void {
-		window.location.href = document.referrer;
+		location.href = document.referrer;
 	};
 
 	form.addEventListener('submit', registration);
@@ -38,7 +30,7 @@ export default async function createUser(): Promise<void> {
 			return;
 		}
 
-		let userData: UserRegistrationData = {
+		const userData: UserRegistrationData = {
 
 			about: descriptionField.value,
 			first_name: nameField.value.toLowerCase(),
@@ -51,7 +43,7 @@ export default async function createUser(): Promise<void> {
 			balance: 100 // это костыль для моки
 		};
 
-		let response: Response = await fetch(requestURL, {
+		const response: Response = await fetch(requestURL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -62,7 +54,7 @@ export default async function createUser(): Promise<void> {
 		if (response.ok) {
 
 			document.cookie = `login=${userData.login}`;
-			window.location.href = `${requests.siteOrigin}user-profile.html`;
+			location.href = `${REQUESTS.SITE_ORIGIN}user-profile.html`;
 
 		} else {
 

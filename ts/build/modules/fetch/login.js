@@ -7,24 +7,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
-import { ERROR_CODES } from '../error-codes.js';
 export default function login(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
-        let spinner = document.querySelector('.spinner-border');
+        const spinner = document.querySelector('#spinner-login');
         if (spinner)
             spinner.setAttribute('style', 'display: block');
-        let form = document.querySelector('#popup-form');
-        let loginField = form.elements[0];
-        let passwordField = form.elements[1];
-        let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.login}`;
-        let requestData = {
+        const form = document.querySelector('#popup-form');
+        const [loginField, passwordField] = getFormFields(form);
+        const requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.LOGIN}`;
+        const requestData = {
             login: loginField.value,
             password: passwordField.value
         };
-        let response = yield fetch(requestURL, {
+        const response = yield fetch(requestURL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -35,12 +34,13 @@ export default function login(event) {
             spinner.setAttribute('style', 'display: none');
         if (response.ok) {
             document.cookie = `login=${requestData.login}`;
-            location.href = `${requests.siteOrigin}` + `user-profile.html`;
+            location.href = `${REQUESTS.SITE_ORIGIN}` + `user-profile.html`;
         }
-        else if (response.status === ERROR_CODES.CLIENT_ERROR.BAD_REQUEST) {
+        else if (response.status === 400 /* ERROR_CODES.BAD_REQUEST */) {
             loginField.style.border = '2px solid #da467d';
             passwordField.style.border = '2px solid #da467d';
             alert('Неверный логин или пароль!');
+            return;
         }
         else {
             handleFetchError(response.status, 'user');

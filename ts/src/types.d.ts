@@ -1,3 +1,15 @@
+const enum ERROR_CODES {
+
+	SERVER_ERROR = 500,
+
+	BAD_REQUEST = 400,
+	UNAUTHORIZED = 401,
+	FORBIDDEN = 403,
+	NOT_FOUND = 404,
+	CONFLICT = 409
+
+}
+
 type Cookies = {
 
 	[property: string]: string
@@ -41,4 +53,19 @@ type LoginData = {
 	password: string;
 }
 
-type SendProjectDataFunc = (event: Event) => Promise<void>;
+type SendProjectData = (event: Event) => Promise<void>;
+
+type RequestUrls = {
+	POST: {
+		[action: string]: string
+	};
+	GET: {
+		[action: string]: string
+	};
+	PUT: {
+		[action: string]: string
+	};
+	DELETE: {
+		[action: string]: string
+	};
+}

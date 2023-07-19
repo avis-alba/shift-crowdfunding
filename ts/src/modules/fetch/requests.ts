@@ -1,37 +1,35 @@
-//json-server --watch db.json
-//json-server db.json --routes routes.json
-
 import getCookies from './get-cookies.js';
 
-export const requestOrigin: string = `http://localhost:3000/`;
-export const siteOrigin: string = `http://127.0.0.1:5500/html/`;
+export const REQUEST_ORIGIN: string = `http://localhost:3000/`;
+export const SITE_ORIGIN: string = `http://127.0.0.1:5500/html/`;
 
-export let userLogin: string | undefined = getCookies()?.login;
+export const LOGIN: string | undefined = getCookies()?.login;
 
-let idParameter: RegExpMatchArray | null = location.href.match(/id=.+/);
-export let projectId: string | undefined = idParameter ? idParameter[0].slice(3) : undefined;
+const idParameter: RegExpMatchArray | null = location.search.match(/id=.+/);
+export const PROJECT_ID: string | undefined = idParameter ? idParameter[0].slice(3) : undefined;
 
-export let requestURLs = {  // типизировать
+export const URLS: RequestUrls = {
+
 	POST: {
-		registration: `users`,
-		login: `login`,
-		balance: `balance`,
-		createProgect: `projects`,
-		donateToProject: `projects/${projectId}/donate`
+		REGISTRATION: `users`,
+		LOGIN: `login`,
+		BALANCE: `balance`,
+		CREATE_PROJECT: `projects`,
+		DONATE_TO_PROJECT: `projects/${PROJECT_ID}/donate`
 	},
 	GET: {
-		userInfo: `users/${userLogin}`,
-		userProjects: `users/${userLogin}/projects`,
-		projects: `projects`,
-		projectById: `projects/${projectId}`,
+		USER_INFO: `users/${LOGIN}`,
+		USER_PROJECTS: `users/${LOGIN}/projects`,
+		PROJECTS: `projects`,
+		PROJECT_BY_ID: `projects/${PROJECT_ID}`,
 	},
 	PUT: {
-		editUser: `users/${userLogin}`,
-		editProject: `projects/${projectId}`,
-		changePassword: `users/security`,
+		EDIT_USER: `users/${LOGIN}`,
+		EDIT_PROJECT: `projects/${PROJECT_ID}`,
+		CHANGE_PASSWORD: `users/${LOGIN}/security`,
 	},
 	DELETE: {
-		deleteProjectById: `projects/${projectId}`,
-		finishFundrising: `projects/${projectId}/finish`
+		DELETE_PROJECT: `projects/${PROJECT_ID}`,
+		CANCEL_FUNDRISING: `projects/${PROJECT_ID}/cancel-fundraising`
 	}
 }

@@ -1,31 +1,25 @@
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
 import { makeProjectDataRequest } from './create-project.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 
 export default async function editProject(): Promise<void> {
 
-	if (!window.location.href.includes('edit-project.html?id=')) return;
+	if (!location.href.includes('edit-project.html?id=')) return;
 
-	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.projectById}`;
-	let requestURLEdit: string = `${requests.requestOrigin}${requests.requestURLs.PUT.editProject}`;
+	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.PROJECT_BY_ID}`;
+	const requestURLEdit: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.PUT.EDIT_PROJECT}`;
 
+	const form: HTMLFormElement = document.querySelector('#edit-project') as HTMLFormElement;
+	const formFields: HTMLInputElement[] = getFormFields(form);
 
-	let form: HTMLFormElement = document.querySelector('#edit-project') as HTMLFormElement;
+	const [nameField, categoryField, moneyField, dateField, videoField, descriptionField, submitButton, cancelButton, deleteButton] = formFields;
 
-	let nameField: HTMLInputElement = form.elements[0] as HTMLInputElement;
-	let categoryField: HTMLSelectElement = form.elements[1] as HTMLSelectElement;
-	let moneyField: HTMLInputElement = form.elements[2] as HTMLInputElement;
-	let dateField: HTMLInputElement = form.elements[3] as HTMLInputElement;
-	let videoField: HTMLInputElement = form.elements[4] as HTMLInputElement;
-	let descriptionField: HTMLInputElement = form.elements[5] as HTMLInputElement;
-
-	let cancelButton: HTMLInputElement = form.elements[7] as HTMLInputElement;
-
-	let response: Response = await fetch(requestURL);
+	const response: Response = await fetch(requestURL);
 
 	if (response.ok) {
 
-		let project = await response.json();   //типизировать ответ с бэка
+		const project = await response.json();   //типизировать ответ с бэка
 
 		nameField.value = project.project_name;
 		categoryField.value = project.category;
@@ -40,9 +34,7 @@ export default async function editProject(): Promise<void> {
 
 	}
 
-	let inputs: HTMLElement[] = [nameField, categoryField, moneyField, dateField, videoField, descriptionField];
-
-	for (let field of inputs) {
+	for (let field of formFields) {
 
 		field.onchange = function (): void {
 			window.onbeforeunload = function (): boolean { return false };
@@ -50,29 +42,29 @@ export default async function editProject(): Promise<void> {
 	}
 
 	cancelButton.onclick = function (): void {
-		window.location.href = document.referrer;
+		location.href = document.referrer;
 	};
 
-	let deleteButton: HTMLInputElement = form.elements[8] as HTMLInputElement;
 	deleteButton.addEventListener('click', deleteProject);
 
-	let sendProjectData: SendProjectDataFunc = makeProjectDataRequest(requestURLEdit, 'PUT');
+	const sendProjectData: SendProjectData = makeProjectDataRequest(requestURLEdit, 'PUT');
 
 	form.addEventListener('submit', sendProjectData);
 }
 
 export async function deleteProject(): Promise<void> {
+
 	if (!confirm('Вы действительно хотите удалить проект?')) return;
 
-	let requestURL = `${requests.siteOrigin}${requests.requestURLs.DELETE.deleteProjectById}`;
+	const requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.DELETE.DELETE_PROJECT}`;
 
-	let response: Response = await fetch(requestURL, { method: 'DELETE' });
-	window.location.href = `${requests.siteOrigin}my-projects.html` // костыль для моки
+	const response: Response = await fetch(requestURL, { method: 'DELETE' });
+	location.href = `${REQUESTS.SITE_ORIGIN}my-projects.html` // костыль для моки
 
 	if (response.ok) {
 
 		alert('Проект удален');
-		window.location.href = `${requests.siteOrigin}my-projects.html`;
+		location.href = `${REQUESTS.SITE_ORIGIN}my-projects.html`;
 
 	} else {
 

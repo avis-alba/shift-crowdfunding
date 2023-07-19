@@ -1,35 +1,32 @@
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
 import showAdditionalForm from '../show-form.js';
 import addPromocodeMask from '../mask.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 
 export default async function getUserProfile(): Promise<void> {
 
-	if (window.location.href !== `${requests.siteOrigin}user-profile.html`) return;
+	if (location.href !== `${REQUESTS.SITE_ORIGIN}user-profile.html`) return;
 
 	showAdditionalForm();
 	addPromocodeMask();
 
-	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
-	let requestURLUpdate: string = `${requests.requestOrigin}${requests.requestURLs.PUT.editUser}`;
+	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.USER_INFO}`;
+	const requestURLUpdate: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.PUT.EDIT_USER}`;
 
-	let form: HTMLFormElement = document.querySelector('#edit-user') as HTMLFormElement;
+	const form: HTMLFormElement = document.querySelector('#edit-user') as HTMLFormElement;
+	const formFields: HTMLInputElement[] = getFormFields(form);
+	const [lastNameField, nameField, patronymicField, birthDateField, descriptionField] = formFields;
 
-	let lastNameField: HTMLInputElement = form.elements[0] as HTMLInputElement;
-	let nameField: HTMLInputElement = form.elements[1] as HTMLInputElement;
-	let patronymicField: HTMLInputElement = form.elements[2] as HTMLInputElement;
-	let birthDateField: HTMLInputElement = form.elements[3] as HTMLInputElement;
-	let descriptionField: HTMLInputElement = form.elements[4] as HTMLInputElement;
-
-	let balance: HTMLElement = document.querySelector('#money') as HTMLElement;
+	const balance: HTMLElement = document.querySelector('#money') as HTMLElement;
 
 	form.addEventListener('submit', updateUserProfile);
 
-	let response: Response = await fetch(requestURL);
+	const response: Response = await fetch(requestURL);
 
 	if (response.ok) {
 
-		let user = await response.json(); // типизировать ответ с бэка
+		const user = await response.json();
 
 		lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
 		nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);
@@ -45,9 +42,7 @@ export default async function getUserProfile(): Promise<void> {
 
 	}
 
-	let inputs: HTMLElement[] = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
-
-	for (let field of inputs) {
+	for (let field of formFields) {
 		field.onchange = function (): void {
 
 			window.onbeforeunload = function () { return false };
@@ -59,7 +54,7 @@ export default async function getUserProfile(): Promise<void> {
 		window.onbeforeunload = null;
 		event.preventDefault();
 
-		let updatedData = {
+		const updatedData = {
 
 			about: descriptionField.value,
 			first_name: nameField.value.toLowerCase(),
@@ -70,7 +65,7 @@ export default async function getUserProfile(): Promise<void> {
 			balance: balance.innerHTML // это костыль для моки
 		};
 
-		let response: Response = await fetch(requestURLUpdate, {
+		const response: Response = await fetch(requestURLUpdate, {
 
 			method: 'PUT',
 			headers: {
@@ -90,21 +85,22 @@ export default async function getUserProfile(): Promise<void> {
 		}
 	}
 
-	let sendMoneyForm: HTMLFormElement = document.querySelector('#send-money') as HTMLFormElement;
-	let promocodeField: HTMLInputElement = sendMoneyForm.elements[0] as HTMLInputElement;
+	const sendMoneyForm: HTMLFormElement = document.querySelector('#send-money') as HTMLFormElement;
+	const promocodeField: HTMLInputElement = sendMoneyForm.elements.namedItem('promocode') as HTMLInputElement;
 
 	sendMoneyForm.addEventListener('submit', sendPromocode);
 
 	async function sendPromocode(event: Event): Promise<void> {
+
 		event.preventDefault();
 
-		let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.balance}`;
+		const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.BALANCE}`;
 
-		let promocode: { promo_code: string } = {
+		const promocode: { promo_code: string } = {
 			promo_code: promocodeField.value
 		}
 
-		let response: Response = await fetch(requestURL, {
+		const response: Response = await fetch(requestURL, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -114,7 +110,7 @@ export default async function getUserProfile(): Promise<void> {
 
 		if (response.ok) {
 
-			let currentBalance = await response.json();
+			const currentBalance = await response.json();
 			balance.innerHTML = currentBalance.current_balance || 10000; // ответа нет в моках
 
 

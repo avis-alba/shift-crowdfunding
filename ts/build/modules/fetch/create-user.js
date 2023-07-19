@@ -7,26 +7,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 export default function createUser() {
     return __awaiter(this, void 0, void 0, function* () {
-        if (window.location.href !== `${requests.siteOrigin}create-user.html`)
+        if (location.href !== `${REQUESTS.SITE_ORIGIN}create-user.html`)
             return;
-        let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.registration}`;
-        let form = document.querySelector('#create-user');
-        let lastNameField = form.elements[0];
-        let nameField = form.elements[1];
-        let patronymicField = form.elements[2];
-        let birthDateField = form.elements[3];
-        let loginField = form.elements[4];
-        let passwordField = form.elements[5];
-        let repeatPasswordField = form.elements[6];
-        let descriptionField = form.elements[7];
-        let cancelButton = form.elements[9];
+        const requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.REGISTRATION}`;
+        const form = document.querySelector('#create-user');
+        const [lastNameField, nameField, patronymicField, birthDateField, loginField, passwordField, repeatPasswordField, descriptionField, submitButton, cancelButton] = getFormFields(form);
         window.onbeforeunload = function () { return false; };
         cancelButton.onclick = function () {
-            window.location.href = document.referrer;
+            location.href = document.referrer;
         };
         form.addEventListener('submit', registration);
         function registration(event) {
@@ -37,7 +30,7 @@ export default function createUser() {
                     repeatPasswordField.style.border = '2px solid #da467d';
                     return;
                 }
-                let userData = {
+                const userData = {
                     about: descriptionField.value,
                     first_name: nameField.value.toLowerCase(),
                     last_name: lastNameField.value.toLowerCase(),
@@ -47,7 +40,7 @@ export default function createUser() {
                     password: passwordField.value,
                     balance: 100 // это костыль для моки
                 };
-                let response = yield fetch(requestURL, {
+                const response = yield fetch(requestURL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -56,7 +49,7 @@ export default function createUser() {
                 });
                 if (response.ok) {
                     document.cookie = `login=${userData.login}`;
-                    window.location.href = `${requests.siteOrigin}user-profile.html`;
+                    location.href = `${REQUESTS.SITE_ORIGIN}user-profile.html`;
                 }
                 else {
                     handleFetchError(response.status, 'user');

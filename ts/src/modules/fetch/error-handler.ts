@@ -1,6 +1,4 @@
-import { ERROR_CODES } from '../error-codes.js';
-
-export default function handleFetchError(responseStatus: number, typeOfObject: 'user' | 'project') {
+export default function handleFetchError(responseStatus: ERROR_CODES, typeOfObject: 'user' | 'project') {
 
 	const type: string = typeOfObject === 'user' ? 'Пользователь' : 'Проект';
 	const name: string = typeOfObject === 'user' ? 'логином' : 'названием';
@@ -12,27 +10,27 @@ export default function handleFetchError(responseStatus: number, typeOfObject: '
 			alert('Ошибка сервера!');
 			break;
 
-		case ERROR_CODES.CLIENT_ERROR.BAD_REQUEST:
+		case ERROR_CODES.BAD_REQUEST:
 
 			alert('Некорректные данные запроса!');
 			break;
 
-		case ERROR_CODES.CLIENT_ERROR.UNAUTHORIZED:
+		case ERROR_CODES.UNAUTHORIZED:
 
 			alert('Необходима авторизация!');
 			break;
 
-		case ERROR_CODES.CLIENT_ERROR.FORBIDDEN:
+		case ERROR_CODES.FORBIDDEN:
 
 			alert('Недостаточно прав для данной операции!');
 			break;
 
-		case ERROR_CODES.CLIENT_ERROR.NOT_FOUND:
+		case ERROR_CODES.NOT_FOUND:
 
 			alert(`${type} не найден!`);
 			break;
 
-		case ERROR_CODES.CLIENT_ERROR.CONFLICT:
+		case ERROR_CODES.CONFLICT:
 
 			alert(`${type} с таким ${name} уже существует!`);
 			break;

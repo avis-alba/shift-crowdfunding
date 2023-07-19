@@ -7,20 +7,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 export default function createProject() {
     return __awaiter(this, void 0, void 0, function* () {
-        if (window.location.href !== `${requests.siteOrigin}create-project.html`)
+        if (location.href !== `${REQUESTS.SITE_ORIGIN}create-project.html`)
             return;
-        let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.createProgect}`;
-        let form = document.querySelector('#create-project');
-        let cancelButton = form.elements[7];
+        const requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.CREATE_PROJECT}`;
+        const form = document.querySelector('#create-project');
+        const cancelButton = form.elements.namedItem('reset');
         window.onbeforeunload = function () { return false; };
         cancelButton.onclick = function () {
-            window.location.href = document.referrer;
+            location.href = document.referrer;
         };
-        let sendProjectData = makeProjectDataRequest(requestURL, 'POST');
+        const sendProjectData = makeProjectDataRequest(requestURL, 'POST');
         form.addEventListener('submit', sendProjectData);
     });
 }
@@ -29,22 +30,17 @@ export function makeProjectDataRequest(requestURL, method) {
         return __awaiter(this, void 0, void 0, function* () {
             window.onbeforeunload = null;
             event.preventDefault();
-            let form = document.querySelector('.main-form');
-            let nameField = form.elements[0];
-            let categoryField = form.elements[1];
-            let moneyField = form.elements[2];
-            let dateField = form.elements[3];
-            let videoField = form.elements[4];
-            let descriptionField = form.elements[5];
-            let projectData = {
-                project_name: nameField.value,
+            const form = document.querySelector('.main-form');
+            const [nameField, categoryField, moneyField, dateField, videoField, descriptionField] = getFormFields(form);
+            const projectData = {
+                project_name: nameField.value.trim(),
                 category: categoryField.value,
                 required_amount: moneyField.value,
                 donation_deadline: dateField.value,
                 video_widget: videoField.value,
                 description: descriptionField.value
             };
-            let response = yield fetch(requestURL, {
+            const response = yield fetch(requestURL, {
                 method,
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -52,11 +48,11 @@ export function makeProjectDataRequest(requestURL, method) {
                 body: JSON.stringify(projectData)
             });
             if (response.ok) {
-                if (window.location.href.includes('edit-project.html?id=')) {
-                    window.location.href = `${requests.siteOrigin}project-item.html?id=${requests.projectId}`;
+                if (location.href.includes('edit-project.html?id=')) {
+                    location.href = `${REQUESTS.SITE_ORIGIN}project-item.html?id=${REQUESTS.PROJECT_ID}`;
                 }
-                else if (window.location.href === `${requests.siteOrigin}create-project.html`) {
-                    window.location.href = `${requests.siteOrigin}my-projects.html`;
+                else if (location.href === `${REQUESTS.SITE_ORIGIN}create-project.html`) {
+                    location.href = `${REQUESTS.SITE_ORIGIN}my-projects.html`;
                 }
             }
             else {

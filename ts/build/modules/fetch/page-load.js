@@ -8,11 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import getCookies from './get-cookies.js';
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
 export default function pageLoad() {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const buttons = document.querySelectorAll('.login');
+        const buttons = document.querySelectorAll('#login-button');
         const login = (_a = getCookies()) === null || _a === void 0 ? void 0 : _a.login;
         if (login) {
             const registrationButton = document.querySelector('#registration');
@@ -21,7 +21,7 @@ export default function pageLoad() {
             for (let button of buttons) {
                 button.innerHTML = 'Мой профиль';
                 button.onclick = function () {
-                    window.location.href = `${requests.siteOrigin}user-profile.html`;
+                    location.href = `${REQUESTS.SITE_ORIGIN}user-profile.html`;
                 };
             }
         }

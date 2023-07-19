@@ -22,14 +22,14 @@
 		<a class="projects-link" href="./projects.html">
 			<div>Проекты</div>
 		</a>
-		<button class="login">Войти</button>
+		<button class="login" id="login-button">Войти</button>
 	</header>
 	<div class="content page">
 		<h1>Изменить информацию о проекте</h1>
 		<div class="form-template">
 			<form class="main-form" id="edit-project">
 				<label for="project-name" data-bs-toggle="tooltip" data-bs-placement="left"
-					data-bs-title="От 2 до 30 знаков, буквы, цифры, пробелы и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Название
+					data-bs-title="От 2 до 30 знаков, буквы, цифры, пробелы и спецсимволы -!#$%&()*,./:;?@[]^{|}~+=">Название
 					проекта*</label>
 				<input type="text" placeholder="Мой проект" id="project-name" minlength="2" maxlength="35" required>
 				<label for="category">Категория</label>
@@ -47,7 +47,7 @@
 				<label for="url" data-bs-toggle="tooltip" data-bs-placement="left"
 					data-bs-title="Ссылка формата https://www.youtube.com/my-video">Ссылка на видео о проекте</label>
 				<input type="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" id="url">
-				<textarea name="" id="user-text" cols="30" rows="10" placeholder="Описание проекта*"
+				<textarea name="" id="project-text" cols="30" rows="10" placeholder="Описание проекта*"
 					maxlength="3000"></textarea>
 				<p>* Поле обязательно для заполнения</p>
 				<div class="button-set">
@@ -65,12 +65,12 @@
 		<a class="projects-link" href="./projects.html">
 			<div>Проекты</div>
 		</a>
-		<button class="login">Войти</button>
+		<button class="login" id="login-button">Войти</button>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
-		<div class="spinner-border" role="status" style="display:none;"></div>
+		<div class="spinner-border" id="spinner-login" role="status" style="display:none;"></div>
 		<form class="main-form" id="popup-form">
 			<label for="popup-login" data-bs-toggle="tooltip" data-bs-placement="left"
 				data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин</label>

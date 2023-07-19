@@ -7,29 +7,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
 import showAdditionalForm from '../show-form.js';
 import addPromocodeMask from '../mask.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 export default function getUserProfile() {
     return __awaiter(this, void 0, void 0, function* () {
-        if (window.location.href !== `${requests.siteOrigin}user-profile.html`)
+        if (location.href !== `${REQUESTS.SITE_ORIGIN}user-profile.html`)
             return;
         showAdditionalForm();
         addPromocodeMask();
-        let requestURL = `${requests.requestOrigin}${requests.requestURLs.GET.userInfo}`;
-        let requestURLUpdate = `${requests.requestOrigin}${requests.requestURLs.PUT.editUser}`;
-        let form = document.querySelector('#edit-user');
-        let lastNameField = form.elements[0];
-        let nameField = form.elements[1];
-        let patronymicField = form.elements[2];
-        let birthDateField = form.elements[3];
-        let descriptionField = form.elements[4];
-        let balance = document.querySelector('#money');
+        const requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.USER_INFO}`;
+        const requestURLUpdate = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.PUT.EDIT_USER}`;
+        const form = document.querySelector('#edit-user');
+        const formFields = getFormFields(form);
+        const [lastNameField, nameField, patronymicField, birthDateField, descriptionField] = formFields;
+        const balance = document.querySelector('#money');
         form.addEventListener('submit', updateUserProfile);
-        let response = yield fetch(requestURL);
+        const response = yield fetch(requestURL);
         if (response.ok) {
-            let user = yield response.json(); // типизировать ответ с бэка
+            const user = yield response.json();
             lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
             nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);
             patronymicField.value = user.patronymic[0].toUpperCase() + user.patronymic.slice(1);
@@ -40,8 +38,7 @@ export default function getUserProfile() {
         else {
             handleFetchError(response.status, 'user');
         }
-        let inputs = [lastNameField, nameField, patronymicField, birthDateField, descriptionField];
-        for (let field of inputs) {
+        for (let field of formFields) {
             field.onchange = function () {
                 window.onbeforeunload = function () { return false; };
             };
@@ -50,7 +47,7 @@ export default function getUserProfile() {
             return __awaiter(this, void 0, void 0, function* () {
                 window.onbeforeunload = null;
                 event.preventDefault();
-                let updatedData = {
+                const updatedData = {
                     about: descriptionField.value,
                     first_name: nameField.value.toLowerCase(),
                     last_name: lastNameField.value.toLowerCase(),
@@ -58,7 +55,7 @@ export default function getUserProfile() {
                     birth_date: birthDateField.value,
                     balance: balance.innerHTML // это костыль для моки
                 };
-                let response = yield fetch(requestURLUpdate, {
+                const response = yield fetch(requestURLUpdate, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -73,17 +70,17 @@ export default function getUserProfile() {
                 }
             });
         }
-        let sendMoneyForm = document.querySelector('#send-money');
-        let promocodeField = sendMoneyForm.elements[0];
+        const sendMoneyForm = document.querySelector('#send-money');
+        const promocodeField = sendMoneyForm.elements.namedItem('promocode');
         sendMoneyForm.addEventListener('submit', sendPromocode);
         function sendPromocode(event) {
             return __awaiter(this, void 0, void 0, function* () {
                 event.preventDefault();
-                let requestURL = `${requests.requestOrigin}${requests.requestURLs.POST.balance}`;
-                let promocode = {
+                const requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.BALANCE}`;
+                const promocode = {
                     promo_code: promocodeField.value
                 };
-                let response = yield fetch(requestURL, {
+                const response = yield fetch(requestURL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -91,7 +88,7 @@ export default function getUserProfile() {
                     body: JSON.stringify(promocode)
                 });
                 if (response.ok) {
-                    let currentBalance = yield response.json();
+                    const currentBalance = yield response.json();
                     balance.innerHTML = currentBalance.current_balance || 10000; // ответа нет в моках
                 }
                 else {

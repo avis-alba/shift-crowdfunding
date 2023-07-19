@@ -21,14 +21,14 @@
 		<a class="projects-link" href="./projects.html">
 			<div>Проекты</div>
 		</a>
-		<button class="login">Войти</button>
+		<button class="login" id="login-button">Войти</button>
 	</header>
 	<div class="content page">
-		<h1 class="item-header">Проект</h1>
+		<h1 class="item-header" id="project-name">Проект</h1>
 		<div class="item-full-info">
 			<div class="full-info-body">
-				<div class="category"></div>
-				<div class="full-info-text">
+				<div class="category" id="project-category"></div>
+				<div class="full-info-text" id="project-description">
 					<p>
 						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, nulla doloremque? Inventore
 						dolorum explicabo aperiam dolores, exercitationem culpa nisi placeat at repellat ex delectus
@@ -36,21 +36,21 @@
 					</p>
 
 				</div>
-				<div class="full-info-video">
+				<div class="full-info-video" id="project-video">
 					<h2>Посмотреть видео о проекте</h2>
 				</div>
 			</div>
-			<div class="full-info-sidebar">
+			<div class="full-info-sidebar" id="project-sidebar">
 				<button id="show-form">Спонсировать</button>
 				<form id="fund" class="fund">
-					<input type="number" placeholder="1000" min="1" max="1000000000" value="1000">
+					<input type="number" name="donation" placeholder="1000" min="1" max="1000000000" value="1000">
 					<input type="submit" value="OK">
 				</form>
 			</div>
 		</div>
 		<!--Админ панель-->
-		<div class="admin-menu">
-			<a href="./edit-project.html?id="><button id="edit">Редактировать проект</button></a>
+		<div class="admin-menu" id="project-management">
+			<button id="edit">Редактировать проект</button>
 			<button id="delete">Удалить проект</button>
 			<button id="withdraw" style="display: none" onclick="alert('Деньги успешно отправлены!')">Вывести
 				деньги</button>
@@ -63,12 +63,12 @@
 		<a class="projects-link" href="./projects.html">
 			<div>Проекты</div>
 		</a>
-		<button class="login">Войти</button>
+		<button class="login" id="login-button">Войти</button>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
-		<div class="spinner-border" role="status" style="display:none;"></div>
+		<div class="spinner-border" id="spinner-login" role="status" style="display:none;"></div>
 		<form class="main-form" id="popup-form">
 			<label for="popup-login" data-bs-toggle="tooltip" data-bs-placement="left"
 				data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин</label>

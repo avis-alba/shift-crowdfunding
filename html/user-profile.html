@@ -21,7 +21,7 @@
 		<a class="projects-link" href="./projects.html">
 			<div>Проекты</div>
 		</a>
-		<button class="login">Войти</button>
+		<button class="login" id="login-button">Войти</button>
 	</header>
 	<div class="content page">
 		<h1>Мой профиль</h1>
@@ -57,7 +57,8 @@
 					</div>
 					<button id="show-form">Пополнить счет</button>
 					<form id="send-money" class="send-money">
-						<input type="text" placeholder="0000-0000-0000" id="promocode" minlength="15" required>
+						<input type="text" placeholder="0000-0000-0000" id="promocode" name="promocode" minlength="15"
+							required>
 						<input type="submit" value="OK">
 					</form>
 					<hr>
@@ -74,12 +75,12 @@
 		<a class="projects-link" href="./projects.html">
 			<div>Проекты</div>
 		</a>
-		<button class="login">Войти</button>
+		<button class="login" id="login-button">Войти</button>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
 		<h3>Вход</h3>
-		<div class="spinner-border" role="status" style="display:none;"></div>
+		<div class="spinner-border" id="spinner-login" role="status" style="display:none;"></div>
 		<form class="main-form" id="popup-form">
 			<label for="popup-login" data-bs-toggle="tooltip" data-bs-placement="left"
 				data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин</label>

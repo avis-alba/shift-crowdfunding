@@ -1,9 +1,9 @@
 import getCookies from './get-cookies.js';
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
 
 export default async function pageLoad(): Promise<void> {
 
-	const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.login');
+	const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('#login-button');
 
 	const login: string | undefined = getCookies()?.login;
 
@@ -16,7 +16,7 @@ export default async function pageLoad(): Promise<void> {
 
 			button.innerHTML = 'Мой профиль';
 			button.onclick = function (): void {
-				window.location.href = `${requests.siteOrigin}user-profile.html`;
+				location.href = `${REQUESTS.SITE_ORIGIN}user-profile.html`;
 			};
 		}
 	}

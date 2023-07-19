@@ -8,7 +8,7 @@ export default function getCookies(): Cookies | undefined {
 
 	for (let item of COOKIES_ARR) {
 
-		let [property, value] = item.split('=');
+		const [property, value] = item.split('=');
 		COOKIES[property] = value;
 
 	}

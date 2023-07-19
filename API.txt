@@ -1,0 +1,712 @@
+API - Documentation
+
+Project: Crowdfunding platform
+
+Version: 2.0
+
+=-=-=-=-=-=-=-=-=-=-=-=-= REQUIREMENTS =-=-=-=-=-=-=-=-=-=-=-=-=
+
+Default requirements:
+   1. Регистрация пользователей
+   2. Получить профиль по айди
+   3. Пополнение счета с помощью промокодов
+   4. Возможность зайти в свой профиль
+   5. Заполнять/редактировать данные профиля
+   6. Изменить свой пароль
+
+Special requirements (for this project):
+   7. Создать карточку проекта
+   8. Получить список своих проектов
+   9. Получить список всех проектов
+   10. Получить карточку проекта по названию
+   11. Получить карточку проекта по айди
+   12. Фильтровать ленту проектов по заданным критериям
+   13. Сортировать ленту проектов по заданным критериям
+   14. Просматривать карточки проектов
+   15. Возможность спонсировать проекты
+   16. Заполнять/редактировать данные своего проекта
+   17. Возможность удалять свои проекты
+   18. Возможность завершить сбор и забрать деньги
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+1. User registration
+
+POST /users
+
+request
+{
+    "login" : "myLogin123",
+    "first_name" : "Artem",
+    "last_name" : "Lisitsin",
+    "patronymic" : "Aleksandrovich",
+    "birth_date" : "YYYY-MM-DD",
+    "about" : "Hi, I'm from ...",
+    "password" : "qwerty"
+}
+
+answers
+HTTP status 200
+{
+    "login" : "myLogin123"
+}
+
+HTTP status 400
+{
+    "message" : "invalid last name"
+}
+
+HTTP status 409
+{
+    "message" : "this login is already taken"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+2.  Get user profile by login, info about balance and donated money
+
+GET /users/{login}
+
+answer
+HTTP status 200 
+{
+    "login" : "myLogin123",
+    "password" : "HASHED-PASSWORD",
+    "first_name" : "Artem",
+    "last_name" : "Lisitsin",
+    "patronymic" : "Aleksandrovich",
+    "about" : "Hi, I'm from ...",
+    "birth_date" : "YYYY-MM-DD",
+    "user_id" : "UUID",
+    "roles" : ["USER", "ADMIN"],
+    "balance" : 5000,
+    "projects" : [UUID project_id, ...]
+}
+
+HTTP status 404
+{
+    "message" : "user not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+3. Use promo code to replenish the balance
+
+POST /balance
+
+request
+{
+    "promo" : "XXXX-XXXX-XXXX"
+}
+
+answers
+HTTP status 200
+{
+    "current_balance" : 4500
+}
+
+HTTP status 400
+{
+    "message" : "invalid promo code"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+4. Login to profile
+
+POST /login
+
+request
+{
+    "login" : "myLogin123",
+    "password" : "qwerty"
+}
+
+answers
+HTTP status 200
+{
+    "status" : "OK"
+}
+
+HTTP status 400
+{
+    "message" : "FAILED"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+5. Edit profile 
+
+PUT users/{login}
+
+requests
+{
+    "first_name" : "Artem",
+    "last_name" : "Newfox",
+    "patronymic" : "Aleksandrovich",
+    "about" : "Hi, I'm from New Zeland ...",
+    "birth_date" : "YYYY-MM-DD"
+}
+
+answers
+
+Authorized (own profile)
+HTTP status 200
+{
+    "login" : "myLogin123"
+}
+
+Unauthorized OR stranger's profile
+HTTP status 403
+{
+    "message" : "access denied"
+}
+
+HTTP status 400
+{
+    "message" : "invalid password"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+6. Change password
+
+PUT users/{login}/security
+
+requests
+{
+    "old_password" : "qwerty",
+    "new_password" : "newqwerty"
+}
+
+answers
+
+Authorized (own profile)
+HTTP status 200
+{
+    "login" : "myLogin123"
+}
+
+Unauthorized OR stranger's profile
+HTTP status 403
+{
+    "message" : "access denied"
+}
+
+HTTP status 404
+{
+    "message" : "user not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+7. Create a project card
+
+POST /projects 
+
+request
+{
+    "project_name" : "Project",
+    "required_amount" : 3000,
+    "donation_deadline" : "YYYY-MM-DD",
+    "description" : "my project is ...",
+    "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "category" : "games"
+}
+
+answers
+HTTP status 200
+{
+    "project_name" : "Project"
+}
+
+HTTP status 400
+{
+    "message" : "bad request"
+}
+
+HTTP status 409
+{
+    "message" : "this project already exists"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+8. Get user's projects
+
+GET /users/{login}/projects
+
+answers
+HTTP status 200
+[
+    {
+        "project_id" : "UUID",
+        "project_name" : "myProject1",
+        "author" : {
+            "login" : "myLogin123",
+            "user_id" : 242525, 
+            "first_name" : "Artem",
+            "last_name" : "Lisitsin",
+            "patronymic" : "Aleksandrovich",
+            "about" : "Hi, I'm from ...",
+            "birth_date" : "YYYY-MM-DD",
+        },
+        "required_amount" : 3000,
+        "collected_amount" : 500,
+        "donation_deadline" : "YYYY-MM-DD",
+        "description" : "my project is ...",
+        "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "category" : "games"
+    },
+    {...}, ...
+]
+
+HTTP status 404
+{
+    "message" : "user not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+9. Get all projects (including sorting & filters)
+
+Advanced search options (query-parameters): 
+
+Sorting: sorting_enabled=[true/false], 
+         is_ascending=[true/false], 
+         category=[...], 
+         mode=[by_deadline_date/by_required_amount].
+
+Filtering: filter_required_amount=[true/false], 
+           min_amount=(int), 
+           max_amount=(int).
+
+GET /projects
+
+answers
+HTTP status 200
+[
+    {
+	    "project_id" : UUID,
+        "project_name" : "Wireless shower",
+        "author" : {
+            "user_id" : 242525, 
+            "first_name" : "Artem",
+            "last_name" : "Lisitsin",
+            "patronymic" : "Aleksandrovich",
+            "about" : "Hi, I'm from ...",
+            "birth_date" : "YYYY-MM-DD",
+        },
+        "required_amount" : 3000,
+        "collected_amount" : 500,
+        "donation_deadline" : "YYYY-MM-DD",
+        "description" : "my project is ...",
+        "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "category" : "games"
+    },
+    {...}, ...
+]
+
+HTTP status 400
+{
+    "message" : "bad request"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+10. Get project by name
+
+GET /projects?project_name=Super_Computer_3000
+
+answers
+HTTP status 200
+{
+    "project_id" : UUID,
+    "project_name" : "Super Computer 3000",
+    "author" : {
+        "login" : "myLogin123", 
+        "first_name" : "Artem",
+        "last_name" : "Lisitsin",
+        "patronymic" : "Aleksandrovich",
+        "about" : "Hi, I'm from ...",
+        "birth_date" : "YYYY-MM-DD",
+    },
+    "required_amount" : 1000000,
+    "collected_amount" : 0,
+    "donation_deadline" : "YYYY-MM-DD",
+    "description" : "it's a powerful thing based on ...",
+    "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "category" : "games"
+},
+
+HTTP status 404
+{
+    "message" : "project not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+11. Get project by project_id
+
+GET /projects/{project_id}
+
+answers
+HTTP status 200
+{
+    "project_id" : "...",
+    "project_name" : "Super Computer 3000",
+    "author" : {
+       "login" : "myLogin123", 
+       "first_name" : "Artem",
+       "last_name" : "Lisitsin",
+       "patronymic" : "Aleksandrovich",
+       "about" : "Hi, I'm from ...",
+       "birth_date" : "YYYY-MM-DD",
+    },
+    "required_amount" : 1000000,
+    "collected_amount" : 0,
+    "donation_deadline" : "YYYY-MM-DD",
+    "description" : "it's a powerful thing based on ...",
+    "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "category" : "games"
+}
+
+HTTP status 404
+{
+    "message" : "project not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+14. Check the project card
+
+GET /projects/{project_id}
+
+answers
+HTTP status 200
+{
+    "project_id" : "...",
+    "project_name" : "Super Computer 3000",
+    "author" : {
+        "login" : "myLogin123", 
+        "first_name" : "Artem",
+        "last_name" : "Lisitsin",
+        "patronymic" : "Aleksandrovich",
+        "about" : "Hi, I'm from ...",
+        "birth_date" : "YYYY-MM-DD",
+    },
+    "required_amount" : 1000000,
+    "collected_amount" : 0,
+    "donation_deadline" : "YYYY-MM-DD",
+    "description" : "it's a powerful thing based on ...",
+    "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "category" : "games"
+}
+
+HTTP status 404
+{
+    "message" : "project not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+15. Donate to the project
+
+POST /projects/{project_id}/donate
+
+request
+{
+    "amount" : 3000
+}
+
+answers
+HTTP status 200
+{
+    "current_balance" : 0,
+    "required_amount" : 10000,
+    "collected_amount" : 3000
+}
+
+HTTP status 401
+{    
+    "message" : "Unauthorized"
+}
+
+HTTP status 409
+{
+    "message" : "not enough money on balance"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+16. Edit project
+
+PUT /projects/{project_id}
+
+request
+{
+    "project_name" : "Super Computer 3000",
+    "required_amount" : 1000000,
+    "donation_deadline" : "YYYY-MM-DD",
+    "description" : "it's a powerful thing based on ...",
+    "video_widget" : "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "category" : "games"
+}
+
+answers
+HTTP status 200
+{
+    "project_name" : "Super Computer 3000"
+}
+
+HTTP status 400
+{
+    "message" : "Invalid data"
+}
+
+HTTP status 401
+{
+    "message" : "Unauthorized"
+}
+
+HTTP status 403
+{
+    "message" : "access denied"
+}
+
+HTTP status 404
+{
+    "message" : "project not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+17. Delete project 
+
+DELETE /projects/{project_id}
+
+answers
+HTTP status 200
+{}
+
+HTTP status 401
+{
+    "message" : "Unauthorized"
+}
+
+HTTP status 403
+{
+    "message" : "access denied"
+}
+
+HTTP status 404
+{
+    "message" : "project not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+18. Cancel fundraising
+
+DELETE /projects/{project_id}/cancel-fundraising
+
+answers
+HTTP status 200
+{}
+
+HTTP status 401
+{
+    "message" : "Unauthorized"
+}
+
+HTTP status 403
+{
+    "message" : "access denied"
+}
+
+HTTP status 404
+{
+    "message" : "project not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ADMIN METHOD 1. Add role to user
+
+POST /admin/roles/{login}
+
+request
+{
+    "role" : "ADMIN"
+}
+
+answers
+HTTP status 200
+{}
+
+HTTP status 404
+{
+    "message" : "User not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ADMIN METHOD 2. Create a new promo code
+
+POST /admin/promo
+
+request
+{
+    "promo_code" : "XXXX-XXXX-XXXX",
+    "amount" : 1000
+}
+
+answers
+HTTP status 200
+{
+    "promo_code" : "XXXX-XXXX-XXXX",
+    "amount" : 1000
+}
+
+HTTP status 400
+{
+    "message" : "bad request"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ADMIN METHOD 3. Get user list
+
+GET /admin/users
+
+answers
+HTTP status 200
+[
+  {
+    "login": "string",
+    "about": "string",
+    "first_name": "string",
+    "last_name": "string",
+    "patronymic": "string",
+    "birth_date": "2023-07-13",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  }, 
+  {...}, ...
+]
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ADMIN METHOD 4. Delete user
+
+GET /admin/delete/{login}
+
+answers
+HTTP status 200
+{}
+
+HTTP status 404
+{
+    "message" : "User not found"
+}
+
+HTTP status 500
+{
+    "message" : "internal server error"
+}
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

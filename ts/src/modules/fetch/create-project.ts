@@ -1,44 +1,40 @@
-import * as requests from './requests.js';
+import * as REQUESTS from './requests.js';
+import getFormFields from '../get-formfields.js';
 import handleFetchError from './error-handler.js';
 
 export default async function createProject(): Promise<void> {
-	if (window.location.href !== `${requests.siteOrigin}create-project.html`) return;
 
-	let requestURL: string = `${requests.requestOrigin}${requests.requestURLs.POST.createProgect}`;
+	if (location.href !== `${REQUESTS.SITE_ORIGIN}create-project.html`) return;
 
-	let form: HTMLFormElement = document.querySelector('#create-project') as HTMLFormElement;
-	let cancelButton: HTMLInputElement = form.elements[7] as HTMLInputElement;
+	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.CREATE_PROJECT}`;
+
+	const form: HTMLFormElement = document.querySelector('#create-project') as HTMLFormElement;
+	const cancelButton: HTMLInputElement = form.elements.namedItem('reset') as HTMLInputElement;
 
 	window.onbeforeunload = function (): boolean { return false };
 
 	cancelButton.onclick = function (): void {
-		window.location.href = document.referrer;
+		location.href = document.referrer;
 	};
 
-	let sendProjectData: SendProjectDataFunc = makeProjectDataRequest(requestURL, 'POST');
+	const sendProjectData: SendProjectData = makeProjectDataRequest(requestURL, 'POST');
 
 	form.addEventListener('submit', sendProjectData);
 }
 
-export function makeProjectDataRequest(requestURL: string, method: string): SendProjectDataFunc {
+export function makeProjectDataRequest(requestURL: string, method: string): SendProjectData {
 
 	return async function (event: Event): Promise<void> {
 
 		window.onbeforeunload = null;
 		event.preventDefault();
 
-		let form: HTMLFormElement = document.querySelector('.main-form') as HTMLFormElement;
+		const form: HTMLFormElement = document.querySelector('.main-form') as HTMLFormElement;
+		const [nameField, categoryField, moneyField, dateField, videoField, descriptionField] = getFormFields(form);
 
-		let nameField: HTMLInputElement = form.elements[0] as HTMLInputElement;
-		let categoryField: HTMLInputElement = form.elements[1] as HTMLInputElement;
-		let moneyField: HTMLInputElement = form.elements[2] as HTMLInputElement;
-		let dateField: HTMLInputElement = form.elements[3] as HTMLInputElement;
-		let videoField: HTMLInputElement = form.elements[4] as HTMLInputElement;
-		let descriptionField: HTMLInputElement = form.elements[5] as HTMLInputElement;
+		const projectData: ProjectData = {
 
-		let projectData: ProjectData = {
-
-			project_name: nameField.value,
+			project_name: nameField.value.trim(),
 			category: categoryField.value,
 			required_amount: moneyField.value,
 			donation_deadline: dateField.value,
@@ -47,7 +43,7 @@ export function makeProjectDataRequest(requestURL: string, method: string): Send
 
 		};
 
-		let response: Response = await fetch(requestURL, {
+		const response: Response = await fetch(requestURL, {
 			method,
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -57,11 +53,11 @@ export function makeProjectDataRequest(requestURL: string, method: string): Send
 
 		if (response.ok) {
 
-			if (window.location.href.includes('edit-project.html?id=')) {
-				window.location.href = `${requests.siteOrigin}project-item.html?id=${requests.projectId}`;
+			if (location.href.includes('edit-project.html?id=')) {
+				location.href = `${REQUESTS.SITE_ORIGIN}project-item.html?id=${REQUESTS.PROJECT_ID}`;
 
-			} else if (window.location.href === `${requests.siteOrigin}create-project.html`) {
-				window.location.href = `${requests.siteOrigin}my-projects.html`;
+			} else if (location.href === `${REQUESTS.SITE_ORIGIN}create-project.html`) {
+				location.href = `${REQUESTS.SITE_ORIGIN}my-projects.html`;
 			}
 
 		} else {
