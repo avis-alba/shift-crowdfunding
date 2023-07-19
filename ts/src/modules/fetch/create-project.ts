@@ -1,6 +1,6 @@
-import * as REQUESTS from './requests.js';
-import getFormFields from '../get-formfields.js';
-import handleFetchError from './error-handler.js';
+import * as REQUESTS from './requests';
+import getFormFields from '../get-formfields';
+import handleFetchError from './error-handler';
 
 export default async function createProject(): Promise<void> {
 

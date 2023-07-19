@@ -1,7 +1,7 @@
-import * as REQUESTS from './requests.js';
-import createSpinner from '../create-spinner.js';
-import handleFetchError from './error-handler.js';
-import getFormFields from '../get-formfields.js';
+import * as REQUESTS from './requests';
+import createSpinner from '../create-spinner';
+import handleFetchError from './error-handler';
+import getFormFields from '../get-formfields';
 
 export default async function getProjects(): Promise<void> {
 

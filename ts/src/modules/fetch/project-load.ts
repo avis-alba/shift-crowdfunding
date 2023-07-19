@@ -1,10 +1,10 @@
-import * as REQUESTS from './requests.js';
-import showAdditionalForm from '../show-form.js';
-import getCookies from './get-cookies.js';
-import createSpinner from '../create-spinner.js';
-import { createBackground } from '../create-spinner.js';
-import { deleteProject } from './edit-project.js';
-import handleFetchError from './error-handler.js';
+import * as REQUESTS from './requests';
+import showAdditionalForm from '../show-form';
+import getCookies from './get-cookies';
+import createSpinner from '../create-spinner';
+import { createBackground } from '../create-spinner';
+import { deleteProject } from './edit-project';
+import handleFetchError from './error-handler';
 
 export default async function getProjectInfo(): Promise<void> {
 

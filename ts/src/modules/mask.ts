@@ -1,5 +1,5 @@
-import IMask from '../../../node_modules/imask/esm/index.js';
-import { InputMaskElement } from '../../../node_modules/imask/esm/index.js';
+import IMask from '../../../node_modules/imask/esm/index';
+import { InputMaskElement } from '../../../node_modules/imask/esm/index';
 
 export default function addPromocodeMask(): void {
 	const promocode = document.querySelector('#promocode') as InputMaskElement;

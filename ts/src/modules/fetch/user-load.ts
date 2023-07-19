@@ -1,8 +1,8 @@
-import * as REQUESTS from './requests.js';
-import showAdditionalForm from '../show-form.js';
-import addPromocodeMask from '../mask.js';
-import getFormFields from '../get-formfields.js';
-import handleFetchError from './error-handler.js';
+import * as REQUESTS from './requests';
+import showAdditionalForm from '../show-form';
+import addPromocodeMask from '../mask';
+import getFormFields from '../get-formfields';
+import handleFetchError from './error-handler';
 
 export default async function getUserProfile(): Promise<void> {
 

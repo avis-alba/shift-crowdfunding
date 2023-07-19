@@ -1,7 +1,7 @@
-import * as REQUESTS from './requests.js';
-import { makeProjectDataRequest } from './create-project.js';
-import getFormFields from '../get-formfields.js';
-import handleFetchError from './error-handler.js';
+import * as REQUESTS from './requests';
+import { makeProjectDataRequest } from './create-project';
+import getFormFields from '../get-formfields';
+import handleFetchError from './error-handler';
 
 export default async function editProject(): Promise<void> {
 

@@ -1,4 +1,4 @@
-import getCookies from './get-cookies.js';
+import getCookies from './get-cookies';
 
 export const REQUEST_ORIGIN: string = `http://localhost:3000/`;
 export const SITE_ORIGIN: string = `http://127.0.0.1:5500/html/`;

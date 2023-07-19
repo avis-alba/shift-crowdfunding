@@ -1,5 +1,5 @@
-import getCookies from './get-cookies.js';
-import * as REQUESTS from './requests.js';
+import getCookies from './get-cookies';
+import * as REQUESTS from './requests';
 
 export default async function pageLoad(): Promise<void> {
 

@@ -1,5 +1,5 @@
-import popupHandler from './popup.js';
-import login from './fetch/login.js';
+import popupHandler from './popup';
+import login from './fetch/login';
 
 export default function addPopupHandler(): void {
 

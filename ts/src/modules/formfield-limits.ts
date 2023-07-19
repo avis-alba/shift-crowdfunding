@@ -1,4 +1,4 @@
-import { formFieldsRegExp } from './regexp.js';
+import { formFieldsRegExp } from './regexp';
 
 export default function addFormFieldLimits(): void {
 
