@@ -16,11 +16,12 @@ export default async function getUserProfile(): Promise<void> {
 
 	const form: HTMLFormElement = document.querySelector('#edit-user') as HTMLFormElement;
 	const formFields: HTMLInputElement[] = getFormFields(form);
-	const [lastNameField, nameField, patronymicField, birthDateField, descriptionField] = formFields;
+	const [lastNameField, nameField, patronymicField, birthDateField, descriptionField, submitButton, logOutButton] = formFields;
 
 	const balance: HTMLElement = document.querySelector('#money') as HTMLElement;
 
 	form.addEventListener('submit', updateUserProfile);
+	logOutButton.addEventListener('click', logOut);
 
 	const response: Response = await fetch(requestURL);
 
@@ -83,6 +84,12 @@ export default async function getUserProfile(): Promise<void> {
 			handleFetchError(response.status, 'user');
 
 		}
+	}
+
+	function logOut() {
+
+		document.cookie = "login=";
+		location.href = `${REQUESTS.SITE_ORIGIN}index.html`;
 	}
 
 	const sendMoneyForm: HTMLFormElement = document.querySelector('#send-money') as HTMLFormElement;
