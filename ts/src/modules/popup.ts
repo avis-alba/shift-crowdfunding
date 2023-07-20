@@ -10,6 +10,8 @@ export default function popupHandler(): void {
 	background.classList.add('popup-background');
 	document.body.append(background);
 
+	setTimeout(() => { background.style.opacity = '1' }, 0);
+
 	const popup: HTMLDivElement | null = document.body.querySelector('#popup');
 
 	function hidePopup(): void {
@@ -20,12 +22,14 @@ export default function popupHandler(): void {
 
 	if (popup) {
 		const popupStyles: CSSStyleDeclaration = getComputedStyle(popup);
-		const offsetTop: string = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl + 'px';
+		const offsetTop: string = htmlH / 2 - parseInt(popupStyles.height) / 2 + htmlScrl - 30 + 'px';
 		const offsetLeft: string = htmlW / 2 - parseInt(popupStyles.width) / 2 + 'px';
 
 		popup.style.display = 'block';
-		popup.style.top = offsetTop;
+		popup.style.top = `${htmlScrl}px`;
 		popup.style.left = offsetLeft;
+
+		setTimeout(() => { popup.style.top = offsetTop; }, 0);
 
 		const closeButton: HTMLButtonElement | null = popup.querySelector('.btn-close');
 		if (closeButton) closeButton.addEventListener('click', hidePopup);
