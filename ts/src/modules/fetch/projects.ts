@@ -1,7 +1,7 @@
 import * as REQUESTS from './requests';
 import createSpinner from '../create-spinner';
-import handleFetchError from './error-handler';
 import getFormFields from '../get-formfields';
+import showProjects from './show-project-feed';
 
 export default async function getProjects(): Promise<void> {
 
@@ -22,7 +22,7 @@ export default async function getProjects(): Promise<void> {
 
 	}
 
-	showProjects();
+	showProjects(requestURL);
 
 	if (location.href.includes('/projects.html')) {
 
@@ -40,7 +40,7 @@ export default async function getProjects(): Promise<void> {
 
 			event.preventDefault();
 			location.search = sortedProjectsRequest();
-			showProjects();
+			showProjects(requestURL);
 		}
 
 		sortForm.addEventListener('submit', showSortedProjects);
@@ -58,14 +58,13 @@ export default async function getProjects(): Promise<void> {
 
 			event.preventDefault();
 			location.search = filteredProjectsRequest();
-			showProjects();
+			showProjects(requestURL);
 		}
 
 		filterForm.addEventListener('submit', showFilteredProjects);
 
 		const searchForm: HTMLFormElement = document.querySelector('#search') as HTMLFormElement;
 		const searchField: HTMLInputElement = searchForm.elements.namedItem('search-by-name') as HTMLInputElement;
-
 
 		function searchProjectsRequest(): string {
 
@@ -77,73 +76,10 @@ export default async function getProjects(): Promise<void> {
 
 			event.preventDefault();
 			location.search = searchProjectsRequest();
-			showProjects();
+			showProjects(requestURL);
 		}
 
 		searchForm.addEventListener('submit', showSearchedProjects);
-	}
-
-	async function showProjects(): Promise<void> {
-
-		if (location.search) {
-
-			const params: string = location.search;
-			requestURL = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.PROJECTS}${params}`;
-		}
-
-		const response: Response = await fetch(requestURL);
-
-		spinner.style.display = 'none';
-
-		if (response.ok) {
-
-			const projects = await response.json();
-
-			for (let project of projects) {
-
-				const projectName = project.project_name;
-				const authorLastName = project.author.last_name[0].toUpperCase() + project.author.last_name.slice(1);
-				const authorName = project.author.first_name[0].toUpperCase();
-				const authorPatronymic = project.author.patronymic[0].toUpperCase();
-				const description = project.description;
-				const collectedAmount = project.collected_amount;
-				const requiredAmount = project.required_amount;
-
-				const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
-				const deadline: string = formatter.format(new Date(project.donation_deadline));
-
-
-				const projectTemplate: string = `
-								<div class="projects-item">
-									<div class="item-name">
-										<h3>${projectName}</h3>
-									</div>
-									<div class="item-body">
-										<div class="item-description">
-											${description}
-										</div>
-										<div class="item-info">
-											<p><strong>Собрано:</strong></p>
-											<p id="money">${collectedAmount} / ${requiredAmount}</p>
-											<p><strong>Окончание сбора:</strong></p>
-											<p id="time">${deadline}</p>
-											<p><strong>Автор:</strong></p>
-											<p id="author">${authorLastName} ${authorName}.${authorPatronymic}.</p>
-										</div>
-									</div>
-								</div>
-									`;
-				const projectCard: HTMLAnchorElement = document.createElement('a');
-				projectCard.href = `${REQUESTS.SITE_ORIGIN}project-item.html?id=${project.project_id}`;
-				projectCard.innerHTML = projectTemplate;
-				projectContainer?.append(projectCard);
-			}
-
-		} else {
-
-			handleFetchError(response.status, 'project');
-
-		}
 	}
 }
 

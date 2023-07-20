@@ -19,32 +19,40 @@ export default async function login(event: Event): Promise<void> {
 		password: passwordField.value
 	};
 
-	const response: Response = await fetch(requestURL, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json;charset=utf-8'
-		},
-		body: JSON.stringify(requestData)
-	});
+	try {
+		const response: Response = await fetch(requestURL, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify(requestData)
+		});
 
-	if (spinner) spinner.setAttribute('style', 'display: none');
+		if (spinner) spinner.setAttribute('style', 'display: none');
 
-	if (response.ok) {
+		if (response.ok) {
 
-		document.cookie = `login=${requestData.login}`;
-		location.href = `${REQUESTS.SITE_ORIGIN}` + `user-profile.html`;
+			document.cookie = `login=${requestData.login}`;
+			location.href = `${REQUESTS.SITE_ORIGIN}` + `user-profile.html`;
 
-	} else if (response.status === ERROR_CODES.BAD_REQUEST) {
+		} else if (response.status === ERROR_CODES.BAD_REQUEST) {
 
-		loginField.style.border = '2px solid #da467d';
-		passwordField.style.border = '2px solid #da467d';
+			loginField.style.border = '2px solid #da467d';
+			passwordField.style.border = '2px solid #da467d';
 
-		alert('Неверный логин или пароль!');
-		return;
+			alert('Неверный логин или пароль!');
+			return;
 
-	} else {
+		} else {
 
-		handleFetchError(response.status, 'user');
+			handleFetchError(response.status, 'user');
 
+		}
+	} catch (e) {
+
+		if (e instanceof Error) {
+
+			alert(`Ошибка при входе в личный кабинет: ${e.message}`);
+		}
 	}
 }

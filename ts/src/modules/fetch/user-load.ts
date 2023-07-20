@@ -2,6 +2,7 @@ import * as REQUESTS from './requests';
 import showAdditionalForm from '../show-form';
 import addPromocodeMask from '../mask';
 import getFormFields from '../get-formfields';
+import logOut from './logout';
 import handleFetchError from './error-handler';
 
 export default async function getUserProfile(): Promise<void> {
@@ -23,24 +24,32 @@ export default async function getUserProfile(): Promise<void> {
 	form.addEventListener('submit', updateUserProfile);
 	logOutButton.addEventListener('click', logOut);
 
-	const response: Response = await fetch(requestURL);
+	try {
+		const response: Response = await fetch(requestURL);
 
-	if (response.ok) {
+		if (response.ok) {
 
-		const user = await response.json();
+			const user = await response.json();
 
-		lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
-		nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);
-		patronymicField.value = user.patronymic[0].toUpperCase() + user.patronymic.slice(1);
-		birthDateField.value = user.birth_date;
-		descriptionField.value = user.about;
+			lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
+			nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);
+			patronymicField.value = user.patronymic[0].toUpperCase() + user.patronymic.slice(1);
+			birthDateField.value = user.birth_date;
+			descriptionField.value = user.about;
 
-		balance.innerHTML = user.balance;
+			balance.innerHTML = user.balance;
 
-	} else {
+		} else {
 
-		handleFetchError(response.status, 'user');
+			handleFetchError(response.status, 'user');
 
+		}
+	} catch (e) {
+
+		if (e instanceof Error) {
+
+			alert(`Ошибка при загрузке данных пользователя: ${e.message}`);
+		}
 	}
 
 	for (let field of formFields) {
@@ -66,30 +75,32 @@ export default async function getUserProfile(): Promise<void> {
 			balance: balance.innerHTML // это костыль для моки
 		};
 
-		const response: Response = await fetch(requestURLUpdate, {
+		try {
+			const response: Response = await fetch(requestURLUpdate, {
 
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			},
-			body: JSON.stringify(updatedData)
-		});
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				},
+				body: JSON.stringify(updatedData)
+			});
 
-		if (response.ok) {
+			if (response.ok) {
 
-			location.reload();
+				location.reload();
 
-		} else {
+			} else {
 
-			handleFetchError(response.status, 'user');
+				handleFetchError(response.status, 'user');
 
+			}
+		} catch (e) {
+
+			if (e instanceof Error) {
+
+				alert(`Ошибка при отправке данных пользователя: ${e.message}`);
+			}
 		}
-	}
-
-	function logOut() {
-
-		document.cookie = "login=";
-		location.href = `${REQUESTS.SITE_ORIGIN}index.html`;
 	}
 
 	const sendMoneyForm: HTMLFormElement = document.querySelector('#send-money') as HTMLFormElement;
@@ -107,24 +118,31 @@ export default async function getUserProfile(): Promise<void> {
 			promo_code: promocodeField.value
 		}
 
-		const response: Response = await fetch(requestURL, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			},
-			body: JSON.stringify(promocode)
-		});
+		try {
+			const response: Response = await fetch(requestURL, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				},
+				body: JSON.stringify(promocode)
+			});
 
-		if (response.ok) {
+			if (response.ok) {
 
-			const currentBalance = await response.json();
-			balance.innerHTML = currentBalance.current_balance || 10000; // ответа нет в моках
+				const currentBalance = await response.json();
+				balance.innerHTML = currentBalance.current_balance || 10000; // ответа нет в моках
 
+			} else {
 
-		} else {
+				handleFetchError(response.status, 'user');
 
-			handleFetchError(response.status, 'user');
+			}
+		} catch (e) {
 
+			if (e instanceof Error) {
+
+				alert(`Ошибка при пополнении счета: ${e.message}`);
+			}
 		}
 	}
 }

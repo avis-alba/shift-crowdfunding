@@ -15,7 +15,7 @@ type Cookies = {
 	[property: string]: string
 }
 
-type RegExpList = {
+interface RegExpList {
 
 	userName: string;
 	projectName: string;
@@ -24,7 +24,7 @@ type RegExpList = {
 	youtubeURL: string;
 }
 
-type ProjectData = {  // неполный тип ответа
+interface ProjectDataToSend {
 
 	project_name: string;
 	category: string;
@@ -34,7 +34,28 @@ type ProjectData = {  // неполный тип ответа
 	description: string;
 }
 
-type UserRegistrationData = {
+interface ProjectDataToGet {
+
+	project_id: string;
+	project_name: string;
+	author: {
+		login: string;
+		about: string;
+		first_name: string;
+		last_name: string;
+		patronymic: string;
+		birth_date: string;
+		user_id: string;
+	},
+	description: string;
+	donation_deadline: string;
+	video_widget: string;
+	required_amount: string;
+	collected_amount: string;
+	category: string;
+}
+
+interface UserRegistrationData {
 
 	about: string;
 	first_name: string;
@@ -47,13 +68,13 @@ type UserRegistrationData = {
 	balance: number;
 }
 
-type LoginData = {
+interface LoginData {
 
 	login: string;
 	password: string;
 }
 
-type SendProjectData = (event: Event) => Promise<void>;
+type asyncSubmitHandler = (event: Event) => Promise<void>;
 
 type RequestUrls = {
 	POST: {

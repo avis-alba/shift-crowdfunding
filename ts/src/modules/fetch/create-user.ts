@@ -43,23 +43,31 @@ export default async function createUser(): Promise<void> {
 			balance: 100 // это костыль для моки
 		};
 
-		const response: Response = await fetch(requestURL, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			},
-			body: JSON.stringify(userData)
-		});
+		try {
+			const response: Response = await fetch(requestURL, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				},
+				body: JSON.stringify(userData)
+			});
 
-		if (response.ok) {
+			if (response.ok) {
 
-			document.cookie = `login=${userData.login}`;
-			location.href = `${REQUESTS.SITE_ORIGIN}user-profile.html`;
+				document.cookie = `login=${userData.login}`;
+				location.href = `${REQUESTS.SITE_ORIGIN}user-profile.html`;
 
-		} else {
+			} else {
 
-			handleFetchError(response.status, 'user');
+				handleFetchError(response.status, 'user');
 
+			}
+		} catch (e) {
+
+			if (e instanceof Error) {
+
+				alert(`Ошибка при создании профиля: ${e.message}`);
+			}
 		}
 	}
 }

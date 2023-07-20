@@ -3,7 +3,8 @@ import showAdditionalForm from '../show-form';
 import getCookies from './get-cookies';
 import createSpinner from '../create-spinner';
 import { createBackground } from '../create-spinner';
-import { deleteProject } from './edit-project';
+import makeDonation from './make-donation';
+import deleteProject from './delete-project';
 import handleFetchError from './error-handler';
 
 export default async function getProjectInfo(): Promise<void> {
@@ -32,115 +33,87 @@ export default async function getProjectInfo(): Promise<void> {
 	document.body.append(spinnerBackground);
 	document.body.append(spinner);
 
-	const response: Response = await fetch(requestURL);
+	try {
+		const response: Response = await fetch(requestURL);
 
-	if (response.ok) {
-		const project = await response.json(); // типизировать ответ с бэка
+		if (response.ok) {
+			const project = await response.json(); // типизировать ответ с бэка
 
-		spinner.remove();
-		spinnerBackground.remove();
+			spinner.remove();
+			spinnerBackground.remove();
 
-		const name = project.project_name;
-		const category = project.category;
-		const description = project.description;
-		const video = project.video_widget;
-		const collectedAmount = project.collected_amount;
-		const requiredAmount = project.required_amount;
-		const authorLastName = project.author.last_name[0].toUpperCase() + project.author.last_name.slice(1);
-		const authorName = project.author.first_name[0].toUpperCase();
-		const authorPatronymic = project.author.patronymic[0].toUpperCase();
+			const name = project.project_name;
+			const category = project.category;
+			const description = project.description;
+			const video = project.video_widget;
+			const collectedAmount = project.collected_amount;
+			const requiredAmount = project.required_amount;
+			const authorLastName = project.author.last_name[0].toUpperCase() + project.author.last_name.slice(1);
+			const authorName = project.author.first_name[0].toUpperCase();
+			const authorPatronymic = project.author.patronymic[0].toUpperCase();
 
-		const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
-		const deadline: string = formatter.format(new Date(project.donation_deadline));
+			const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat();
+			const deadline: string = formatter.format(new Date(project.donation_deadline));
 
-		projectName.innerHTML = name;
-		projectDescription.innerHTML = `<p>${description}</p>`;
-		projectCategory.innerHTML = `<p>${category}</p>`;
+			projectName.innerHTML = name;
+			projectDescription.innerHTML = `<p>${description}</p>`;
+			projectCategory.innerHTML = `<p>${category}</p>`;
 
-		if (video) {
+			if (video) {
 
-			projectVideo.style.display = 'block';
+				projectVideo.style.display = 'block';
 
-			const iframe: HTMLIFrameElement = document.createElement('iframe');
-			projectVideo.append(iframe);
-			iframe.outerHTML = `<iframe width="560" height="315" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>`
-
-		}
-
-		const sidebarTemplate: string = `
-					<p><strong>Собрано:</strong></p>
-					<div class="sidebar-num">
-						<p id="money">${collectedAmount} / ${requiredAmount}</p>
-					</div>
-					<p><strong>Окончание сбора:</strong></p>
-					<div class="sidebar-num">
-						<p id="time">${deadline}</p>
-					</div>
-					<p><strong>Автор:</strong></p>
-					<p id="author">${authorLastName} ${authorName}.${authorPatronymic}.</p>
-				`;
-
-		sidebar.insertAdjacentHTML('afterbegin', sidebarTemplate);
-
-		if (getCookies()?.login === project.author.login) {
-
-			adminMenu.style.display = 'block';
-
-			const editButton: HTMLAnchorElement = adminMenu.querySelector('#edit') as HTMLAnchorElement;
-			const sendMoneyButton: HTMLButtonElement = adminMenu.querySelector('#withdraw') as HTMLButtonElement;
-			const deleteButton: HTMLButtonElement = adminMenu.querySelector('#delete') as HTMLButtonElement;
-
-			editButton.onclick = function (): void {
-				location.href = `${REQUESTS.SITE_ORIGIN}edit-project.html?id=${REQUESTS.PROJECT_ID}`;
-			}
-
-			if (+collectedAmount >= +requiredAmount) sendMoneyButton.setAttribute('style', '');
-
-			deleteButton.addEventListener('click', deleteProject);
-
-		}
-
-		const donationForm: HTMLFormElement = sidebar.querySelector('#fund') as HTMLFormElement;
-		const moneyField: HTMLInputElement = donationForm.elements.namedItem('donation') as HTMLInputElement;
-		const money: { amount: string } = {
-			amount: moneyField.value
-		};
-
-		donationForm.addEventListener('submit', donateToProject);
-
-		async function donateToProject(event: Event): Promise<void> {
-
-			event.preventDefault();
-
-			console.log(money);
-
-			const response: Response = await fetch(`${REQUESTS.REQUEST_ORIGIN}donate`, { // стоит url для моки, рабочий requestURLDonation
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json;charset=utf-8'
-				},
-				body: JSON.stringify(money)
-			});
-
-			if (response.ok) {
-
-				location.reload();
-
-			} else if (response.status === ERROR_CODES.CONFLICT) {
-
-				alert('Недостаточно средств!');
-				return;
-
-			} else {
-
-				handleFetchError(response.status, 'project');
+				const iframe: HTMLIFrameElement = document.createElement('iframe');
+				projectVideo.append(iframe);
+				iframe.outerHTML = `<iframe width="560" height="315" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>`
 
 			}
+
+			const projectMoney: HTMLParagraphElement = document.querySelector('#money') as HTMLParagraphElement;
+			const projectTime: HTMLParagraphElement = document.querySelector('#time') as HTMLParagraphElement;
+			const projectAuthor: HTMLParagraphElement = document.querySelector('#author') as HTMLParagraphElement;
+
+			projectMoney.append(`${collectedAmount} / ${requiredAmount}`);
+			projectTime.append(deadline);
+			projectAuthor.append(`${authorLastName} ${authorName}.${authorPatronymic}.`);
+
+			if (getCookies()?.login === project.author.login) {
+
+				adminMenu.style.display = 'block';
+
+				const editButton: HTMLAnchorElement = adminMenu.querySelector('#edit') as HTMLAnchorElement;
+				const sendMoneyButton: HTMLButtonElement = adminMenu.querySelector('#withdraw') as HTMLButtonElement;
+				const deleteButton: HTMLButtonElement = adminMenu.querySelector('#delete') as HTMLButtonElement;
+
+				editButton.onclick = function (): void {
+					location.href = `${REQUESTS.SITE_ORIGIN}edit-project.html?id=${REQUESTS.PROJECT_ID}`;
+				}
+
+				if (+collectedAmount >= +requiredAmount) sendMoneyButton.setAttribute('style', '');
+
+				deleteButton.addEventListener('click', deleteProject);
+
+			}
+
+			const donationForm: HTMLFormElement = sidebar.querySelector('#fund') as HTMLFormElement;
+			const moneyField: HTMLInputElement = donationForm.elements.namedItem('donation') as HTMLInputElement;
+			const money: { amount: string } = {
+				amount: moneyField.value
+			};
+
+			const donateToProject: asyncSubmitHandler = makeDonation(requestURLDonation, money);
+			donationForm.addEventListener('submit', donateToProject);
+
+		} else {
+
+			handleFetchError(response.status, 'project');
+
 		}
+	} catch (e) {
 
-	} else {
+		if (e instanceof Error) {
 
-		handleFetchError(response.status, 'project');
-
+			alert(`Ошибка при загрузке данных проекта: ${e.message}`);
+		}
 	}
 }
