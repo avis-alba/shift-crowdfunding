@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	position: relative;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: PlayRegular, Arial, Helvetica, sans-serif;
 	color: var(--my-black);
 	display: flex;
 	flex-direction: column;
@@ -65,6 +65,7 @@ a:visited {
 
 input {
 	box-sizing: border-box;
+	font-family: PlayRegular;
 }
 
 input[type="submit"] {
@@ -128,6 +129,7 @@ button {
 	border: 0;
 	padding: 0;
 	background: var(--my-grey-light);
+	font-family: PlayBold;
 	font-size: 20px;
 	font-weight: bold;
 	cursor: pointer;
@@ -185,6 +187,7 @@ header .projects-link {
 .name {
 	font-size: 30px;
 	font-weight: bold;
+	font-family: PlayBold;
 	text-align: center;
 }
 
@@ -803,4 +806,18 @@ label {
 
 .form-visible {
 	display: block;
+}
+
+@font-face {
+	font-family: "PlayRegular";
+	src: url("../fonts/Play-Regular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "PlayBold";
+	src: url("../fonts/Play-Bold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }

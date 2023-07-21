@@ -2,16 +2,16 @@ export default function getCookies(): Cookies | undefined {
 
 	if (!document.cookie) return;
 
-	const COOKIES_ARR: string[] = document.cookie.split('; ');
+	const cookiesArr: string[] = document.cookie.split('; ');
 
-	const COOKIES: Cookies = {};
+	const cookies: Cookies = {};
 
-	for (let item of COOKIES_ARR) {
+	for (let item of cookiesArr) {
 
 		const [property, value] = item.split('=');
-		COOKIES[property] = value;
+		cookies[property] = value;
 
 	}
 
-	return COOKIES;
+	return cookies;
 }
