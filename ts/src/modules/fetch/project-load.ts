@@ -1,5 +1,6 @@
 import * as REQUESTS from './requests';
 import showAdditionalForm from '../show-form';
+import createIframe from '../create-iframe';
 import getCookies from './get-cookies';
 import createSpinner from '../create-spinner';
 import { createBackground } from '../create-spinner';
@@ -62,11 +63,7 @@ export default async function getProjectInfo(): Promise<void> {
 			if (video) {
 
 				projectVideo.style.display = 'block';
-
-				const iframe: HTMLIFrameElement = document.createElement('iframe');
-				projectVideo.append(iframe);
-				iframe.outerHTML = `<iframe width="560" height="315" src="${video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>`
-
+				projectVideo.append(createIframe(video));
 			}
 
 			const projectMoney: HTMLParagraphElement = document.querySelector('#money') as HTMLParagraphElement;
