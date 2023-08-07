@@ -14,33 +14,34 @@
 
 <body>
 	<header>
-		<img src="../img/logo.png" alt="logo">
-		<a href="./index.html">
-			<div class="name">SHUT UP AND TAKE MY MONEY</div>
-		</a>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Войти</button>
+		<div class="logo">
+			<img src="../img/logo.png" alt="logo">
+		</div>
+		<div class="name">
+			<a href="./index.html">
+				<p>SHUT UP AND TAKE MY MONEY</p>
+			</a>
+		</div>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
 	</header>
-	<div class="content page">
+	<div class="content">
 		<h1 class="item-header" id="project-name">Проект</h1>
 		<div class="item-full-info">
 			<div class="full-info-body">
 				<div class="category" id="project-category"></div>
-				<div class="full-info-text" id="project-description">
-					<p>
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi, nulla doloremque? Inventore
-						dolorum explicabo aperiam dolores, exercitationem culpa nisi placeat at repellat ex delectus
-						deserunt iure facilis corporis consequatur laborum?
-					</p>
-
-				</div>
+				<div id="project-description"></div>
 				<div class="full-info-video" id="project-video">
 					<h2>Посмотреть видео о проекте</h2>
 				</div>
 			</div>
-			<div class="full-info-sidebar" id="project-sidebar">
+			<div class="sidebar full-info-sidebar" id="project-sidebar">
 				<p><strong>Собрано:</strong></p>
 				<div class="sidebar-num">
 					<p id="money"></p>
@@ -52,9 +53,10 @@
 				<p><strong>Автор:</strong></p>
 				<p id="author"></p>
 				<button id="show-form">Спонсировать</button>
-				<form id="fund" class="fund">
-					<input type="number" name="donation" placeholder="1000" min="1" max="1000000000" value="1000">
-					<input type="submit" value="OK">
+				<form id="fund" class="send-money">
+					<input class="send-money-summ" type="number" name="donation" placeholder="1000" min="1"
+						max="1000000000" value="1000">
+					<input class="submit-button send-money-submit" type="submit" value="OK">
 				</form>
 			</div>
 		</div>
@@ -70,10 +72,14 @@
 		<div class="copyright">
 			<p>© Shut Up And Take My Money Inc. 2023</p>
 		</div>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Войти</button>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
@@ -87,8 +93,8 @@
 				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
-				<input type="submit" value="Войти">
-				<input type="reset" value="Отмена">
+				<input class="submit-button" type="submit" value="Войти">
+				<input class="reset-button" type="reset" value="Отмена">
 			</div>
 		</form>
 		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>

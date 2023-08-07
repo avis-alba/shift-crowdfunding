@@ -6,7 +6,7 @@ export default async function login(event: Event): Promise<void> {
 	event.preventDefault();
 
 	const spinner: HTMLDivElement | null = document.querySelector('#spinner-login');
-	if (spinner) spinner.setAttribute('style', 'display: block');
+	if (spinner) spinner.style.display = 'block';
 
 	const form: HTMLFormElement = document.querySelector('#popup-form') as HTMLFormElement;
 	const [loginField, passwordField] = getFormFields(form);

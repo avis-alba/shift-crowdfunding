@@ -1,6 +1,8 @@
 import * as REQUESTS from './requests';
 import showAdditionalForm from '../show-form';
 import addPromocodeMask from '../mask';
+import createSpinner from '../create-spinner';
+import { createBackground } from '../create-spinner';
 import getFormFields from '../get-formfields';
 import logOut from './logout';
 import handleFetchError from './error-handler';
@@ -15,6 +17,8 @@ export default async function getUserProfile(): Promise<void> {
 	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.USER_INFO}`;
 	const requestURLUpdate: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.PUT.EDIT_USER}`;
 
+	const userBody: HTMLElement = document.querySelector('.content') as HTMLElement;
+
 	const form: HTMLFormElement = document.querySelector('#edit-user') as HTMLFormElement;
 	const formFields: HTMLInputElement[] = getFormFields(form);
 	const [lastNameField, nameField, patronymicField, birthDateField, descriptionField, submitButton, logOutButton] = formFields;
@@ -24,12 +28,24 @@ export default async function getUserProfile(): Promise<void> {
 	form.addEventListener('submit', updateUserProfile);
 	logOutButton.addEventListener('click', logOut);
 
+	const spinner: HTMLDivElement = createSpinner();
+	const spinnerBackground: HTMLDivElement = createBackground();
+	spinner.style.position = 'absolute';
+	spinner.style.top = '150px';
+	spinner.style.left = `${document.documentElement.clientWidth / 2 - 18}px`;
+
+	userBody.append(spinnerBackground);
+	userBody.append(spinner);
+
 	try {
 		const response: Response = await fetch(requestURL);
 
 		if (response.ok) {
 
 			const user = await response.json();
+
+			spinner.remove();
+			spinnerBackground.remove();
 
 			lastNameField.value = user.last_name[0].toUpperCase() + user.last_name.slice(1);
 			nameField.value = user.first_name[0].toUpperCase() + user.first_name.slice(1);

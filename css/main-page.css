@@ -1,0 +1,117 @@
+.content.main {
+	padding-bottom: 50px;
+}
+
+.banner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 460px;
+	width: 100%;
+	padding: 0px 80px;
+	gap: 80px;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 10;
+}
+
+.description {
+	flex-shrink: 0;
+	width: 600px;
+	height: 300px;
+	padding: 20px;
+	box-sizing: border-box;
+	background-color: var(--my-green-1);
+	box-shadow: var(--hard-shadow);
+}
+
+.description h1 {
+	text-align: left;
+}
+
+.description p:last-child {
+	margin-bottom: 0;
+}
+
+.arrow::before {
+	content: "➤";
+}
+
+.arrow {
+	position: relative;
+	font-size: 80px;
+	animation: 1s infinite alternate pointing;
+	animation-timing-function: ease-in;
+}
+
+@keyframes pointing {
+	from {
+		left: -30px;
+	}
+
+	to {
+		left: 30px;
+	}
+}
+
+.banner button {
+	width: 300px;
+	height: 120px;
+	background-color: var(--my-green-4);
+}
+
+.banner button:hover {
+	background-color: var(--my-green-5);
+}
+
+.background {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url(../img/pattern.png);
+	opacity: 0.5;
+	z-index: 0;
+}
+
+.about-us {
+	width: 100%;
+	margin-bottom: 50px;
+	padding: 15px 5px 20px;
+	box-sizing: border-box;
+	box-shadow: var(--main-block-shadow);
+	background-color: var(--my-green-2);
+	position: relative;
+	z-index: 10;
+}
+
+.info {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+	padding: 20px;
+}
+
+.info-point {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100px;
+	width: 300px;
+	padding: 10px 15px;
+	gap: 10px;
+	border: 1px solid var(--my-black);
+	box-shadow: var(--hard-shadow);
+	font-weight: bold;
+}
+
+.project-feed {
+	position: relative;
+	padding-top: 15px;
+	background-color: var(--my-green-3);
+	box-shadow: var(--main-block-shadow);
+	z-index: 10;
+}

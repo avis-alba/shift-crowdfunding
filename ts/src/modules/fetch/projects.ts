@@ -11,6 +11,7 @@ export default async function getProjects(): Promise<void> {
 
 	const spinner: HTMLDivElement = createSpinner();
 	spinner.style.position = 'static';
+	spinner.style.margin = '10px';
 
 	projectContainer.append(spinner);
 

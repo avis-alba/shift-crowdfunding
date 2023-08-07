@@ -14,65 +14,75 @@
 
 <body>
 	<header>
-		<img src="../img/logo.png" alt="logo">
-		<a href="./index.html">
-			<div class="name">SHUT UP AND TAKE MY MONEY</div>
-		</a>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Войти</button>
-	</header>
-	<div class="content page">
-		<div class="projects">
-			<h1>Проекты для спонсорства</h1>
-			<div class="projects-menu">
-				<div class="menu-form">
-					<p data-bs-toggle="tooltip" data-bs-placement="top"
-						data-bs-title="Для сортировки обязателен выбор категории"><strong>Сортировка:</strong></p>
-					<form name="sort" id="sort">
-						<select>
-							<option value="Игры">Игры</option>
-							<option value="Наука">Наука</option>
-							<option value="Бизнес">Бизнес</option>
-							<option value="Кино">Кино</option>
-							<option value="Благотворительность">Благотворительность</option>
-						</select>
-						<select>
-							<option value="by_required_amount,false">По сумме ⇊</option>
-							<option value="by_required_amount,true">По сумме ⇈</option>
-							<option value="by_deadline_date,false">По дате завершения ⇊</option>
-							<option value="by_deadline_date,true">По дате завершения ⇈</option>
-						</select>
-						<input type="submit" value="Показать">
-					</form>
-				</div>
-				<div class="menu-form">
-					<p><strong>Сумма сбора:</strong></p>
-					<form name="filter" id="filter">
-						<span>от </span><input type="number" min="0" max="1000000000" value="0" id="min-summ">
-						<span>до </span><input type="number" min="2" max="1000000000" value="10000" id="max-summ">
-						<input type="submit" value="Показать">
-					</form>
-				</div>
-				<div class="menu-form">
-					<form name="search" id="search">
-						<input type="search" name="search-by-name" placeholder="Поиск по проектам">
-						<input type="submit" value="Поиск">
-					</form>
-				</div>
-			</div>
-			<div class="projects-body"></div>
+		<div class="logo">
+			<img src="../img/logo.png" alt="logo">
 		</div>
+		<div class="name">
+			<a href="./index.html">
+				<p>SHUT UP AND TAKE MY MONEY</p>
+			</a>
+		</div>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
+	</header>
+	<div class="content">
+		<h1>Проекты для спонсорства</h1>
+		<div class="projects-menu">
+			<div class="menu-form">
+				<p data-bs-toggle="tooltip" data-bs-placement="top"
+					data-bs-title="Для сортировки обязателен выбор категории"><strong>Сортировка:</strong></p>
+				<form name="sort" id="sort">
+					<select>
+						<option value="Игры">Игры</option>
+						<option value="Наука">Наука</option>
+						<option value="Бизнес">Бизнес</option>
+						<option value="Кино">Кино</option>
+						<option value="Благотворительность">Благотворительность</option>
+					</select>
+					<select>
+						<option value="by_required_amount,false">По сумме ⇊</option>
+						<option value="by_required_amount,true">По сумме ⇈</option>
+						<option value="by_deadline_date,false">По дате завершения ⇊</option>
+						<option value="by_deadline_date,true">По дате завершения ⇈</option>
+					</select>
+					<input class="submit-button" type="submit" value="Показать">
+				</form>
+			</div>
+			<div class="menu-form">
+				<p><strong>Сумма сбора:</strong></p>
+				<form name="filter" id="filter">
+					<span>от </span><input type="number" min="0" max="1000000000" value="0" id="min-summ">
+					<span>до </span><input type="number" min="2" max="1000000000" value="10000" id="max-summ">
+					<input class="submit-button" type="submit" value="Показать">
+				</form>
+			</div>
+			<div class="menu-form">
+				<form name="search" id="search">
+					<input type="search" name="search-by-name" placeholder="Поиск по проектам">
+					<input class="submit-button" type="submit" value="Поиск">
+				</form>
+			</div>
+		</div>
+		<div class="projects-body"></div>
 	</div>
 	<footer>
 		<div class="copyright">
 			<p>© Shut Up And Take My Money Inc. 2023</p>
 		</div>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Войти</button>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
@@ -86,8 +96,8 @@
 				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
-				<input type="submit" value="Войти">
-				<input type="reset" value="Отмена">
+				<input class="submit-button" type="submit" value="Войти">
+				<input class="reset-button" type="reset" value="Отмена">
 			</div>
 		</form>
 		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>

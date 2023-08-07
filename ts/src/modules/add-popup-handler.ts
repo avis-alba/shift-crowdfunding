@@ -3,7 +3,7 @@ import login from './fetch/login';
 
 export default function addPopupHandler(): void {
 
-	const loginButtons: NodeListOf<HTMLButtonElement> = document.body.querySelectorAll('#login-button');
+	const loginButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('#login-button');
 
 	for (let button of loginButtons) {
 		button.onclick = popupHandler;

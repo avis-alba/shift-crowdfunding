@@ -1,0 +1,72 @@
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 300px;
+	padding: 30px;
+	background-color: var(--my-green-4);
+	box-shadow: var(--hard-shadow);
+	text-align: center;
+}
+
+.sidebar p {
+	margin: 0;
+}
+
+.sidebar button {
+	width: 100%;
+	height: 60px;
+	margin: 20px 0px 0px;
+}
+
+.sidebar hr {
+	width: 100%;
+	margin-top: 25px;
+}
+
+.sidebar-num {
+	width: 100%;
+	margin: 5px 0px 20px;
+	background-color: var(--my-green-1);
+	box-shadow: var(--hard-shadow);
+	font-weight: bold;
+	color: var(--my-green-6);
+}
+
+.sidebar-num p {
+	margin: 10px 5px;
+	text-align: inherit;
+}
+
+.sidebar-num #money {
+	font-size: 30px;
+}
+
+.sidebar-num #time {
+	font-size: 20px;
+}
+
+.send-money {
+	display: none;
+	width: 100%;
+}
+
+.send-money:before {
+	content: '▼';
+	display: block;
+	margin: 15px auto 10px;
+}
+
+.send-money input {
+	display: inline-block;
+	height: 50px;
+}
+
+.send-money-summ {
+	width: 70%;
+}
+
+.send-money-submit {
+	width: 25%;
+}

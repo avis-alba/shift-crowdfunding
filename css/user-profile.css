@@ -1,0 +1,16 @@
+.user-profile {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	margin: 10px auto 50px;
+	padding: 0px 50px;
+	gap: 30px;
+}
+
+.user-profile .form-template {
+	margin: 0;
+}
+
+.user-profile .sidebar-num {
+	margin-bottom: 0px;
+}

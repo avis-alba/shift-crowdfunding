@@ -17,6 +17,8 @@ export default async function getProjectInfo(): Promise<void> {
 	const requestURL: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.GET.PROJECT_BY_ID}`;
 	const requestURLDonation: string = `${REQUESTS.REQUEST_ORIGIN}${REQUESTS.URLS.POST.DONATE_TO_PROJECT}`;
 
+	const projectBody: HTMLElement = document.querySelector('.content') as HTMLElement;
+
 	const projectName: HTMLElement = document.querySelector('#project-name') as HTMLElement;
 	const projectCategory: HTMLElement = document.querySelector('#project-category') as HTMLElement;
 	const projectDescription: HTMLElement = document.querySelector('#project-description') as HTMLElement;
@@ -28,17 +30,18 @@ export default async function getProjectInfo(): Promise<void> {
 
 	const spinner: HTMLDivElement = createSpinner();
 	const spinnerBackground: HTMLDivElement = createBackground();
-	spinner.style.top = '250px';
+	spinner.style.position = 'absolute';
+	spinner.style.top = '150px';
 	spinner.style.left = `${document.documentElement.clientWidth / 2 - 18}px`;
 
-	document.body.append(spinnerBackground);
-	document.body.append(spinner);
+	projectBody.append(spinnerBackground);
+	projectBody.append(spinner);
 
 	try {
 		const response: Response = await fetch(requestURL);
 
 		if (response.ok) {
-			const project = await response.json(); // типизировать ответ с бэка
+			const project = await response.json();
 
 			spinner.remove();
 			spinnerBackground.remove();
@@ -76,7 +79,7 @@ export default async function getProjectInfo(): Promise<void> {
 
 			if (getCookies()?.login === project.author.login) {
 
-				adminMenu.style.display = 'block';
+				adminMenu.style.display = 'inline-block';
 
 				const editButton: HTMLAnchorElement = adminMenu.querySelector('#edit') as HTMLAnchorElement;
 				const sendMoneyButton: HTMLButtonElement = adminMenu.querySelector('#withdraw') as HTMLButtonElement;

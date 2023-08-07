@@ -1,0 +1,126 @@
+@font-face {
+	font-family: "PlayRegular";
+	src: url("../fonts/Play-Regular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "PlayBold";
+	src: url("../fonts/Play-Bold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: PlayRegular, Arial, Helvetica, sans-serif;
+	color: var(--my-black);
+
+	--my-black: #17141B;
+	--my-white: #ECECE4;
+	--my-grey-light: #c6c6bf;
+	--my-grey-dark: #b7b7b1;
+	--my-red: #da467d;
+	--my-green-1: #f5f9f2;
+	--my-green-2: #d6e8cc;
+	--my-green-3: #c2ddb2;
+	--my-green-4: #aed298;
+	--my-green-5: #99c67f;
+	--my-green-6: #365325;
+
+	--hard-shadow: 5px 5px 0px var(--my-black);
+	--hard-green-shadow: 5px 5px 0px 0px var(--my-green-6);
+	--main-block-shadow: 0px -5px 10px var(--my-grey-dark),
+		0px 5px 10px var(--my-grey-dark);
+}
+
+h1 {
+	margin: 0;
+	text-align: center;
+}
+
+h2 {
+	margin: 0;
+	text-align: center;
+}
+
+h3 {
+	margin: 0;
+	text-align: center;
+}
+
+p {
+	text-align: justify;
+}
+
+p:first-child {
+	margin-top: 0;
+}
+
+a {
+	text-decoration: none;
+	color: var(--my-black);
+}
+
+a:visited {
+	color: var(--my-black);
+}
+
+img {
+	height: 100%;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 90px;
+	line-height: 90px;
+	gap: 10px;
+	box-shadow: 0px 5px 30px var(--my-grey-dark);
+	background: var(--my-white);
+	z-index: 100;
+}
+
+footer {
+	position: relative;
+	top: 90px;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	gap: 10px;
+	box-shadow: 0px -5px 30px var(--my-grey-dark);
+	background: var(--my-white);
+	z-index: 10;
+}
+
+button {
+	border: 0;
+	padding: 0px 10px;
+	background: var(--my-green-2);
+	box-shadow: var(--hard-green-shadow);
+	font-family: PlayBold;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 500ms;
+}
+
+button:hover {
+	background: var(--my-green-3);
+	transition: background-color 500ms;
+}
+
+.content {
+	position: relative;
+	top: 90px;
+	margin: 0;
+	padding: 25px 0px 0px 0px;
+}

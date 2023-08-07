@@ -16,19 +16,27 @@ export default function makeProjectCard(project: ProjectDataToGet, link: string)
 	name.append(project.project_name);
 
 	const description: HTMLDivElement = document.createElement('div');
+	const p: HTMLParagraphElement = document.createElement('p');
 	description.classList.add('item-description');
-	description.append(project.description);
+	p.append(project.description);
+	description.append(p);
 
 	const info: HTMLDivElement = document.createElement('div');
 	info.classList.add('item-info');
 
 	const infoTemplate: string = `
-								<p><strong>Собрано:</strong></p>
-								<p id="money">${project.collected_amount} / ${project.required_amount}</p>
-								<p><strong>Окончание сбора:</strong></p>
-								<p id="time">${project.donation_deadline}</p>
-								<p><strong>Автор:</strong></p>
-								<p id="author">${project.author.last_name} ${project.author.first_name}.${project.author.patronymic}.</p>
+								<div class="item-info-block">
+									<p><strong>Собрано:</strong></p>
+									<p class="project-card-money" id="money">${project.collected_amount} / ${project.required_amount}</p>
+								</div>
+								<div class="item-info-block">
+									<p><strong>Окончание сбора:</strong></p>
+									<p id="time">${project.donation_deadline}</p>
+								</div>
+								<div class="item-info-block">
+									<p><strong>Автор:</strong></p>
+									<p id="author">${project.author.last_name} ${project.author.first_name}.${project.author.patronymic}.</p>
+								</div>
 								`;
 
 	info.insertAdjacentHTML('afterbegin', infoTemplate);

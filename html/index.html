@@ -14,30 +14,38 @@
 </head>
 
 <body>
-	<header class=".container-fluid">
-		<img src="../img/logo.png" alt="logo">
-		<a href="./index.html">
-			<div class="name">SHUT UP AND TAKE MY MONEY</div>
-		</a>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Войти</button>
+	<header>
+		<div class="logo">
+			<img src="../img/logo.png" alt="logo">
+		</div>
+		<div class="name">
+			<a href="./index.html">
+				<p>SHUT UP AND TAKE MY MONEY</p>
+			</a>
+		</div>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
 	</header>
-	<div class="content">
+	<div class="content main">
 		<div class="banner">
 			<div class="description">
 				<h1>Краудфандинговая платформа</br>Shut Up And Take My Money</h1>
 				<p>У вас так много денег, что вы уже не можете придумать куда их потратить? Может быть, вы просто хотите
 					поддержать молодых
-					специалистов с горящими глазами? Илиу вас есть гениальная идея, способная изменить мир, но нет
+					специалистов с горящими глазами? Или у вас есть гениальная идея, способная изменить мир, но нет
 					средств для ее реализации?</p>
 				<p>Именно для вас наша команда создала платформу, где молодые предприниматели и <del>немолодые</del>
 					инвесторы могут найти друг друга!</p>
 				<p>Присоединяйтесь!</p>
 			</div>
-			<div id="arrow"></div>
-			<a href="./create-user.html" id="registration"><button>Зарегистрироваться</button></a>
+			<div class="arrow"></div>
+			<button id="registration">Зарегистрироваться</button>
 		</div>
 		<div class="about-us">
 			<h2>Почему краудфандинг</h2>
@@ -60,7 +68,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="projects">
+		<div class="project-feed">
 			<h2><a href="./projects.html">Проекты</a></h2>
 			<div class="projects-body"></div>
 		</div>
@@ -70,10 +78,14 @@
 		<div class="copyright">
 			<p>© Shut Up And Take My Money Inc. 2023</p>
 		</div>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Войти</button>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
@@ -88,8 +100,8 @@
 				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
-				<input type="submit" value="Войти">
-				<input type="reset" value="Отмена">
+				<input class="submit-button" type="submit" value="Войти">
+				<input class="reset-button" type="reset" value="Отмена">
 			</div>
 		</form>
 		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>

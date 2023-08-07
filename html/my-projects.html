@@ -14,31 +14,40 @@
 
 <body>
 	<header>
-		<img src="../img/logo.png" alt="logo">
-		<a href="./index.html">
-			<div class="name">SHUT UP AND TAKE MY MONEY</div>
-		</a>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Мой профиль</button>
-	</header>
-	<div class="content page">
-		<div class="projects">
-			<h1>Мои проекты</h1>
-			<a href="./create-project.html"><button>Создать
-					новый проект</button></a>
-			<div class="projects-body"></div>
+		<div class="logo">
+			<img src="../img/logo.png" alt="logo">
 		</div>
+		<div class="name">
+			<a href="./index.html">
+				<p>SHUT UP AND TAKE MY MONEY</p>
+			</a>
+		</div>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
+	</header>
+	<div class="content">
+		<h1>Мои проекты</h1>
+		<button class="new-project-button" onclick="location.href='./create-project.html'">Создать новый проект</button>
+		<div class="projects-body"></div>
 	</div>
 	<footer>
 		<div class="copyright">
 			<p>© Shut Up And Take My Money Inc. 2023</p>
 		</div>
-		<a class="projects-link" href="./projects.html">
-			<div>Проекты</div>
-		</a>
-		<button class="login" id="login-button">Мой профиль</button>
+		<div class="projects-link">
+			<a href="./projects.html">
+				<p>Проекты</p>
+			</a>
+		</div>
+		<div class="auth-button">
+			<button class="login" id="login-button">Войти</button>
+		</div>
 	</footer>
 	<div class="form-template popup" id="popup">
 		<button type="button" class="btn-close" aria-label="Закрыть"></button>
@@ -52,8 +61,8 @@
 				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
-				<input type="submit" value="Войти">
-				<input type="reset" value="Отмена">
+				<input class="submit-button" type="submit" value="Войти">
+				<input class="reset-button" type="reset" value="Отмена">
 			</div>
 		</form>
 		<p>Нет аккаунта? <a href="./create-user.html"><strong>Зарегистрироваться</strong></a></p>

@@ -1,0 +1,14 @@
+.spinner-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: calc(100% + 50px);
+	background-color: var(--my-white);
+	opacity: 0.5;
+	z-index: 80;
+}
+
+.content .spinner-border {
+	z-index: 90;
+}

@@ -1,0 +1,60 @@
+header p,
+footer p {
+	text-align: center;
+}
+
+.logo {
+	position: relative;
+	left: -50px;
+	transition: left 1s;
+}
+
+.logo:hover {
+	left: 0;
+	transition: left 1s;
+}
+
+.name {
+	width: 460px;
+	font-size: 30px;
+	font-weight: bold;
+	font-family: PlayBold;
+}
+
+@media screen and (max-width: 920px) {
+
+	.name,
+	.auth-button {
+		line-height: 45px;
+	}
+}
+
+.auth-button {
+	width: 150px;
+	text-align: center;
+}
+
+.login {
+	height: 100%;
+	width: 100%;
+	background: var(--my-grey-light);
+	box-shadow: none;
+}
+
+.login:hover {
+	background: var(--my-grey-dark);
+}
+
+.projects-link {
+	width: 150px;
+	transition: font-size 1s;
+}
+
+.projects-link:hover {
+	font-size: 20px;
+	transition: font-size 1s;
+}
+
+.copyright {
+	margin-left: 30px;
+}

@@ -1,0 +1,78 @@
+input,
+textarea,
+select {
+	box-sizing: border-box;
+	font-family: PlayRegular;
+}
+
+input,
+select {
+	height: 50px;
+}
+
+textarea {
+	resize: vertical;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.submit-button {
+	border: 2px solid var(--my-green-6);
+}
+
+.reset-button {
+	border: 1px solid var(--my-red);
+}
+
+.submit-button:hover,
+.reset-button:hover {
+	cursor: pointer;
+	background-color: var(--my-white);
+}
+
+.form-template {
+	width: 700px;
+	margin: 10px auto 50px;
+	padding: 30px;
+	box-sizing: border-box;
+	box-shadow: var(--hard-shadow);
+	background-color: var(--my-green-2);
+}
+
+.form-template h3 {
+	margin-bottom: 10px;
+	font-size: 25px;
+}
+
+.form-template input,
+.form-template textarea,
+.form-template select {
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	font-size: 17px;
+}
+
+.main-form {
+	width: 100%;
+}
+
+.button-set {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 25px;
+}
+
+.main-form .submit-button,
+.main-form .reset-button {
+	width: 200px;
+	margin-bottom: 0px;
+}
+
+.form-visible {
+	display: block;
+}
