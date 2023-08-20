@@ -37,19 +37,19 @@
 			<div class="form-template">
 				<form class="main-form" id="edit-user">
 					<label for="lastname" data-bs-toggle="tooltip" data-bs-placement="left"
-						data-bs-title="От 2 до 50 знаков, буквы, пробелы и -">Фамилия*</label>
+						data-bs-title="От 2 до 50 знаков, буквы, пробелы ' и -">Фамилия*</label>
 					<input type="text" placeholder="Иванов" id="lastname" minlength="2" maxlength="35" required
 						value="">
 					<label for="name" data-bs-toggle="tooltip" data-bs-placement="left"
-						data-bs-title="От 2 до 50 знаков, буквы, пробелы и -">Имя*</label>
+						data-bs-title="От 2 до 50 знаков, буквы, пробелы ' и -">Имя*</label>
 					<input type="text" placeholder="Сергей" id="name" minlength="2" maxlength="35" required value="">
 					<label for="patronymic" data-bs-toggle="tooltip" data-bs-placement="left"
-						data-bs-title="От 2 до 50 знаков, буквы, пробелы и -">Отчество</label>
+						data-bs-title="От 2 до 50 знаков, буквы, пробелы ' и -">Отчество</label>
 					<input type="text" placeholder="Петрович" id="patronymic" minlength="2" maxlength="35" value="">
 					<label for="date" data-bs-toggle="tooltip" data-bs-placement="left"
 						data-bs-title="Вам должно быть не меньше 18 лет">Дата рождения*</label>
 					<input type="date" id="date" value="" required>
-					<textarea name="" id="user-text" cols="30" rows="5" placeholder="Расскажите о себе"
+					<textarea id="user-text" cols="30" rows="5" placeholder="Расскажите о себе"
 						maxlength="700"></textarea>
 					<p>* Поле обязательно для заполнения</p>
 					<div class="button-set">
@@ -97,7 +97,7 @@
 				data-bs-title="От 3 до 30 знаков, латинские буквы, цифры, - и _">Логин</label>
 			<input type="text" placeholder="ivanov_s" id="popup-login" minlength="2" maxlength="35" required>
 			<label for="popup-password" data-bs-toggle="tooltip" data-bs-placement="left"
-				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./:;?@[]^_{|}~+=">Пароль</label>
+				data-bs-title="От 6 до 30 знаков, латинские буквы, цифры и спецсимволы -!#$%&()*,./|:;?@^_~+=[]{}">Пароль</label>
 			<input type="password" id="popup-password" placeholder="**********" required>
 			<div class="button-set">
 				<input class="submit-button" type="submit" value="Войти">

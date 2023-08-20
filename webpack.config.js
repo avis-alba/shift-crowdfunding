@@ -1,28 +1,30 @@
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-
 const path = require('path');
 
 module.exports = {
-	context: __dirname,
+
 	entry: './ts/src/script.ts',
-	resolve: {
-		extensions: [".ts", ".tsx", ".js"],
-	},
+
+	mode: 'production',
+
 	module: {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				loader: 'ts-loader',
+				use: 'ts-loader',
 			}
 		]
 	},
-	plugins: [new ForkTsCheckerWebpackPlugin()],
-	watchOptions: {
-		ignored: /node_modules/,
+
+	resolve: {
+		extensions: [".ts", ".tsx", ".js"],
 	},
+
 	output: {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, './ts'),
 	},
-	mode: 'production'
+
+	cache: {
+		type: 'filesystem',
+	},
 };

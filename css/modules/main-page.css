@@ -70,7 +70,7 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: url(../img/pattern.png);
+	background: url(../../img/pattern.png);
 	opacity: 0.5;
 	z-index: 0;
 }
